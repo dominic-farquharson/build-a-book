@@ -16,7 +16,7 @@ class App extends Component {
     super();
     // setting initital states to false
     this.state = {
-      editor: false,
+      viewEditor: false,
       viewChapter: false
     }
     // binding methods
@@ -30,18 +30,22 @@ class App extends Component {
   // Toggles text editor based on state
   toggleTextEditor() {
     console.log('editor has been toggled')
-    if(this.state.editor === false)
-      this.setState({editor:true})
+    if(this.state.viewEditor === false) {
+      this.setState({viewEditor:true})
+      this.setState({viewChapter:false})
+    }
     else
-      this.setState({editor:false})
+      this.setState({viewEditor:false})
 
   }
 
   // Toggles Chapter View
   toggleChapterView() {
     console.log('chapter has been toggled')
-    if(this.state.viewChapter=== false)
+    if(this.state.viewChapter=== false) {
       this.setState({viewChapter:true})
+      this.setState({viewEditor: false})
+    }
     else
       this.setState({viewChapter:false})
 
@@ -78,12 +82,15 @@ class App extends Component {
       printing book component, sending book data as props
     */
 
+    // change view to viewEditor for clarity
+
     return(
       <Book book={book}
         editor={()=>this.toggleTextEditor()}
-        view={this.state.editor}
+        viewEditor={this.state.viewEditor}
         viewChapter = {this.state.viewChapter}
         toggleChapterView = {() => this.toggleChapterView()}
+        toggleTextEditor = { ()=> this.toggleTextEditor() }
       />
       // iterating through chapters object - to get book chapters
       // Object.keys(book['chapters']).map( (key, i)=> {

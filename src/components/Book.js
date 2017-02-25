@@ -6,6 +6,9 @@ import Chapter from './Chapter';
 // importing resource component
 import Resource from './Resource';
 
+// importing Editor component
+import Editor from './Editor';
+
 // creating Book component
 class Book extends Component {
   constructor(props) {
@@ -38,6 +41,7 @@ class Book extends Component {
       chapters = {this.props.book['chapters'][key]['title']}
       title = {this.props.book['title']}
       view={false}
+      toggleTextEditor = {()=>this.props.toggleTextEditor}
 
       />
     )
@@ -59,14 +63,15 @@ class Book extends Component {
     // variable for book title.
     const book_title = this.props.book['title'];
     let viewChapter = this.props.viewChapter;
+    let viewEditor = this.props.viewEditor;
 
-    // renders chapters when edit state false
-    if(viewChapter === false) {
+    // renders chapters when edit state and view chapter state is false
+    if(viewChapter === false && viewEditor=== false) {
       return (
         <div>
           {/* Toggling Text Editor */}
-          <button onClick={() => this.props.editor()}>Toggle Editor</button>
-          <button onClick={() => this.props.toggleChapterView()}>Toggle Chapter</button>
+          <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
+          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button>
 
           <h1>
             {/* Book Title */}
@@ -86,23 +91,36 @@ class Book extends Component {
 
 
     // renders editor if edit state true
-    if(viewChapter === true){
+    if(viewChapter === true && viewEditor ===false){
       return (
         <div>Hello
           {/* Printing chapters */}
           {this.printChapters()}
-          <button onClick={() => this.props.editor()}>Toggle Editor</button>
-          <button onClick={() => this.props.toggleChapterView()}>Toggle Chapter</button>
+          <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
+          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button>
 
         </div>
       )
-
-
+    }
+      // Rendering editor when view editor is true, but viewChapter state is false
+      if(viewEditor === true && viewChapter !== true) {
+        return (
+          <div>
+            {/* Passing toggle Editor and Toggle Chapter down as props */}
+            <Editor
+              viewEditor={this.props.viewEditor}
+              viewChapter = {this.props.viewChapter}
+              toggleChapterView = {this.props.toggleChapterView}
+              toggleTextEditor = {this.props.toggleTextEditor}
+             />
+          </div>
+        )
+      }
 
 
     }
   }
-}
+
 
 
 
