@@ -86,9 +86,9 @@ class Book extends Component {
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
 
-    // renders chapters when edit state and view chapter state is false
+    // renders books when edit state and view chapter state is false
     if(viewChapter === false && viewEditor=== false) {
-      // Viewing all chapters
+      // Viewing all books
       return (
         <div>
           {/* Add a Chapter */}
@@ -115,7 +115,7 @@ class Book extends Component {
     }
 
 
-    // renders editor if edit state true
+    // renders chapters
     if(viewChapter === true && viewEditor ===false){
       return (
         <div>Hello

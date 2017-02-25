@@ -17,10 +17,6 @@
 body {
   font-size: 2.2rem;
   color: red;
-
-  p {
-    color: green;
-  }
 }
 // main body
 main {
@@ -41,5 +37,14 @@ header {
     @include position(absolute, 0, 0, 20%, 100%);
     // giving background color
     @include backgroundFontColor (blue, white);
+    li {
+      border-bottom:1px black solid;
+      padding:20px;
+      list-style-type:none;
+    }
+
+    li:hover {
+      opacity:.7;
+    }
   }
 }

@@ -17,7 +17,7 @@ class App extends Component {
     // setting initital states to false
     this.state = {
       viewEditor: false,
-      viewChapter: false
+      viewChapter: false,
     }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
@@ -52,6 +52,13 @@ class App extends Component {
     else
       this.setState({viewChapter:false})
 
+  }
+
+  // Home page - lists all books. Displayed when editor and chapter's state are false
+  toggleBookView() {
+    console.log('Book view is toggled')
+    this.setState({viewEditor: false})
+    this.setState({viewChapter:false})
   }
 
   // function to print out books
@@ -105,16 +112,17 @@ class App extends Component {
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
-             books={()=>{this.printBooks()}}
             toggleEdit={()=>{this.toggleTextEditor()}}
+            viewEditor={this.state.viewEditor}
+            bookView = {()=>{this.toggleBookView()}}
           />
         </header>
         <main>
         {/* Rendering Book Component */}
-          <div className="books">
-            {this.printBooks()}
-          </div>
-        </main>
+        <div className="books">
+          {this.printBooks()}
+        </div>
+      </main>
         <a href="http://google.com">Test</a>
      </div>
     )
