@@ -87,6 +87,7 @@ class App extends Component {
   // function to print out books
   printBooks() {
     // sample object to have dummy data
+    /*
     let book = {
       'title': 'book_title',
       'chapters' :{
@@ -109,7 +110,8 @@ class App extends Component {
 
 
       }
-    }
+
+    } */
     //will have an  ajax call, prints books depending on database
     /*
       printing book component, sending book data as props
