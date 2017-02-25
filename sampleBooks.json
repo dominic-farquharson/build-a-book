@@ -1,9 +1,9 @@
  {
      "user1": {
-         "title": "book_title",
+         "title": "book_title (user1)",
          "chapters": {
              "chapter1": {
-                 "title": "chapter 1",
+                 "title": "chapter 1 (user1)",
                  "images": ["im1", "im2"],
                  "data":"I am chapter 1 data"
              },
@@ -28,10 +28,10 @@
          }
      },
      "user2": {
-         "title": "book_title",
+         "title": "User 2's book title",
          "chapters": {
              "chapter1": {
-                 "title": "chapter 1",
+                 "title": "chapter 1 (user2)",
                  "images": ["im1", "im2"]
              },
              "chapter2": {

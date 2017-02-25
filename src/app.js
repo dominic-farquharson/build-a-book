@@ -21,6 +21,7 @@ class App extends Component {
     this.state = {
       viewEditor: false,
       viewChapter: false,
+      book: {}
     }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
@@ -75,9 +76,11 @@ class App extends Component {
     console.log('get books has mounted');
 
     // ajax call to get books from firebase endpoint
-    axios.get('/')
+    const url = 'https://build-a-book.firebaseio.com/user1.json'
+    axios.get(url)
       .then( (response)=> {
         console.log(response.data);
+        this.setState({book:response.data})
       })
       .catch( (error) => {
         console.log(error);
@@ -120,7 +123,7 @@ class App extends Component {
     // change view to viewEditor for clarity
 
     return(
-      <Book book={book}
+      <Book book={this.state.book}
         // editor={()=>this.toggleTextEditor()}
         viewEditor={this.state.viewEditor}
         viewChapter = {this.state.viewChapter}

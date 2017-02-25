@@ -115,7 +115,7 @@ class Book extends Component {
     }
 
 
-    // renders chapters
+    // renders editor if edit state true
     if(viewChapter === true && viewEditor ===false){
       return (
         <div>Hello
