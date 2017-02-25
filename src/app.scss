@@ -1,8 +1,45 @@
+// function to position elements
+@mixin position ($type, $top, $left, $width, $height) {
+  position: $type;
+  top: $top;
+  left: $left;
+  width: $width;
+  height: $height;
+}
+
+@mixin backgroundFontColor ($color, $font) {
+  background-color: $color;
+  color: $font;
+
+}
+
 // testing SASS file
 body {
-  font-size:2.2rem;
-  color:red;
+  font-size: 2.2rem;
+  color: red;
+
   p {
-    color:green;
+    color: green;
+  }
+}
+// main body
+main {
+  // @include position(absolute, 400)
+  // Books view
+  .books {
+    @include position(absolute, 0, 20%, 80%, 100%);
+    padding:50px;
+    @include backgroundFontColor (green, white)
+  }
+}
+// navigation bar
+header {
+  padding:0;
+  // navigation bar
+  nav {
+    // positioning element
+    @include position(absolute, 0, 0, 20%, 100%);
+    // giving background color
+    @include backgroundFontColor (blue, white);
   }
 }

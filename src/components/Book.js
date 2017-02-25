@@ -88,11 +88,15 @@ class Book extends Component {
 
     // renders chapters when edit state and view chapter state is false
     if(viewChapter === false && viewEditor=== false) {
+      // Viewing all chapters
       return (
         <div>
-          {/* Toggling Text Editor */}
-          <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
-          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button>
+          {/* Add a Chapter */}
+          <button>Add a chapters</button>
+          {/* View Text Editor - Button Toggle */}
+          <button onClick={this.props.toggleTextEditor}>Open Editor</button>
+          {/* View All Chapters Button Toggle  */}
+          <button onClick={this.props.toggleChapterView}>View All Chapter</button>
 
           <h1>
             {/* Book Title */}

@@ -16,8 +16,8 @@ class Editor extends Component {
         <h1>{book.chapterTitle}</h1>
         {/* Printing title from props */}
         Editor
-        <button onClick={book.toggleTextEditor}>Toggle Editor</button>
-        <button onClick={book.toggleChapterView}>Toggle Chapter</button>
+        <button onClick={book.toggleTextEditor}>Close Editor</button>
+        <button onClick={book.toggleChapterView}>View All Chapter</button>
         {/* Last modified from moment? */}
      </div>
     )

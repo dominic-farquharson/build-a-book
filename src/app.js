@@ -89,34 +89,32 @@ class App extends Component {
 
     return(
       <Book book={book}
-        editor={()=>this.toggleTextEditor()}
+        // editor={()=>this.toggleTextEditor()}
         viewEditor={this.state.viewEditor}
         viewChapter = {this.state.viewChapter}
         toggleChapterView = {() => this.toggleChapterView()}
         toggleTextEditor = { ()=> this.toggleTextEditor() }
       />
-      // iterating through chapters object - to get book chapters
-      // Object.keys(book['chapters']).map( (key, i)=> {
-
-          // <Book
-          //   key={i}
-          //   chapters = {book['chapters'][key]['title']}
-          //   title = {book['title']}
-          //
-          //   />
-
-      )
-
-
+    )
 
   }
 
   render() {
     return (
       <div>
-        <Navigation toggleEdit={()=>{this.toggleTextEditor()}} />
+        {/* Navigation component - Nav Bar */}
+        <header>
+          <Navigation
+             books={()=>{this.printBooks()}}
+            toggleEdit={()=>{this.toggleTextEditor()}}
+          />
+        </header>
+        <main>
         {/* Rendering Book Component */}
-        {this.printBooks()}
+          <div className="books">
+            {this.printBooks()}
+          </div>
+        </main>
         <a href="http://google.com">Test</a>
      </div>
     )
