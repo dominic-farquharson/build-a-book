@@ -19,24 +19,27 @@ class App extends Component {
   printBooks() {
     // sample object to have dummy data
     let book = {
-      'chapter1':{
-        'title':'title 1',
-        'images':['im1', 'im2']
-      },
-      'chapter2': {
-        'title':'title 2',
-        'images':['im1', 'im2']
-      },
-      'chapter3':{
-        'title':'title 3',
-        'images':['im1', 'im2']
-      },
-      'chapter4': {
-        'title':'title 4',
-        'images':['im1', 'im2']
+      'title': 'book_title',
+      'chapters' :{
+        'chapter1':{
+          'title':'chapter 1',
+          'images':['im1', 'im2']
+        },
+        'chapter2': {
+          'title':'chapter 2',
+          'images':['im1', 'im2']
+        },
+        'chapter3':{
+          'title':'chapter 3',
+          'images':['im1', 'im2']
+        },
+        'chapter4': {
+          'title':'chapter 4',
+          'images':['im1', 'im2']
+        }
+
+
       }
-
-
     }
     //will have an  ajax call, prints books depending on database
     /*
@@ -44,14 +47,20 @@ class App extends Component {
     */
 
     return(
-      Object.keys(book).map( (key, i)=> {
-        return(
-          <Book
-            title={book[key]['title']} />
-      )
-      })
+      <Book book={book} />
+      // iterating through chapters object - to get book chapters
+      // Object.keys(book['chapters']).map( (key, i)=> {
 
-  )
+          // <Book
+          //   key={i}
+          //   chapters = {book['chapters'][key]['title']}
+          //   title = {book['title']}
+          //
+          //   />
+
+      )
+
+
 
   }
 

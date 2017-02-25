@@ -9,8 +9,9 @@ class Chapter extends Component {
 
   render() {
     return (
-      <div>Chapter.js
-        <a href="http://google.com">Test</a>
+      <div>
+        {/* Printing title from props */}
+        <p>{this.props.chapters}</p>
      </div>
     )
   }
