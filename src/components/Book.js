@@ -71,6 +71,19 @@ class Book extends Component {
   )
   }
 
+  printBookTitles() {
+    // setting books object to a variable
+    const books = this.props.book;
+    return(
+    Object.keys(books).map( (book, i) => {
+      return (
+        // printing key from object, represents book titlee
+        <li key={i}>{book}</li>
+      )
+    })
+  )
+  }
+
   // // Toggles text editor based on state
   // toggleTextEditor() {
   //   if(this.state.editor === false)
@@ -82,7 +95,7 @@ class Book extends Component {
 
   render() {
     // variable for book title.
-    const book_title = this.props.book['title'];
+    // const book_title = this.props.book['title'];
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
 
@@ -97,12 +110,10 @@ class Book extends Component {
           <button onClick={this.props.toggleTextEditor}>Open Editor</button>
           {/* View All Chapters Button Toggle  */}
           <button onClick={this.props.toggleChapterView}>View All Chapter</button>
-
-          <h1>
-            {/* Book Title */}
-            {book_title}
-          </h1>
-
+            {/* Printing book titles from firebase endpoint */}
+          <ul>
+            {this.printBookTitles()}
+          </ul>
 
           {/* Rendering Resource component */}
           <Resource />

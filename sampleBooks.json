@@ -1,30 +1,64 @@
  {
      "user1": {
-         "title": "book_title (user1)",
-         "chapters": {
-             "chapter1": {
-                 "title": "chapter 1 (user1)",
-                 "images": ["im1", "im2"],
-                 "data":"I am chapter 1 data"
-             },
-             "chapter2": {
-                 "title": "chapter 2",
-                 "images": ["im1", "im2"],
-                 "data":"I am chapter 2 data"
-             },
-             "chapter3": {
-                 "title": "chapter 3",
-                 "images": ["im1", "im2"],
-                 "data":"I am chapter 3 data"
+         "books": {
+             "User 1 - Book 1": {
+                 "book_title (user1)": {
+                     "chapters": {
+                         "chapter1": {
+                             "title": "chapter 1 (user1)",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 1 data"
+                         },
+                         "chapter2": {
+                             "title": "chapter 2",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 2 data"
+                         },
+                         "chapter3": {
+                             "title": "chapter 3",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 3 data"
 
-             },
-             "chapter4": {
-                 "title": "chapter 4",
-                 "images": ["im1", "im2"],
-                 "data":"I am chapter 4 data"
+                         },
+                         "chapter4": {
+                             "title": "chapter 4",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 4 data"
 
+                         }
+
+                     }
+                 }
+             },
+             "User 1 - Book 2": {
+                 "book_title (user1)": {
+                     "chapters": {
+                         "chapter1": {
+                             "title": "chapter 1 (user1)",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 1 data"
+                         },
+                         "chapter2": {
+                             "title": "chapter 2",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 2 data"
+                         },
+                         "chapter3": {
+                             "title": "chapter 3",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 3 data"
+
+                         },
+                         "chapter4": {
+                             "title": "chapter 4",
+                             "images": ["im1", "im2"],
+                             "data": "I am chapter 4 data"
+
+                         }
+
+                     }
+                 }
              }
-
          }
      },
      "user2": {

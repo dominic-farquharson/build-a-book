@@ -79,8 +79,8 @@ class App extends Component {
     const url = 'https://build-a-book.firebaseio.com/user1.json'
     axios.get(url)
       .then( (response)=> {
-        console.log(response.data);
-        this.setState({book:response.data})
+        console.log(response.data.books);
+        this.setState({book:response.data.books})
       })
       .catch( (error) => {
         console.log(error);
