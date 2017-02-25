@@ -41,7 +41,9 @@ class Navigation extends Component {
 
           {/* Toggling View All Books page */}
           <li onClick={()=>{this.props.bookView()}}>View Books</li>
-          <li>View Books</li>
+          {/* <li>View All Chapter</li> */}
+
+          <li>Account</li>
         </ul>
       </nav>
     )

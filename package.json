@@ -27,6 +27,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "electron": "^1.4.15",
     "electron-prebuilt": "^0.37.2",
     "react": "^0.14.7",

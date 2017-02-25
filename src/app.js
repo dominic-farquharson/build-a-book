@@ -10,6 +10,9 @@ import Navigation from './components/Navigation';
 // importing react and component
 import React, {Component} from 'react';
 
+//importing axios
+import axios from 'axios';
+
 // creating app component
 class App extends Component {
   constructor() {
@@ -23,8 +26,14 @@ class App extends Component {
     this.printBooks = this.printBooks.bind(this);
     this.toggleTextEditor = this.toggleTextEditor.bind(this);
     this.toggleChapterView = this.toggleChapterView.bind(this);
+    this.getBooks = this.getBooks.bind(this);
 
 
+  }
+
+  componentDidMount() {
+    // getting books from firebase endpoint - if any
+    this.getBooks();
   }
 
   // Toggles text editor based on state
@@ -59,6 +68,20 @@ class App extends Component {
     console.log('Book view is toggled')
     this.setState({viewEditor: false})
     this.setState({viewChapter:false})
+  }
+
+  // function to get books from firebase
+  getBooks() {
+    console.log('get books has mounted');
+
+    // ajax call to get books from firebase endpoint
+    axios.get('/')
+      .then( (response)=> {
+        console.log(response.data);
+      })
+      .catch( (error) => {
+        console.log(error);
+      })
   }
 
   // function to print out books
