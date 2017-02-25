@@ -23,7 +23,14 @@ class Book extends Component {
 
     // binding functions
     this.printChapters = this.printChapters.bind(this);
+    // function to set state for chapter Title to pass down to editor as prop
+    this.setChapterTitle = this.setChapterTitle.bind(this);
     // this.toggleTextEditor = this.toggleTextEditor.bind(this)
+
+    // setting initial title state to untitled
+    this.state = {
+      chapterTitle:'untitled'
+    }
   }
 
   // prints out resources depending on num available in database
@@ -31,17 +38,31 @@ class Book extends Component {
 
   }
 
+  // sets chapter title to be sent down to editor as prop
+  setChapterTitle(title) {
+    // setting state
+    this.setState({chapterTitle: title})
+  }
+
   // prints out chapters depending on num available in database
   printChapters() {
     return(
     Object.keys(this.props.book['chapters']).map( (key, i)=> {
+      // setting chapter title to a variable
+      let chapterTitle= this.props.book['chapters'][key]['title'];
       return(
     <Chapter
       key={i}
       chapters = {this.props.book['chapters'][key]['title']}
       title = {this.props.book['title']}
       view={false}
-      toggleTextEditor = {()=>this.props.toggleTextEditor}
+      toggleTextEditor = {
+        ()=> {
+          console.log(chapterTitle);
+          this.props.toggleTextEditor();
+          this.setChapterTitle(chapterTitle);
+        }
+        }
 
       />
     )
@@ -108,10 +129,12 @@ class Book extends Component {
           <div>
             {/* Passing toggle Editor and Toggle Chapter down as props */}
             <Editor
+              // currentChapter = {this.state.chapterTitle}
               viewEditor={this.props.viewEditor}
               viewChapter = {this.props.viewChapter}
               toggleChapterView = {this.props.toggleChapterView}
               toggleTextEditor = {this.props.toggleTextEditor}
+              chapterTitle = {this.state.chapterTitle}
              />
           </div>
         )

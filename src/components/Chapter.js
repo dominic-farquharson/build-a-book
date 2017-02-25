@@ -12,7 +12,7 @@ class Chapter extends Component {
       <div>
         {/* Printing title from props */}
         <p>{this.props.chapters}</p>
-        <button onClick = {this.props.toggleTextEditor()}>View</button>
+        <button onClick = {this.props.toggleTextEditor}>View</button>
         {/* Last modified from moment? */}
      </div>
     )

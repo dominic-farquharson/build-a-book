@@ -28,10 +28,13 @@ class App extends Component {
   }
 
   // Toggles text editor based on state
-  toggleTextEditor() {
+  toggleTextEditor(chapterTitle) {
     console.log('editor has been toggled')
     if(this.state.viewEditor === false) {
+      // state changed to true
       this.setState({viewEditor:true})
+      this.setState({chapterTitle: chapterTitle})
+      // viewChapter state changed to false
       this.setState({viewChapter:false})
     }
     else
