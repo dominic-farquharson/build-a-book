@@ -4,6 +4,9 @@ import './app.scss'
 // importing Book.js
 import Book from './components/Book';
 
+// importing nav bar
+import Navigation from './components/Navigation';
+
 // importing react and component
 import React, {Component} from 'react';
 
@@ -11,8 +14,37 @@ import React, {Component} from 'react';
 class App extends Component {
   constructor() {
     super();
+    // setting initital states to false
+    this.state = {
+      editor: false,
+      viewChapter: false
+    }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
+    this.toggleTextEditor = this.toggleTextEditor.bind(this);
+    this.toggleChapterView = this.toggleChapterView.bind(this);
+
+
+  }
+
+  // Toggles text editor based on state
+  toggleTextEditor() {
+    console.log('editor has been toggled')
+    if(this.state.editor === false)
+      this.setState({editor:true})
+    else
+      this.setState({editor:false})
+
+  }
+
+  // Toggles Chapter View
+  toggleChapterView() {
+    console.log('chapter has been toggled')
+    if(this.state.viewChapter=== false)
+      this.setState({viewChapter:true})
+    else
+      this.setState({viewChapter:false})
+
   }
 
   // function to print out books
@@ -47,7 +79,12 @@ class App extends Component {
     */
 
     return(
-      <Book book={book} />
+      <Book book={book}
+        editor={()=>this.toggleTextEditor()}
+        view={this.state.editor}
+        viewChapter = {this.state.viewChapter}
+        toggleChapterView = {() => this.toggleChapterView()}
+      />
       // iterating through chapters object - to get book chapters
       // Object.keys(book['chapters']).map( (key, i)=> {
 
@@ -66,7 +103,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>App.js
+      <div>
+        <Navigation toggleEdit={()=>{this.toggleTextEditor()}} />
         {/* Rendering Book Component */}
         {this.printBooks()}
         <a href="http://google.com">Test</a>

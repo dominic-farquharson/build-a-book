@@ -12,13 +12,15 @@ class Book extends Component {
     super(props);
 
     // setting state to allow for conditional rendering
-    this.state = {
-      editor: false
-    }
+    // edit condition, originally false
+
+    // this.state = {
+    //   editor: this.props.view
+    // }
 
     // binding functions
     this.printChapters = this.printChapters.bind(this);
-    this.toggleTextEditor = this.toggleTextEditor.bind(this)
+    // this.toggleTextEditor = this.toggleTextEditor.bind(this)
   }
 
   // prints out resources depending on num available in database
@@ -44,33 +46,33 @@ class Book extends Component {
   )
   }
 
-  // Toggles text editor based on state
-  toggleTextEditor() {
-    if(this.state.editor === false)
-      this.setState({editor:true})
-    else
-      this.setState({editor:false})
-
-  }
+  // // Toggles text editor based on state
+  // toggleTextEditor() {
+  //   if(this.state.editor === false)
+  //     this.setState({editor:true})
+  //   else
+  //     this.setState({editor:false})
+  //
+  // }
 
   render() {
     // variable for book title.
     const book_title = this.props.book['title'];
-    let editState = this.state.editor;
+    let viewChapter = this.props.viewChapter;
 
     // renders chapters when edit state false
-    if(editState === false) {
+    if(viewChapter === false) {
       return (
         <div>
           {/* Toggling Text Editor */}
-          <button onClick={() => this.toggleTextEditor()}>Toggle Editor</button>
+          <button onClick={() => this.props.editor()}>Toggle Editor</button>
+          <button onClick={() => this.props.toggleChapterView()}>Toggle Chapter</button>
+
           <h1>
             {/* Book Title */}
             {book_title}
           </h1>
 
-          {/* Printing chapters */}
-          {this.printChapters()}
 
           {/* Rendering Resource component */}
           <Resource />
@@ -84,10 +86,14 @@ class Book extends Component {
 
 
     // renders editor if edit state true
-    if(editState === true){
+    if(viewChapter === true){
       return (
         <div>Hello
-          <button onClick={() => this.toggleTextEditor()}>Toggle Editor</button>
+          {/* Printing chapters */}
+          {this.printChapters()}
+          <button onClick={() => this.props.editor()}>Toggle Editor</button>
+          <button onClick={() => this.props.toggleChapterView()}>Toggle Chapter</button>
+
         </div>
       )
 

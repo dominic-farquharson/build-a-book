@@ -10,7 +10,7 @@ class Resource extends Component {
   render() {
     return (
       <div>Resource.js
-        <a href="http://google.com">Test</a>
+        {/* <a href="http://google.com">Test</a> */}
      </div>
     )
   }

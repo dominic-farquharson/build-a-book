@@ -12,6 +12,7 @@ class Chapter extends Component {
       <div>
         {/* Printing title from props */}
         <p>{this.props.chapters}</p>
+        {/* Last modified from moment? */}
      </div>
     )
   }
