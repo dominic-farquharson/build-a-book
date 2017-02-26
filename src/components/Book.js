@@ -127,6 +127,10 @@ class Book extends Component {
       // Viewing all books
       return (
         <div>
+          <h1>{this.props.user}</h1>
+
+
+
           {/* Add a Chapter */}
           <button>Add a chapters</button>
           {/* View Text Editor - Button Toggle */}

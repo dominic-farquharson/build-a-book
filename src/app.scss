@@ -70,3 +70,19 @@ header {
     }
   }
 }
+
+
+// Landing Screen - page with sign in and sign out buttons
+#welcomeScreen {
+  // positioning it take up entire screen
+  @include position(absolute, 0, 0, 100%, 100%);
+  // setting background color and font color
+  @include backgroundFontColor(green, black);
+
+  nav {
+    @include position(absolute, 30%, 45%, 100%, 100%);
+    @include backgroundFontColor(green, black);
+    
+  }
+
+}

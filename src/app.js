@@ -29,7 +29,12 @@ class App extends Component {
       viewChapter: false,
       book: {},
       // Checking if a user is signed in
-      userSignIn: false
+      userSignIn: false,
+      // user's email
+      email:'',
+      // user's unique key from firebase
+      uid: '',
+      displayName: ''
     }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
@@ -42,14 +47,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // getting books from firebase endpoint - if any
-    this.getBooks();
-  }
-
-  // create user - firebase
-  createUser(email, password) {
-
-    // Initialize Firebase
+    // Initializing Firebase
     var config = {
        apiKey: process.env.apiKey,
        authDomain: process.env.authDomain,
@@ -60,18 +58,132 @@ class App extends Component {
 
     firebase.initializeApp(config);
 
+    // getting books from firebase endpoint - if any
+    this.getBooks();
+  }
 
+  // create user - firebase
+  createUser(email, password, displayName) {
     console.log('new user has been created')
-    console.log(email, password)
+    console.log('email type',typeof email)
+    // console.log(email, password, displayName)
     // creating a new user - firebase
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    //promise object - only toggles user sign in on successful account sign up
+    .then(
+      (response)=>{
+        console.log(response)
+        console.log('success');
+
+        // getting user details
+        firebase.auth().onAuthStateChanged( (user) => {
+
+          // invoking firebase current user
+          var user = firebase.auth().currentUser;
+
+          // adding name to user object
+          user.updateProfile({
+            displayName: displayName,
+            photoURL: "http://placehold.it/350x150"
+          }).then( () => {
+            // Update successful.
+            // getting user's unique key and email address
+            this.setState({
+              uid: user.uid,
+              email: user.email,
+              displayName: displayName
+            })
+            // toggling sign in state
+            this.toggleUserSignIn();
+
+          }, function(error) {
+            // An error happened.
+            console.log('error updating profile',error)
+          });
+
+        });
+
+
+      }
+    )
+    .catch(function(error) {
       // outputting error message using an alert.
       var errorCode = error.code;
       var errorMessage = error.message;
+      // console.log(error, errorCode, errorMessage)
+      console.log('error creatiing user', error)
+      // error message
       alert(`${error.message}  \n Error Code: ${error.code}`);
 
       // ...
     });
+
+
+
+  }
+
+
+  // toggle User Sign In - renders book component - null value means account created
+  toggleUserSignIn(email='null', password='null') {
+    /*
+    when user creates an account, can't passing in password data results in flashing error.
+    When function is passed with no arguments, then user account has been created
+    */
+    if(email ==='null') {
+        // getting user details
+        firebase.auth().onAuthStateChanged( (user) => {
+          console.log('user details:', user)
+          console.log(`userId: ${user.uid} email:${user.email}`);
+
+          // getting user's unique key and email address
+          this.setState({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            // this.setState({userSignIn:true})
+            userSignIn:true
+          })
+        });
+                // exiting function
+        return;
+
+
+    }
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    // adding promise object to sign user in on sucess
+    .then( ()=> {
+        // console.log('user logged in', user)
+
+        // getting user details
+        firebase.auth().onAuthStateChanged( (user) => {
+          console.log('user details:', user)
+          console.log(`userId: ${user.uid} email:${user.email}`);
+
+          // getting user's unique key and email address
+          this.setState({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName
+          })
+        });
+
+        if(this.state.userSignIn === false) {
+          // changing user sign in state to true
+          this.setState({userSignIn:true})
+        }
+        else
+          this.setState({userSignIn:false})
+    })
+    .catch(function(error) {
+      console.log('error loggin in:', error)
+      // error codes + message
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert('invalid password or email')
+
+    // ...
+    });
+
   }
 
   // Toggles text editor based on state
@@ -131,7 +243,9 @@ class App extends Component {
     */
 
     return(
-      <Book book={this.state.book}
+      <Book
+        book={this.state.book}
+        user = {this.state.displayName}
         // editor={()=>this.toggleTextEditor()}
         viewEditor={this.state.viewEditor}
         viewChapter = {this.state.viewChapter}
@@ -159,19 +273,6 @@ class App extends Component {
         <div className="books">
           {this.printBooks()}
         </div>
-        <div>
-          <form action="#" method="POST">
-            {/* Using refs to grab input values to pass to create user function */}
-            <input name="username" ref={(email) => {this.emailInput=email}} type="text" placeholder="email" required />
-            <input name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="password" required />
-            {/*
-              Posting user info to firebase
-              Passing password, email to createuser function
-            */}
-            <input type="button" value="Create Account" onClick={()=>this.createUser(this.emailInput.value, this.passwordInput.value)} />
-          </form>
-        </div>
-
       </main>
         <a href="http://google.com">Test</a>
      </div>
@@ -182,7 +283,12 @@ class App extends Component {
     return (
       <div>
         {/* App Landing Page - when no user is signed in */}
-        <Welcome />
+        <Welcome
+          createUser = {(email, password, displayName) => this.createUser(email, password, displayName)}
+          userSignedIn = { ()=> this.toggleUserSignIn()}
+          // passing function to authenticate user down as prop
+          toggleUserSignIn = { (email, password)=> {this.toggleUserSignIn(email, password)}}
+         />
       </div>
     )
   }
