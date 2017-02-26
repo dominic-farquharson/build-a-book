@@ -25,8 +25,13 @@ class Chapter extends Component {
         <h3>{this.state.title}</h3>
         {/* printing chapters */}
         {this.props.chapter}
-        {/* <p>{this.props.chapters['chapter1']['title']}}</p> */}
+        {/* View chapter contents - Renders editor */}
         <button onClick = {this.props.toggleTextEditor}>View</button>
+
+
+
+
+
         {/* Last modified from moment? */}
      </div>
     )

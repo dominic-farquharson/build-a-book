@@ -34,6 +34,7 @@ class Book extends Component {
 
   // sets chapter title to be sent down to editor as prop
   setChapterTitle(title) {
+    console.log('setting chapter title')
     // setting state
     this.setState({chapterTitle: title})
   }
@@ -58,17 +59,25 @@ class Book extends Component {
             key = {i}
             title = {this.state.title}
             chapter = {key}
+            toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
 
           />
         )
       }
-      // printing chapters without title property
+      /*
+      - printing chapters without title property
+      - passing chapter data, and toggleEditor function down
+        as props.
+      - toggleEditor will update state to render chapter view
+
+      */
       else {
         return (
           <Chapter
             key = {i}
             chapter = {key}
-
+            // Sets chapter title and toggles chapter editor
+            toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
           />
         )
       }

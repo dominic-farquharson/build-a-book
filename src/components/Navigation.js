@@ -32,17 +32,16 @@ class Navigation extends Component {
       <nav>
         <p className="uk-position-bottom">Nav</p>
         <ul>
-          {/* {console.log(nav.viewEditor)} */}
-          {/* Printing book component within nav */}
-          {/* {this.props.toggl} */}
-
-          {/* Toggling Editor */}
-          <li onClick={()=>this.toggleEdit()}>Create Chapter</li>
+          {/* Toggling Create New Book */}
+          <li onClick={()=>this.toggleEdit()}>Create New Book</li>
 
           {/* Toggling View All Books page */}
           <li onClick={()=>{this.props.bookView()}}>View Books</li>
-          {/* <li>View All Chapter</li> */}
 
+          {/* Showing Book Statistics using D3??? */}
+          <li>Statistics</li>
+
+          {/* User Account Info */}
           <li>Account</li>
         </ul>
       </nav>

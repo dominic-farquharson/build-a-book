@@ -89,38 +89,9 @@ class App extends Component {
 
   // function to print out books
   printBooks() {
-    // sample object to have dummy data
-    /*
-    let book = {
-      'title': 'book_title',
-      'chapters' :{
-        'chapter1':{
-          'title':'chapter 1',
-          'images':['im1', 'im2']
-        },
-        'chapter2': {
-          'title':'chapter 2',
-          'images':['im1', 'im2']
-        },
-        'chapter3':{
-          'title':'chapter 3',
-          'images':['im1', 'im2']
-        },
-        'chapter4': {
-          'title':'chapter 4',
-          'images':['im1', 'im2']
-        }
-
-
-      }
-
-    } */
-    //will have an  ajax call, prints books depending on database
     /*
       printing book component, sending book data as props
     */
-
-    // change view to viewEditor for clarity
 
     return(
       <Book book={this.state.book}
