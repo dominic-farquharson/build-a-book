@@ -1,9 +1,6 @@
 // importing react and component
 import React, {Component} from 'react';
 
-// importing add chapter component
-import AddChapter from './AddChapter';
-
 // creating Chapter component
 class Chapter extends Component {
   constructor(props) {
@@ -37,8 +34,13 @@ class Chapter extends Component {
           <p>{chapter.chapterTitle}</p>
           <p>{chapter['image']}</p>
 
-
+{/* this.props.toggleAddChapter */}
         </div>
+        {/* Adding A Chater Button - toggles Add Chapter component*/}
+        <div>
+          <button onClick={this.props.toggleAddChapter}>Add A Chapter</button>
+        </div>
+
         {/* View chapter contents - Renders editor */}
         <button onClick = {this.props.toggleTextEditor}>View</button>
 

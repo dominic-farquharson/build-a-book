@@ -9,6 +9,9 @@ import Resource from './Resource';
 // importing Editor component
 import Editor from './Editor';
 
+// Adding Chapter
+import AddChapter from './AddChapter';
+
 
 // importing axios
 import axios from 'axios';
@@ -29,13 +32,35 @@ class Book extends Component {
       chapterTitle:'untitled',
       title:'',
       // add Book input field state initially false
-      addBook: false
+      addBook: false,
+      // Renders Add Chapter component when true
+      addChapter: false
     }
   }
 
   // prints out resources depending on num available in database
   printResources() {
 
+  }
+
+  // toggles Add Chapter component
+  toggleAddChapter() {
+    console.log('toggling add Chapter')
+
+
+    // sets state of addChapter to false if true
+    if(this.state.addChapter) {
+      this.setState({addChapter: false});
+      // axios call to update books after posting
+      this.props.getBooks();
+      // rendering Add Chapter Component
+      this.printChapters();
+    }
+    // sets state of addchapter to true if false
+    else {
+      this.setState({addChapter: true});
+
+    }
   }
 
   // sets chapter title to be sent down to editor as prop
@@ -57,9 +82,28 @@ class Book extends Component {
     /* Using title from state to render chapters of a specific book */
     let book = this.props.book[this.state.title]['chapters'];
     console.log(book)
-    if(book === undefined) {
 
-        return (<div>No chapters</div>)
+    /*
+    if chapters is undefined - there are no chapters, renders add a chapter
+    Also rendered if user toggles state of addChapter and sets it to true
+
+    */
+    if(book === undefined  || this.state.addChapter===true) {
+
+        return (
+          <div>
+            <h1>Add A Chapter</h1>
+            {/* Rendering Add Chapter component */}
+            <AddChapter
+               // user's key
+               userId = {uid}
+               // toggles Add Chapter component
+               toggleAddChapter = {()=> this.toggleAddChapter()}
+               // getting book's unique key to post chapters to it
+               bookKey = {this.state.title}
+              />
+          </div>
+        )
       }
 
 
@@ -82,10 +126,13 @@ class Book extends Component {
         //   )
         // }
 
+        // rendering Chapter component when chapters object isn't null
           return (
             <Chapter
               userId = {uid}
               key = {i}
+              // toggles Add Chapter component
+              toggleAddChapter = {()=> this.toggleAddChapter()}
               // chapter = {book[key]}
               chapterTitle = {book[key]['title']}
               bookKey = {this.state.title}

@@ -25,6 +25,8 @@ class AddChapter extends Component {
     })
     .then( (response) => {
       console.log('New Chapter has been created', response);
+      alert('chapter has been added')
+      this.props.toggleAddChapter();
       // updating state of chapters after new chapter is added
       // this.props.getBooks();
       // setting add chapter's form's state to false - rendering all chapters view
@@ -41,6 +43,7 @@ class AddChapter extends Component {
   render() {
     return (
       <div>
+        {/* <h1>BookKey: {this.props.bookKey}</h1> */}
         {/* Create Chapter Form */}
         <form id="addChapterForm" action="#" method="POST">
           {/* Using refs to grab input values to pass to create chapter function */}
