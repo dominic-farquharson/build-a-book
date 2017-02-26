@@ -7,6 +7,9 @@ import Book from './components/Book';
 // importing nav bar
 import Navigation from './components/Navigation';
 
+// importing landing page
+import Welcome from './components/Auth/Welcome';
+
 // importing react and component
 import React, {Component} from 'react';
 
@@ -24,7 +27,9 @@ class App extends Component {
     this.state = {
       viewEditor: false,
       viewChapter: false,
-      book: {}
+      book: {},
+      // Checking if a user is signed in
+      userSignIn: false
     }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
@@ -138,6 +143,7 @@ class App extends Component {
   }
 
   render() {
+    if(this.state.userSignIn) {
     return (
       <div>
         {/* Navigation component - Nav Bar */}
@@ -171,6 +177,17 @@ class App extends Component {
      </div>
     )
   }
+  // rendering sign up page if user not signed in
+  else {
+    return (
+      <div>
+        {/* App Landing Page - when no user is signed in */}
+        <Welcome />
+      </div>
+    )
+  }
+  }
+
 }
 
 
