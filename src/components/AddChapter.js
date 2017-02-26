@@ -1,10 +1,41 @@
 // importing react and component
 import React, {Component} from 'react';
 
+// importing Axios
+import axios from 'axios';
+
 // creating AddChapter component
 class AddChapter extends Component {
-  constructor() {
-    super();
+  constructor(uid) {
+    super(uid);
+  }
+
+  // function to post chapter title and image to firebase
+  addChapter(title, image, bookKey) {
+    console.log('props',this.props)
+    // user's id key
+    const uid = this.props.userId;
+    // url of user's chapters endpoint located within the selected book
+    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}/chapters.json`;
+
+    // posting ot user's chapter's endpoint
+    axios.post(url, {
+      title:title,
+      image: image
+    })
+    .then( (response) => {
+      console.log('New Chapter has been created', response);
+      // updating state of chapters after new chapter is added
+      // this.props.getBooks();
+      // setting add chapter's form's state to false - rendering all chapters view
+      // this.toggleAddBook();
+
+    })
+    .catch( (error) => {
+      console.log('error posting new book', error)
+    })
+
+  // will need to fetch chapters within promise
   }
 
   render() {
@@ -23,11 +54,11 @@ class AddChapter extends Component {
           {/* Chapter Image Cover */}
           <input name="chapterImage" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} type="text" placeholder="Insert Image Url" required />
           {/*
-            Posting user info to firebase
-            Passing password, email to createuser function
+            Posting book info to firebase
+            Passing chapter title and image cover
           */}
-          <input type="button" value="Create Chapter" onClick={()=>console.log('creating chapter') } />
-          {/* this.props.add(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value); }} /> */}
+          <input type="button" value="Create Chapter" onClick={()=>this.addChapter(this.chapterTitleInput.value, this.chapterImageInput.value, this.props.bookKey)} />
+
         </form>
       </div>
     )
