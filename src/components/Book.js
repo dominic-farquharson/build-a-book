@@ -135,6 +135,7 @@ class Book extends Component {
               toggleAddChapter = {()=> this.toggleAddChapter()}
               // chapter = {book[key]}
               chapterTitle = {book[key]['title']}
+              chapterImage = {book[key]['image']}
               bookKey = {this.state.title}
               // Sets chapter title and toggles chapter editor
               toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
@@ -312,8 +313,9 @@ class Book extends Component {
           <h1>Chapters view</h1>
           {/* Printing chapters */}
           {this.printChapters()}
-          <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
-          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button>
+
+          {/* <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
+          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button> */}
 
         </div>
       )
