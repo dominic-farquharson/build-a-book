@@ -82,7 +82,15 @@ header {
   nav {
     @include position(absolute, 30%, 45%, 100%, 100%);
     @include backgroundFontColor(green, black);
-    
+
   }
 
+}
+
+// Add a Chapter Form
+#addChapterForm {
+  position:absolute;
+  bottom:30%;
+  left:10%;
+  height:30%;
 }

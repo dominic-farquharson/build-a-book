@@ -9,6 +9,9 @@ import Resource from './Resource';
 // importing Editor component
 import Editor from './Editor';
 
+// importing AddChapter component
+import AddChapter from './AddChapter';
+
 // importing axios
 import axios from 'axios';
 
@@ -46,48 +49,67 @@ class Book extends Component {
 
   // prints out chapters depending on num available in database
   printChapters() {
+    // user's id
+    const uid = this.state.userId;
+    console.log(this.props.books)
+    // books[book]['title']
+
+
+
     /* Using title from state to render chapters of a specific book */
-    let book = this.props.book[this.state.title]['chapters'];
+    let book = this.props.book;
 
     return(
       // grabbing keys from object
       Object.keys(book).map( (key, i)=> {
-        console.log(book['chapters'])
+        // printing add chapter form - if no chapters present or if user toggles it
+        if(this.props.book[key]['title']['chapters'] === undefined && i===0) {
+          return (
+            <div key={i}>
+              <AddChapter />
+            </div>
+          )
+        }
+
 
         /*
          preventing title from being printed mutliple times
          Only printed when key = 0
         */
-        if(i === 0) {
-        return (
-          <Chapter
-            key = {i}
-            title = {this.state.title}
-            chapter = {key}
-            toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
+        // if(i === 0) {
+      //   else {
+      //   return (
+      //     <Chapter
+      //       key = {i}
+      //       title = {this.state.title}
+      //       chapter = {book[key]['title']}
+      //       toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
+      //
+      //     />
+      //   )
+      // }
+    })
+  )
+    //   /*
+    //   - printing chapters without title property
+    //   - passing chapter data, and toggleEditor function down
+    //     as props.
+    //   - toggleEditor will update state to render chapter view
+    //
+    //   */
+    //   else {
+    //     return (
+    //       <Chapter
+    //         key = {i}
+    //         chapter = {key}
+    //         // Sets chapter title and toggles chapter editor
+    //         toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
+    //       />
+    //     )
+    //   }
+    //   })
+    // )
 
-          />
-        )
-      }
-      /*
-      - printing chapters without title property
-      - passing chapter data, and toggleEditor function down
-        as props.
-      - toggleEditor will update state to render chapter view
-
-      */
-      else {
-        return (
-          <Chapter
-            key = {i}
-            chapter = {key}
-            // Sets chapter title and toggles chapter editor
-            toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
-          />
-        )
-      }
-      })
-    )
   }
 
   /*
@@ -110,11 +132,16 @@ class Book extends Component {
       return (
         // printing key from object, represents book titlee
         <li key={i}>
+          {/* Printing book title */}
           {books[book]['title']}
           <br />
           {/* Viewing chapters based on book's key */}
           {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
           <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapter</button>
+
+          {/* Add delete button */}
+
+          {/* Add Edit Button */}
 
         </li>
       )
