@@ -7,6 +7,9 @@ Watches for changes within webpack-dev-server.
 // importing webpack
 const webpack = require('webpack');
 
+// Enables .env file to be referenced in app.js
+const Dotenv = require('dotenv-webpack');
+
 // exporting modules
 module.exports = {
   // entry point for app - using app.js located in src folder
@@ -44,6 +47,11 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$"))
+    new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$")),
+    // dot env file for reference in app.js
+    new Dotenv({
+     path: './.env', //file path
+     safe: false
+   })
   ]
 }

@@ -13,6 +13,9 @@ import React, {Component} from 'react';
 //importing axios
 import axios from 'axios';
 
+// importing firebase
+import * as firebase from "firebase";
+
 // creating app component
 class App extends Component {
   constructor() {
@@ -28,6 +31,7 @@ class App extends Component {
     this.toggleTextEditor = this.toggleTextEditor.bind(this);
     this.toggleChapterView = this.toggleChapterView.bind(this);
     this.getBooks = this.getBooks.bind(this);
+    this.createUser = this.createUser.bind(this);
 
 
   }
@@ -35,6 +39,34 @@ class App extends Component {
   componentDidMount() {
     // getting books from firebase endpoint - if any
     this.getBooks();
+  }
+
+  // create user - firebase
+  createUser(email, password) {
+
+    // Initialize Firebase
+    var config = {
+       apiKey: process.env.apiKey,
+       authDomain: process.env.authDomain,
+       databaseURL: process.env.databaseURL,
+       storageBucket: process.env.storageBucket,
+       messagingSenderId: process.env.messagingSenderId
+     };
+
+    firebase.initializeApp(config);
+
+
+    console.log('new user has been created')
+    console.log(email, password)
+    // creating a new user - firebase
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // outputting error message using an alert.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(`${error.message}  \n Error Code: ${error.code}`);
+
+      // ...
+    });
   }
 
   // Toggles text editor based on state
@@ -121,6 +153,19 @@ class App extends Component {
         <div className="books">
           {this.printBooks()}
         </div>
+        <div>
+          <form action="#" method="POST">
+            {/* Using refs to grab input values to pass to create user function */}
+            <input name="username" ref={(email) => {this.emailInput=email}} type="text" placeholder="email" required />
+            <input name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="password" required />
+            {/*
+              Posting user info to firebase
+              Passing password, email to createuser function
+            */}
+            <input type="button" value="Create Account" onClick={()=>this.createUser(this.emailInput.value, this.passwordInput.value)} />
+          </form>
+        </div>
+
       </main>
         <a href="http://google.com">Test</a>
      </div>
