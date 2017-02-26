@@ -6,12 +6,21 @@ class Chapter extends Component {
   constructor() {
     super();
   }
+  // Toggling view when component mounts
+  componentDidMount() {
+    // this.props.toggleChapterView();
+  }
 
   render() {
     return (
       <div>
+        <h3>Book: {this.props.title}</h3>
+        Chapters
         {/* Printing title from props */}
-        <p>{this.props.chapters}</p>
+        {/* {console.log('testing',Object.keys(this.props.chapters).map( (key, i)=> {
+          console.log(this.props.chapaters[key])
+        })  )} */}
+        {/* <p>{this.props.chapters['chapter1']['title']}}</p> */}
         <button onClick = {this.props.toggleTextEditor}>View</button>
         {/* Last modified from moment? */}
      </div>

@@ -1,86 +1,123 @@
- {
-     "user1": {
-         "books": {
-             "User 1 - Book 1": {
-                 "book_title (user1)": {
-                     "chapters": {
-                         "chapter1": {
-                             "title": "chapter 1 (user1)",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 1 data"
-                         },
-                         "chapter2": {
-                             "title": "chapter 2",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 2 data"
-                         },
-                         "chapter3": {
-                             "title": "chapter 3",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 3 data"
+{
+    "user1": {
+        "book1": {
+            "title": "book 1",
+            "chapters": {
+                "chapter1": {
+                    "data": "chapter1 data",
+                    "resources": ["img1", "im2"]
+                }
+            }
+        },
+        "book2": {
+            "title": "book 2",
+            "chapters": {
+                "chapter1": {
+                    "data": "chapter2 data",
+                    "resources": ["img1", "im2"]
+                }
+            }
+        },
+        "book3": {
+            "title": "book 3",
+            "chapters": {
+                "chapter1": {
+                    "data": "chapter3 data",
+                    "resources": ["img1", "im2"]
+                }
+            }
+        }
 
-                         },
-                         "chapter4": {
-                             "title": "chapter 4",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 4 data"
+    }
 
-                         }
 
-                     }
-                 }
-             },
-             "User 1 - Book 2": {
-                 "book_title (user1)": {
-                     "chapters": {
-                         "chapter1": {
-                             "title": "chapter 1 (user1)",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 1 data"
-                         },
-                         "chapter2": {
-                             "title": "chapter 2",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 2 data"
-                         },
-                         "chapter3": {
-                             "title": "chapter 3",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 3 data"
+}
 
-                         },
-                         "chapter4": {
-                             "title": "chapter 4",
-                             "images": ["im1", "im2"],
-                             "data": "I am chapter 4 data"
 
-                         }
 
-                     }
-                 }
-             }
-         }
-     },
-     "user2": {
-         "title": "User 2's book title",
-         "chapters": {
-             "chapter1": {
-                 "title": "chapter 1 (user2)",
-                 "images": ["im1", "im2"]
-             },
-             "chapter2": {
-                 "title": "chapter 2",
-                 "images": ["im1", "im2"]
-             },
-             "chapter3": {
-                 "title": "chapter 3",
-                 "images": ["im1", "im2"]
-             },
-             "chapter4": {
-                 "title": "chapter 4",
-                 "images": ["im1", "im2"]
-             }
 
-         }
-     }
- }
+
+
+
+/*{
+    "user1": {
+        "books": {
+            "User 1 - Book 1": {
+                "chapters": {
+                    "chapter1": {
+                        "title": "chapter 1 (user1)",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 1 data"
+                    },
+                    "chapter2": {
+                        "title": "chapter 2",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 2 data"
+                    },
+                    "chapter3": {
+                        "title": "chapter 3",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 3 data"
+
+                    },
+                    "chapter4": {
+                        "title": "chapter 4",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 4 data"
+
+                    }
+
+                }
+            },
+            "User 1 - Book 2": {
+                "chapters": {
+                    "chapter1": {
+                        "title": "chapter 1 (user1)",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 1 data"
+                    },
+                    "chapter2": {
+                        "title": "chapter 2",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 2 data"
+                    },
+                    "chapter3": {
+                        "title": "chapter 3",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 3 data"
+
+                    },
+                    "chapter4": {
+                        "title": "chapter 4",
+                        "images": ["im1", "im2"],
+                        "data": "I am chapter 4 data"
+
+                    }
+
+                }
+            }
+        }
+    },
+    "user2": {
+        "title": "User 2's book title",
+        "chapters": {
+            "chapter1": {
+                "title": "chapter 1 (user2)",
+                "images": ["im1", "im2"]
+            },
+            "chapter2": {
+                "title": "chapter 2",
+                "images": ["im1", "im2"]
+            },
+            "chapter3": {
+                "title": "chapter 3",
+                "images": ["im1", "im2"]
+            },
+            "chapter4": {
+                "title": "chapter 4",
+                "images": ["im1", "im2"]
+            }
+
+        }
+    }
+}*/

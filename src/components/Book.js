@@ -29,7 +29,8 @@ class Book extends Component {
 
     // setting initial title state to untitled
     this.state = {
-      chapterTitle:'untitled'
+      chapterTitle:'untitled',
+      title:''
     }
   }
 
@@ -46,29 +47,48 @@ class Book extends Component {
 
   // prints out chapters depending on num available in database
   printChapters() {
-    return(
-    Object.keys(this.props.book['chapters']).map( (key, i)=> {
-      // setting chapter title to a variable
-      let chapterTitle= this.props.book['chapters'][key]['title'];
-      return(
-    <Chapter
-      key={i}
-      chapters = {this.props.book['chapters'][key]['title']}
-      title = {this.props.book['title']}
-      view={false}
-      toggleTextEditor = {
-        ()=> {
-          console.log(chapterTitle);
-          this.props.toggleTextEditor();
-          this.setChapterTitle(chapterTitle);
-        }
-        }
+    /* Using title from state to render chapters of a specific book */
+    let book = this.props.book[this.state.title];
 
-      />
+    return(
+      // grabbing keys from object
+      Object.keys(book).map( (key, i)=> {
+        console.log(book['chapters'])
+        // let newObject = this.props.book[key]['chapters'];
+        // console.log(this.props.book[key]['chapters']);
+        // console.log('newObject', newObject)
+        return (
+          // <div key={i}>{book['chapters']}</div>
+          <Chapter
+            title = {this.state.title}
+
+          />
+        )
+        // return (
+        //   // using book's key to render it's chapters
+        //   Object.keys(newObject).map( (chapter, i) => {
+        //   console.log(chapter, i)
+        //     return (
+        //     // rendering book chapters
+        //     <div chapter={i}>{chapter}</div>
+        //     )
+        //   })
+        // )
+      })
     )
 
-    })
-  )
+
+  }
+
+  /*
+   setting current book title to state
+   Will reference this when printing book
+
+  */
+  setBookTitle(title) {
+    console.log('the title is', title)
+    // setting  book title to state
+    this.setState({title: title})
   }
 
   printBookTitles() {
@@ -78,20 +98,18 @@ class Book extends Component {
     Object.keys(books).map( (book, i) => {
       return (
         // printing key from object, represents book titlee
-        <li key={i}>{book}</li>
+        <li key={i}>
+          {book}
+          <br />
+          {/* Viewing chapters based on book's key */}
+          {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
+          <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapter</button>
+
+        </li>
       )
     })
   )
   }
-
-  // // Toggles text editor based on state
-  // toggleTextEditor() {
-  //   if(this.state.editor === false)
-  //     this.setState({editor:true})
-  //   else
-  //     this.setState({editor:false})
-  //
-  // }
 
   render() {
     // variable for book title.
@@ -126,10 +144,11 @@ class Book extends Component {
     }
 
 
-    // renders editor if edit state true
+    // renders chapter if edit state false and viewChapter is true
     if(viewChapter === true && viewEditor ===false){
       return (
-        <div>Hello
+        <div>
+          <h1>Chapters view</h1>
           {/* Printing chapters */}
           {this.printChapters()}
           <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
