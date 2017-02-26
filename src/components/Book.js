@@ -9,6 +9,9 @@ import Resource from './Resource';
 // importing Editor component
 import Editor from './Editor';
 
+// importing axios
+import axios from 'axios';
+
 // creating Book component
 class Book extends Component {
   constructor(props) {
@@ -116,6 +119,29 @@ class Book extends Component {
   )
   }
 
+
+  /* Adding a Book. Posting to Firebase */
+  addBook(uid) {
+    /*
+     will need function to update state of books in app.js after new book added
+     or rerun fetch books request
+     */
+    const url = `https://build-a-book.firebaseio.com/${uid}/books/.json`;
+    axios.post(url, {
+      title:'book 1 title'
+    })
+    .then( (response) => {
+      console.log('post request succesful', response);
+      // updating state of books after new book is added
+      this.props.getBooks();
+
+    })
+    .catch( (error) => {
+      console.log('error posting new book', error)
+    })
+
+  }
+
   render() {
     // variable for book title.
     // const book_title = this.props.book['title'];
@@ -127,12 +153,13 @@ class Book extends Component {
       // Viewing all books
       return (
         <div>
+          <p>Viewing All Books</p>
           <h1>{this.props.user}</h1>
 
 
 
-          {/* Add a Chapter */}
-          <button>Add a chapters</button>
+          {/* Add a Book - Posting to Firebase */}
+          <button onClick={()=>this.addBook(this.props.userId)}>Add a Book</button>
           {/* View Text Editor - Button Toggle */}
           <button onClick={this.props.toggleTextEditor}>Open Editor</button>
           {/* View All Chapters Button Toggle  */}

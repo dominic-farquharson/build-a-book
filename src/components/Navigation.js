@@ -33,16 +33,18 @@ class Navigation extends Component {
         <p className="uk-position-bottom">Nav</p>
         <ul>
           {/* Toggling Create New Book */}
-          <li onClick={()=>this.toggleEdit()}>Create New Book</li>
+          {/* <li onClick={()=>this.toggleEdit()}>Create New Book</li> */}
 
           {/* Toggling View All Books page */}
-          <li onClick={()=>{this.props.bookView()}}>View Books</li>
+          <li onClick={()=>{this.props.bookView()}}>Books</li>
 
           {/* Showing Book Statistics using D3??? */}
           <li>Statistics</li>
 
           {/* User Account Info */}
           <li>Account</li>
+          {/* Log Out Button */}
+          <li> Log Out </li>
         </ul>
       </nav>
     )

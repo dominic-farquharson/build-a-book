@@ -28,13 +28,20 @@ class App extends Component {
       viewEditor: false,
       viewChapter: false,
       book: {},
+      /*
       // Checking if a user is signed in
-      userSignIn: false,
+      // userSignIn: false,
       // user's email
       email:'',
       // user's unique key from firebase
       uid: '',
-      displayName: ''
+      */
+    //  displayName: '',
+      // for testing - disabling sign in
+      userSignIn: true,
+      displayName: 'Dominic',
+      uid:'user-Dominic'
+
     }
     // binding methods
     this.printBooks = this.printBooks.bind(this);
@@ -222,10 +229,10 @@ class App extends Component {
 
   // function to get books from firebase
   getBooks() {
-    console.log('get books has mounted');
+    console.log('fetching books');
 
-    // ajax call to get books from firebase endpoint
-    const url = 'https://build-a-book.firebaseio.com/user1.json'
+    // ajax call to get books from firebase endpoint - based on signed in user's uid
+    const url = `https://build-a-book.firebaseio.com/${this.state.uid}.json`
     axios.get(url)
       .then( (response)=> {
         console.log(response.data);
@@ -245,7 +252,11 @@ class App extends Component {
     return(
       <Book
         book={this.state.book}
+        // Passing getBooks method as prop = to update books after new book is added
+        getBooks = { () => this.getBooks()}
         user = {this.state.displayName}
+        // using user Id to pass to firebase endpoint
+        userId = {this.state.uid}
         // editor={()=>this.toggleTextEditor()}
         viewEditor={this.state.viewEditor}
         viewChapter = {this.state.viewChapter}
