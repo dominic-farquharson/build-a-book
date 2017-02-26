@@ -14,13 +14,6 @@ class Book extends Component {
   constructor(props) {
     super(props);
 
-    // setting state to allow for conditional rendering
-    // edit condition, originally false
-
-    // this.state = {
-    //   editor: this.props.view
-    // }
-
     // binding functions
     this.printChapters = this.printChapters.bind(this);
     // function to set state for chapter Title to pass down to editor as prop
@@ -48,36 +41,39 @@ class Book extends Component {
   // prints out chapters depending on num available in database
   printChapters() {
     /* Using title from state to render chapters of a specific book */
-    let book = this.props.book[this.state.title];
+    let book = this.props.book[this.state.title]['chapters'];
 
     return(
       // grabbing keys from object
       Object.keys(book).map( (key, i)=> {
         console.log(book['chapters'])
-        // let newObject = this.props.book[key]['chapters'];
-        // console.log(this.props.book[key]['chapters']);
-        // console.log('newObject', newObject)
+
+        /*
+         preventing title from being printed mutliple times
+         Only printed when key = 0
+        */
+        if(i === 0) {
         return (
-          // <div key={i}>{book['chapters']}</div>
           <Chapter
+            key = {i}
             title = {this.state.title}
+            chapter = {key}
 
           />
         )
-        // return (
-        //   // using book's key to render it's chapters
-        //   Object.keys(newObject).map( (chapter, i) => {
-        //   console.log(chapter, i)
-        //     return (
-        //     // rendering book chapters
-        //     <div chapter={i}>{chapter}</div>
-        //     )
-        //   })
-        // )
+      }
+      // printing chapters without title property
+      else {
+        return (
+          <Chapter
+            key = {i}
+            chapter = {key}
+
+          />
+        )
+      }
       })
     )
-
-
   }
 
   /*
