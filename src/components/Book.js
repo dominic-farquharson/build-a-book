@@ -26,7 +26,9 @@ class Book extends Component {
     // setting initial title state to untitled
     this.state = {
       chapterTitle:'untitled',
-      title:''
+      title:'',
+      // add Book input field state initially false
+      addBook: false
     }
   }
 
@@ -104,10 +106,11 @@ class Book extends Component {
     const books = this.props.book;
     return(
     Object.keys(books).map( (book, i) => {
+      console.log('book item', book)
       return (
         // printing key from object, represents book titlee
         <li key={i}>
-          {book}
+          {books[book]['title']}
           <br />
           {/* Viewing chapters based on book's key */}
           {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
@@ -121,19 +124,21 @@ class Book extends Component {
 
 
   /* Adding a Book. Posting to Firebase */
-  addBook(uid) {
+  addBook(uid, bookTitle) {
     /*
      will need function to update state of books in app.js after new book added
      or rerun fetch books request
      */
-    const url = `https://build-a-book.firebaseio.com/${uid}/books/.json`;
+    const url = `https://build-a-book.firebaseio.com/users/${uid}/books.json`;
     axios.post(url, {
-      title:'book 1 title'
+      title:bookTitle
     })
     .then( (response) => {
       console.log('post request succesful', response);
       // updating state of books after new book is added
       this.props.getBooks();
+      // setting add book form's state to false - rendering all books view
+      this.toggleAddBook();
 
     })
     .catch( (error) => {
@@ -142,32 +147,64 @@ class Book extends Component {
 
   }
 
+  // Function to toggle Add Book state - renders add book form when true
+  toggleAddBook() {
+    // stopping form from rendering
+    if(this.state.addBook) {
+      this.setState({addBook: false})
+    }
+    // rendering add book form
+    else {
+      this.setState({addBook: true})
+    }
+  }
+
   render() {
     // variable for book title.
     // const book_title = this.props.book['title'];
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
+    let addBook = this.state.addBook;
 
     // renders books when edit state and view chapter state is false
     if(viewChapter === false && viewEditor=== false) {
+      // reners AddBook form when addBook state is true
+      if(addBook) {
+        return (
+          <form action="#" method="POST">
+            {/* Storing value of Input field */}
+            <input tyep="text" name="bookTitle" ref={ (bookTitle)=>{this.bookTitle = bookTitle}} placeholder="Book Title" required />
+
+            {/* Grabs value of input field, along with user id to send post request to firebase endpoint */}
+            <input type="button" onClick={ ()=> this.addBook(this.props.userId, this.bookTitle.value) } value="Add Book" />
+
+            {/* Toggling add Book state - renders all books */}
+            <input type="button" onClick={ ()=> this.toggleAddBook() } value="Cancel" />
+
+          </form>
+        )
+      }
+      // prints all books when add Book state is false
+      else {
       // Viewing all books
       return (
         <div>
           <p>Viewing All Books</p>
           <h1>{this.props.user}</h1>
 
-
-
-          {/* Add a Book - Posting to Firebase */}
-          <button onClick={()=>this.addBook(this.props.userId)}>Add a Book</button>
+          {/* Toggles Add A book - Renders form by setting addbook state to true */}
+          <button onClick={()=>this.toggleAddBook()}>Add a Book</button>
           {/* View Text Editor - Button Toggle */}
-          <button onClick={this.props.toggleTextEditor}>Open Editor</button>
+          {/* <button onClick={this.props.toggleTextEditor}>Open Editor</button> */}
           {/* View All Chapters Button Toggle  */}
-          <button onClick={this.props.toggleChapterView}>View All Chapter</button>
+          {/* <button onClick={this.props.toggleChapterView}>View All Chapter</button> */}
             {/* Printing book titles from firebase endpoint */}
           <ul>
             {this.printBookTitles()}
           </ul>
+
+
+
 
           {/* Rendering Resource component */}
           <Resource />
@@ -176,9 +213,8 @@ class Book extends Component {
           <a href="http://google.com">Test</a>
        </div>
       )
-
     }
-
+    }
 
     // renders chapter if edit state false and viewChapter is true
     if(viewChapter === true && viewEditor ===false){

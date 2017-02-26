@@ -28,19 +28,22 @@ class App extends Component {
       viewEditor: false,
       viewChapter: false,
       book: {},
-      /*
+
       // Checking if a user is signed in
       // userSignIn: false,
       // user's email
       email:'',
       // user's unique key from firebase
-      uid: '',
-      */
+    //   uid: '',
+     //
     //  displayName: '',
-      // for testing - disabling sign in
+
+
+      // for testing - disabling sign in, spoofing signed in user
       userSignIn: true,
       displayName: 'Dominic',
-      uid:'user-Dominic'
+      uid: process.env.userIdTesting
+
 
     }
     // binding methods
@@ -52,7 +55,6 @@ class App extends Component {
 
 
   }
-
   componentDidMount() {
     // Initializing Firebase
     var config = {
@@ -232,10 +234,12 @@ class App extends Component {
     console.log('fetching books');
 
     // ajax call to get books from firebase endpoint - based on signed in user's uid
-    const url = `https://build-a-book.firebaseio.com/${this.state.uid}.json`
+    const url = `https://build-a-book.firebaseio.com/users/${this.state.uid}.json`
+    console.log(url)
     axios.get(url)
       .then( (response)=> {
-        console.log(response.data);
+        console.log('response',response.data);
+        // setting response containing books to book state
         this.setState({book:response.data.books})
       })
       .catch( (error) => {
