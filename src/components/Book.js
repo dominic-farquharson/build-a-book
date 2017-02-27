@@ -43,6 +43,10 @@ class Book extends Component {
     }
   }
 
+  componentDidMount() {
+    // this.props.getBooks();
+  }
+
   // prints out resources depending on num available in database
   printResources() {
 
@@ -87,7 +91,7 @@ class Book extends Component {
 
     /* Using title from state to render chapters of a specific book */
     let book = this.props.book[this.state.title]['chapters'];
-    console.log(book)
+    console.log('book',book)
 
     /*
     if chapters is undefined - there are no chapters, renders add a chapter
@@ -267,6 +271,12 @@ class Book extends Component {
   printBookTitles() {
     // setting books object to a variable
     const books = this.props.book;
+    console.log('books',this.props);
+    if(books === undefined) {
+      return (
+        <div>Welcome</div>
+      )
+    }
     // renders when edit book is true
     if(!this.state.editBook){
       return(
@@ -296,7 +306,12 @@ class Book extends Component {
         )
       })
     )
-
+  }
+    else {
+      return (
+        <div>Welcome</div>
+      )
+    }
 
       // return(
       //   <div>
@@ -318,7 +333,7 @@ class Book extends Component {
       //     <hr />
       //   </div>
       // );
-    }
+
   //   else {
   //
   //   return(

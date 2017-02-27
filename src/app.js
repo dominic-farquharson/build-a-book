@@ -30,19 +30,19 @@ class App extends Component {
       book: {},
 
       // Checking if a user is signed in
-      // userSignIn: false,
+      userSignIn: false,
       // user's email
       email:'',
-      // user's unique key from firebase
-    //   uid: '',
-     //
-    //  displayName: '',
+      //user's unique key from firebase
+      uid: '',
+
+     displayName: '',
 
 
       // for testing - disabling sign in, spoofing signed in user
-      userSignIn: true,
-      displayName: 'Dominic',
-      uid: process.env.userIdTesting
+      // userSignIn: true,
+      // displayName: 'Dominic',
+      // uid: process.env.userIdTesting
 
 
     }
@@ -100,7 +100,7 @@ class App extends Component {
             this.setState({
               uid: user.uid,
               email: user.email,
-              displayName: displayName
+              displayName: displayName,
             })
             // toggling sign in state
             this.toggleUserSignIn();
@@ -134,6 +134,7 @@ class App extends Component {
 
   // toggle User Sign In - renders book component - null value means account created
   toggleUserSignIn(email='null', password='null') {
+    console.log('from input',email, password )
     /*
     when user creates an account, can't passing in password data results in flashing error.
     When function is passed with no arguments, then user account has been created
@@ -161,7 +162,8 @@ class App extends Component {
     firebase.auth().signInWithEmailAndPassword(email, password)
     // adding promise object to sign user in on sucess
     .then( ()=> {
-        // console.log('user logged in', user)
+        console.log('user was able to log in');
+
 
         // getting user details
         firebase.auth().onAuthStateChanged( (user) => {
@@ -174,6 +176,7 @@ class App extends Component {
             email: user.email,
             displayName: user.displayName
           })
+          this.getBooks();
         });
 
         if(this.state.userSignIn === false) {
