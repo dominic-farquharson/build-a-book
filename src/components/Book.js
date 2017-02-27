@@ -13,7 +13,7 @@ import Editor from './Editor';
 import AddChapter from './AddChapter';
 
 
-
+import BookItem from './BookItem';
 
 
 
@@ -38,7 +38,8 @@ class Book extends Component {
       // add Book input field state initially false
       addBook: false,
       // Renders Add Chapter component when true
-      addChapter: false
+      addChapter: false,
+      editBook: false
     }
   }
 
@@ -56,6 +57,7 @@ class Book extends Component {
     if(this.state.addChapter) {
       this.setState({addChapter: false});
       // axios call to update books after posting
+      // console.log('get books',this.props)
       this.props.getBooks();
       // rendering Add Chapter Component
       this.printChapters();
@@ -223,33 +225,126 @@ class Book extends Component {
     })
 
   }
+  // editing a book
+  editBook(bookKey, title) {
+    console.log('editing', bookKey, 'title', title)
+    // url for chapter endpoint - based on user's id, the book key, and the chapter's key
+    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${bookKey}.json`;
 
+    // Patch request to update book endpoint with new book title and image
+    axios.patch(url, {
+      title:title,
+    })
+    .then( (response) => {
+      alert(`updated title`);
+      this.toggleChapterEdit();
+    })
+    .catch( (error) => {
+      console.log('error updating title and image')
+      this.toggleChapterEdit();
+    })
+  }
+
+  // toggles state of book edit
+  toggleEditBook() {
+    console.log('toggling edit book')
+    // sets state of addChapter to false if true
+    if(this.state.editBook) {
+      this.setState({editBook: false});
+      // axios call to update books after posting
+      this.props.getBooks();
+      // rendering Add Chapter Component
+      this.printBookTitles();
+    }
+    // sets state of addchapter to true if false
+    else {
+      this.setState({editBook: true});
+
+    }
+  }
+
+  // printing book titles from books object
   printBookTitles() {
     // setting books object to a variable
     const books = this.props.book;
-    return(
-    Object.keys(books).map( (book, i) => {
-      console.log('book item', book)
-      return (
-        // printing key from object, represents book titlee
-        <li key={i}>
-          {/* Printing book title */}
-          {books[book]['title']}
-          <br />
-          {/* Viewing chapters based on book's key */}
-          {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
-          <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
-          {/* Runs function to delete a book */}
-          <button onClick={()=>this.deleteBook(book)}>Delete Book</button>
-          {/* Add delete button */}
+    // renders when edit book is true
+    if(!this.state.editBook){
+      return(
+      Object.keys(books).map( (book, i) => {
+        console.log('book item', book)
+        return (
+          // printing key from object, represents book titlee
+          <li key={i}>
+            <BookItem
+              key={book}
+              // unique key for each book
+              bookKey={book}
+              // book title
+              title={books[book]['title']}
+              // function to update objects
+              getBooks = {()=> this.props.getBooks()}
+              // setting title of book to state
+              setBookTitle = {()=>this.setBookTitle(book) }
+              // printing all bookd
+              printBookTitles = {()=> this.printBookTitles()}
+              deleteBook = {()=>this.deleteBook(book)}
+              editBook = {(bookKey, title)=>this.editBook(bookKey, title)}
+              toggleChapterView = { ()=> this.props.toggleChapterView()}
+            />
 
-          {/* Add Edit Button */}
+          </li>
+        )
+      })
+    )
 
-        </li>
-      )
-    })
-  )
-  }
+
+      // return(
+      //   <div>
+      //     <h3>Edit {this.state.title}</h3>
+      //     <div>
+      //       {/* Chapter title Input Box filled w/ value of title */}
+      //       <label htmlFor="chapterTitle">Title: </label>
+      //       {/* <input id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required /> */}
+      //     </div>
+      //     <div>
+      //       {/* Chapter Image input box filled w/ value of title */}
+      //       <label htmlFor="chapterImage">Image:</label>
+      //       {/* <input id="chapterImage" name="chapterImage" type="text" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} defaultValue={chapter.chapterImage} required /> */}
+      //     </div>
+      //     {/* Grabbing updated title and image */}
+      //     {/* <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterImageInput.value)}>Save</button> */}
+      //     {/* Toggling Edit state - closing chapter Info editor  */}
+      //     <button onClick = {()=> this.editBook(key)}>Close</button>
+      //     <hr />
+      //   </div>
+      // );
+    }
+  //   else {
+  //
+  //   return(
+  //   Object.keys(books).map( (book, i) => {
+  //     console.log('book item', book)
+  //     return (
+  //       // printing key from object, represents book titlee
+  //       <li key={i}>
+  //         {/* Printing book title */}
+  //         {books[book]['title']}
+  //         <br />
+  //         {/* Viewing chapters based on book's key */}
+  //         {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
+  //         <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
+  //         {/* Runs function to delete a book */}
+  //         <button onClick={()=>this.deleteBook(book)}>Delete Book</button>
+  //         {/* Add Edit Button */}
+  //         <button onClick={()=>this.toggleEditBook(book)}>Edit Book</button>
+  //
+  //
+  //       </li>
+  //     )
+  //   })
+  // )
+  // }
+}
 
 
   /* Adding a Book. Posting to Firebase */
@@ -294,6 +389,7 @@ class Book extends Component {
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
     let addBook = this.state.addBook;
+
 
     // renders books when edit state and view chapter state is false
     if(viewChapter === false && viewEditor=== false) {

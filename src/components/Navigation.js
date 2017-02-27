@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 
 let uikit = require('uikit')
-console.log(uikit)
+// console.log(uikit)
 
 
 class Navigation extends Component {
