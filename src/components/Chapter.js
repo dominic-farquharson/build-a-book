@@ -60,12 +60,20 @@ class Chapter extends Component {
     // Closing Chapter Edit - toggling edit state to false
   }
 
+  // delete chapter
+  deleteChapter(key) {
+    console.log(`deleting chapter of key ${key}`)
+  }
+
   render() {
     // console.log('chapter key', this.props.key)
 
     // setting chapter to this.props
     const chapter = this.props;
+    // chapter's unique key
+    let chapterKey = chapter.chapterKey;
     // console.log(chapter)
+
     // renders when edit state is false - prints all chapters
     if(!this.state.edit) {
     return (
@@ -80,6 +88,10 @@ class Chapter extends Component {
           <p>Image: {chapter.chapterImage}</p>
           {/* Edit Chapter button */}
           <button onClick = {()=> this.toggleChapterEdit()}>Edit chapter</button>
+
+          {/* Delete Chapter Button */}
+          <button onClick = {()=> this.deleteChapter(chapterKey)}>Delete chapter</button>
+
 
         </div>
 

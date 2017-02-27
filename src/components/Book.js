@@ -194,6 +194,11 @@ class Book extends Component {
     this.setState({title: title})
   }
 
+  // Deleting a book function
+  deleteBook() {
+    console.log('deleting book')
+  }
+
   printBookTitles() {
     // setting books object to a variable
     const books = this.props.book;
@@ -208,8 +213,9 @@ class Book extends Component {
           <br />
           {/* Viewing chapters based on book's key */}
           {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
-          <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapter</button>
-
+          <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
+          {/* Runs function to delete a book */}
+          <button onClick={()=>this.deleteBook()}>Delete Book</button>
           {/* Add delete button */}
 
           {/* Add Edit Button */}
@@ -292,6 +298,8 @@ class Book extends Component {
 
           {/* Toggles Add A book - Renders form by setting addbook state to true */}
           <button onClick={()=>this.toggleAddBook()}>Add a Book</button>
+
+
           {/* View Text Editor - Button Toggle */}
           {/* <button onClick={this.props.toggleTextEditor}>Open Editor</button> */}
           {/* View All Chapters Button Toggle  */}
