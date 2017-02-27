@@ -61,6 +61,8 @@ class AddChapter extends Component {
             Passing chapter title and image cover
           */}
           <input type="button" value="Create Chapter" onClick={()=>this.addChapter(this.chapterTitleInput.value, this.chapterImageInput.value, this.props.bookKey)} />
+          <input type="button" value="Close" onClick={()=>this.props.toggleAddChapter()} />
+
 
         </form>
       </div>

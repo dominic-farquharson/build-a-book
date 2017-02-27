@@ -93,4 +93,22 @@ header {
   bottom:30%;
   left:10%;
   height:30%;
-}
+
+
+  }
+// When user has no chapters
+  #newUser {
+    p {
+      font-size:2rem;
+    }
+    // Add a Chapter Form
+    #addChapterFormNewUser {
+      position:absolute;
+      bottom:30%;
+      left:10%;
+      height:30%;
+
+
+      }
+
+  }

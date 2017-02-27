@@ -13,6 +13,10 @@ import Editor from './Editor';
 import AddChapter from './AddChapter';
 
 
+
+
+
+
 // importing axios
 import axios from 'axios';
 
@@ -195,8 +199,29 @@ class Book extends Component {
   }
 
   // Deleting a book function
-  deleteBook() {
-    console.log('deleting book')
+  deleteBook(bookKey) {
+    console.log('deleting book', bookKey)
+    // user id
+    const uid= this.props.userId;
+
+    // Book endpoint - based on key of user and key of book
+    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}.json`;
+    console.log('will be deleting',url)
+    axios.delete(url)
+    // promise to update state of books after book has been deleted
+    .then(
+      (response)=>{
+        alert('Book has been deleted');
+        // refreshing books object after book has been delted
+        this.props.getBooks();
+        // prining out books based on refreshed book object
+        this.printBookTitles();
+    })
+    .catch(
+      (error)=> {
+        alert('error deleting book')
+    })
+
   }
 
   printBookTitles() {
@@ -215,7 +240,7 @@ class Book extends Component {
           {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
           <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
           {/* Runs function to delete a book */}
-          <button onClick={()=>this.deleteBook()}>Delete Book</button>
+          <button onClick={()=>this.deleteBook(book)}>Delete Book</button>
           {/* Add delete button */}
 
           {/* Add Edit Button */}
