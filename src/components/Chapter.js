@@ -62,7 +62,28 @@ class Chapter extends Component {
 
   // delete chapter
   deleteChapter(key) {
-    console.log(`deleting chapter of key ${key}`)
+    console.log(`deleting chapter of key ${key}`);
+    // Chapter endpoint - based on userid, the book key and the chapter's key
+    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+
+    // Put request to update chapter endpoint with new chapter title and image
+    axios.delete(url)
+    .then( (response) => {
+      alert('chapter has been deleted!');
+      // refreshing books object after chapter has been deleted
+      this.props.getBooks();
+      // printing out chapters based on refreshed book object
+      this.props.printChapters();
+    })
+    .catch( (error) => {
+      alert('error deleting title');
+      // refreshing books object after chapter has been deleted
+      this.props.getBooks();
+      // printing out chapters based on refreshed book object
+      this.props.printChapters();
+
+    })
+
   }
 
   render() {
@@ -89,7 +110,7 @@ class Chapter extends Component {
           {/* Edit Chapter button */}
           <button onClick = {()=> this.toggleChapterEdit()}>Edit chapter</button>
 
-          {/* Delete Chapter Button */}
+          {/* Delete Chapter Button - using unique chapter key */}
           <button onClick = {()=> this.deleteChapter(chapterKey)}>Delete chapter</button>
 
 
