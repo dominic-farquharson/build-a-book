@@ -30,6 +30,12 @@ class Chapter extends Component {
     }
   }
 
+  // Saving Edited Chapter Info
+  updateChapterInfo(title, image) {
+    console.log(title, image)
+    this.toggleChapterEdit();
+  }
+
   render() {
     console.log('chapter key', this.props.key)
 
@@ -65,17 +71,24 @@ class Chapter extends Component {
      </div>
     )
   }
+  // Rendering Text Inputs to edit chapter title and image
   else {
     return(
       <div>
+        <h3>Edit {chapter.chapterTitle}</h3>
         <div>
           {/* Chapter title Input Box filled w/ value of title */}
-          <input type="text" defaultValue={chapter.chapterTitle} require />
+          <label htmlFor="chapterTitle">Title: </label>
+          <input id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required />
         </div>
         <div>
           {/* Chapter Image input box filled w/ value of title */}
-          <input type="text" defaultValue={chapter.chapterImage} require />
+          <label htmlFor="chapterImage">Image:</label>
+          <input id="chapterImage" name="chapterImage" type="text" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} defaultValue={chapter.chapterImage} required />
         </div>
+        {/* Grabbing updated title and image */}
+        <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterImageInput.value)}>Save</button>
+        {/* Toggling Edit state - closing chapter Info editor  */}
         <button onClick = {()=> this.toggleChapterEdit()}>Close</button>
         <hr />
       </div>
