@@ -1,6 +1,9 @@
 // importing react and component
 import React, {Component} from 'react';
 
+// importing axios
+import axios from 'axios';
+
 // creating Chapter component
 class Chapter extends Component {
   constructor(props) {
@@ -22,6 +25,10 @@ class Chapter extends Component {
     // sets state of edit to false if true
     if(this.state.edit) {
       this.setState({edit: false});
+      // ajax call to update books object after posting to chapters endpoint
+      this.props.getBooks();
+      // rendering Add Chapter Component
+      this.props.printChapters();
     }
     // sets state of edit to true if false
     else {
@@ -32,16 +39,33 @@ class Chapter extends Component {
 
   // Saving Edited Chapter Info
   updateChapterInfo(title, image) {
-    console.log(title, image)
-    this.toggleChapterEdit();
+    console.log(`title:${title}, image:${image}`)
+
+    // url for chapter endpoint - based on user's id, the book key, and the chapter's key
+    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+
+    // Put request to update chapter endpoint with new chapter title and image
+    axios.put(url, {
+      title:title,
+      image: image
+    })
+    .then( (response) => {
+      console.log(`updated title`);
+      this.toggleChapterEdit();
+    })
+    .catch( (error) => {
+      console.log('error updating title and image')
+      this.toggleChapterEdit();
+    })
+    // Closing Chapter Edit - toggling edit state to false
   }
 
   render() {
-    console.log('chapter key', this.props.key)
+    // console.log('chapter key', this.props.key)
 
     // setting chapter to this.props
     const chapter = this.props;
-    console.log(chapter)
+    // console.log(chapter)
     // renders when edit state is false - prints all chapters
     if(!this.state.edit) {
     return (

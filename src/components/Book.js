@@ -131,6 +131,14 @@ class Book extends Component {
             <Chapter
               userId = {uid}
               key = {i}
+              // axios call to refresh books after it's updated
+              // getBooks = {()=> this.props.getBoooks()}
+              getBooks = {()=> this.props.getBooks()}
+
+              // printing book's chapters
+              printChapters = {()=>this.printChapters()}
+              // passing chapter's unique key to allow for updating it
+              chapterKey={key}
               // toggles Add Chapter component
               toggleAddChapter = {()=> this.toggleAddChapter()}
               // chapter = {book[key]}

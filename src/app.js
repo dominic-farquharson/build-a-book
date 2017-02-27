@@ -255,9 +255,10 @@ class App extends Component {
 
     return(
       <Book
+        // book object from user's firebase endpoint
         book={this.state.book}
         // Passing getBooks method as prop = to update books after new book is added
-        getBooks = { () => this.getBooks()}
+        getBooks = { () => this.getBooks() }
         user = {this.state.displayName}
         // using user Id to pass to firebase endpoint
         userId = {this.state.uid}
