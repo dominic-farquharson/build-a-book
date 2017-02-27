@@ -144,7 +144,8 @@ class Book extends Component {
               // axios call to refresh books after it's updated
               // getBooks = {()=> this.props.getBoooks()}
               getBooks = {()=> this.props.getBooks()}
-
+              // description of chapter - based on key
+              description={book[key]['description']}
               // printing book's chapters
               printChapters = {()=>this.printChapters()}
               // passing chapter's unique key to allow for updating it

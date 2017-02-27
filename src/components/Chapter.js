@@ -38,8 +38,8 @@ class Chapter extends Component {
   }
 
   // Saving Edited Chapter Info
-  updateChapterInfo(title, image) {
-    console.log(`title:${title}, image:${image}`)
+  updateChapterInfo(title, description) {
+    console.log(`title:${title}, image:${description}`)
 
     // url for chapter endpoint - based on user's id, the book key, and the chapter's key
     const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
@@ -47,7 +47,7 @@ class Chapter extends Component {
     // Put request to update chapter endpoint with new chapter title and image
     axios.put(url, {
       title:title,
-      image: image
+      description: description
     })
     .then( (response) => {
       console.log(`updated title`);
@@ -106,7 +106,7 @@ class Chapter extends Component {
         {/* printing chapters */}
         {/* <div> */}
           {/* <p>Title: {chapter.chapterTitle}</p> */}
-          {/* <p>Image: {chapter.chapterImage}</p> */}
+          {/* <p>Image: {chapter.chapterDescription}</p> */}
           {/* Edit Chapter button */}
           {/* <button onClick = {()=> this.toggleChapterEdit()}>Edit chapter</button> */}
 
@@ -135,7 +135,11 @@ class Chapter extends Component {
             <div className="uk-card-title">{chapter.chapterTitle}</div>
             <hr />
             <div className="uk-card-body">
-              Description for {chapter.chapterTitle}
+              {/* {console.log('chapter', chapter)} */}
+
+              {/* Printing chapter description */}
+              <p>{chapter.description}</p>
+              {/* Description for {chapter.chapterTitle} */}
             </div>
             {/* <div className="uk-card-media-top"> */}
                 {/* {chapter.image} */}
@@ -175,13 +179,16 @@ class Chapter extends Component {
           <input id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required />
         </div>
         <div>
-          {/* Chapter Image input box filled w/ value of title */}
-          <label htmlFor="chapterImage">Image:</label>
-          <input id="chapterImage" name="chapterImage" type="text" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} defaultValue={chapter.chapterImage} required />
+          {/* Chapter Description input box filled w/ value of Description */}
+          <label htmlFor="chapterDescription">Description:</label>
+          <textarea className="editChapterInput" name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} defaultValue={chapter.description} required></textarea>
+
+          {/* <input id="chapterDescription" name="chapterDescription" type="text" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} defaultValue={chapter.chapterDescription} required /> */}
+
         </div>
         {/* Grabbing updated title and image */}
 
-        <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterImageInput.value)}>Save</button>
+        <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterDescriptionInput.value)}>Save</button>
         {/* Toggling Edit state - closing chapter Info editor  */}
         <button onClick = {()=> this.toggleChapterEdit()}>Close</button>
         <hr />

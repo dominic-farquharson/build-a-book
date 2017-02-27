@@ -11,8 +11,8 @@ class AddChapter extends Component {
   }
 
   // function to post chapter title and image to firebase
-  addChapter(title, image, bookKey) {
-    console.log('props',this.props)
+  addChapter(title, description, bookKey) {
+    console.log(`title:${title}, description: ${description}`)
     // user's id key
     const uid = this.props.userId;
     // url of user's chapters endpoint located within the selected book
@@ -21,7 +21,7 @@ class AddChapter extends Component {
     // posting ot user's chapter's endpoint
     axios.post(url, {
       title:title,
-      image: image
+      description: description
     })
     .then( (response) => {
       console.log('New Chapter has been created', response);
@@ -45,23 +45,25 @@ class AddChapter extends Component {
       <div>
         {/* <h1>BookKey: {this.props.bookKey}</h1> */}
         {/* Create Chapter Form */}
-        <form id="addChapterForm" action="#" method="POST">
+        <form id="addChapterForm" className="uk-position-center" action="#" method="POST">
           {/* Using refs to grab input values to pass to create chapter function */}
 
 
           <label htmlFor="chapterTitle">Chapter Title</label>
           {/* Chapter Title */}
-          <input id="chapterTitle" name="chapterTitle" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} type="text" placeholder="Chapter Title" required />
+          <input className="addChapterInput uk-input" id="chapterTitle" name="chapterTitle" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} type="text" placeholder="Chapter Title" required />
 
-          <label htmlFor="chapterImage">Chapter Image</label>
-          {/* Chapter Image Cover */}
-          <input name="chapterImage" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} type="text" placeholder="Insert Image Url" required />
+          <label htmlFor="chapterDescription">Chapter Description</label>
+          {/* Chapter Description */}
+          {/* <input name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} type="text" placeholder="Chapter Description" required /> */}
+          <textarea className="addChapterInput" name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} placeholder="Chapter Description" required></textarea>
+
           {/*
             Posting book info to firebase
             Passing chapter title and image cover
           */}
-          <input type="button" value="Create Chapter" onClick={()=>this.addChapter(this.chapterTitleInput.value, this.chapterImageInput.value, this.props.bookKey)} />
-          <input type="button" value="Close" onClick={()=>this.props.toggleAddChapter()} />
+          <input className="addChapterButton uk-button uk-button-default" type="button" value="Create Chapter" onClick={()=>this.addChapter(this.chapterTitleInput.value, this.chapterDescriptionInput.value, this.props.bookKey)} />
+          <input className="addChapterButton uk-button uk-button-default" type="button" value="Close" onClick={()=>this.props.toggleAddChapter()} />
 
 
         </form>

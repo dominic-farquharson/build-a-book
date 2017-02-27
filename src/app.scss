@@ -12,7 +12,7 @@
 }
 // testing SASS file
 body {
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   color: red;
   text-align: center;
   form {
@@ -134,10 +134,34 @@ header {
 
 // Add a Chapter Form
 #addChapterForm {
-  position:absolute;
-  bottom:30%;
-  left:10%;
+  // position:absolute;
+  // bottom:30%;
+  // left:10%;
+  bottom:10%;
   height:30%;
+  text-align: center;
+  width: 100%;
+
+  // input fields - for add and edit chapter
+  .addChapterInput {
+    display:block;
+    margin: 0 auto;
+    width: 50%;
+  }
+  .addChapterInput, textarea {
+    font-size:2rem;
+  }
+
+  // text area
+  textarea {
+    height:50%;
+  }
+
+  .addChapterButton {
+    // width:25%;
+    display: inline-block;
+    margin-right: 20px;
+  }
 
 
   }
@@ -246,3 +270,10 @@ header {
 // .alignBooks:after {
 //   margin-bottom:20px;
 // }
+
+// edit chapter styling
+.editChapterInput {
+display:block;
+  margin: 0 auto;
+  width: 50%;
+}

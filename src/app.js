@@ -248,7 +248,7 @@ class App extends Component {
         this.setState({book:response.data.books})
       })
       .catch( (error) => {
-        console.log('error getting books',error);
+        console.log('error getting books',error)
       })
   }
 
