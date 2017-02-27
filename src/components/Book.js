@@ -429,7 +429,7 @@ class Book extends Component {
       // Viewing all books
       return (
         <div>
-          <p>Viewing All Books</p>
+          <p>Books List</p>
           <h1>{this.props.user}</h1>
 
           {/* Toggles Add A book - Renders form by setting addbook state to true */}

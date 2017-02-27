@@ -9,20 +9,24 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div>
+      <div className="signUp">
         {/* Sign Up Form */}
-        <form action="#" method="POST">
-          {/* Using refs to grab input values to pass to create user function */}
+        <form className="uk-position-center" action="#" method="POST">
+          <div>
+            <h1>Create an Account</h1>
+            {/* Using refs to grab input values to pass to create user function */}
+            {/* Display Name */}
+            <input className="uk-input" name="nameInput" ref={(displayNameInput) => {this.displayNameInput=displayNameInput}} type="text" placeholder="Username" required />
+            <input className="uk-input" name="email" ref={(email) => {this.emailInput=email}} type="text" placeholder="Email" required />
+            <input className="uk-input" name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="Password" required />
+            {/*
+              Posting user info to firebase
+              Passing password, email to createuser function
+            */}
+            <input className="createAccountButton uk-button uk-button-default" type="button" value="Create Account" onClick={()=>{this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value); }} />
+            {/* Close Button */}
 
-          {/* Display Name */}
-          <input name="password" ref={(displayNameInput) => {this.displayNameInput=displayNameInput}} type="text" placeholder="displayNameInput" required />
-          <input name="email" ref={(email) => {this.emailInput=email}} type="text" placeholder="email" required />
-          <input name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="password" required />
-          {/*
-            Posting user info to firebase
-            Passing password, email to createuser function
-          */}
-          <input type="button" value="Create Account" onClick={()=>{this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value); }} />
+          </div>
         </form>
       </div>
     )

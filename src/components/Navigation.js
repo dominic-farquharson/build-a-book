@@ -29,8 +29,8 @@ class Navigation extends Component {
   render() {
     // const nav = this.props;
     return (
-      <nav>
-        <p className="uk-position-bottom">Nav</p>
+      <nav className="navigationMenu">
+        <p className="logo uk-position-bottom">Build A Book</p>
         <ul>
           {/* Toggling Create New Book */}
           {/* <li onClick={()=>this.toggleEdit()}>Create New Book</li> */}

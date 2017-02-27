@@ -15,6 +15,7 @@ class Welcome extends Component {
     // setting signin and singUp inital state to fasle
     this.state = {
       signIn : false,
+      // signIn:true,
       signUp : false,
       welcome: true
     }
@@ -66,22 +67,30 @@ class Welcome extends Component {
       if(welcomeScreen) {
       return (
         <header id="welcomeScreen">
-          <nav>
-            <ul>
-              <li
-                onClick ={
-                  ()=>{this.toggleSignIn(); console.log('Sign in Pressed')}
-              }>
-                Sign In
-              </li>
-              <li
-                onClick ={
-                  ()=>{this.toggleSignUp(); console.log('Sign Up Pressed')}
-              }>
-                Sign Up
-              </li>
-            </ul>
-          </nav>
+          <h1 className="uk-position-top-center welcomeTitle"> Build A Book</h1>
+
+          {/* Positioning - Sign In */}
+          <div className="uk-position-center">
+          {/* Heading  */}
+
+              <ul>
+                <li
+                  className="uk-button uk-button-default"
+                  onClick ={
+                    ()=>{this.toggleSignIn(); console.log('Sign in Pressed')}
+                }>
+                  Sign In
+                </li>
+                <li
+                  className="uk-button uk-button-default"
+                  onClick ={
+                    ()=>{this.toggleSignUp(); console.log('Sign Up Pressed')}
+                }>
+                  Sign Up
+                </li>
+              </ul>
+
+          </div>
         </header>
 
     )

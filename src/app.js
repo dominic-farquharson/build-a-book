@@ -30,19 +30,21 @@ class App extends Component {
       book: {},
 
       // Checking if a user is signed in
-      userSignIn: false,
+      // userSignIn: false,
+      // userSignIn: true,
+
       // user's email
       email:'',
       //user's unique key from firebase
-      uid: '',
-
-     displayName: '',
+    //   uid: '',
+     //
+    //  displayName: '',
 
 
       // for testing - disabling sign in, spoofing signed in user
-      // userSignIn: true,
-      // displayName: 'Dominic',
-      // uid: process.env.userIdTesting
+      userSignIn: true,
+      displayName: 'Dominic',
+      uid: process.env.userIdTesting
 
 
     }
