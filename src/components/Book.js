@@ -429,11 +429,11 @@ class Book extends Component {
       // Viewing all books
       return (
         <div>
-          <p>Books List</p>
-          <h1>{this.props.user}</h1>
-
+          {/* Title For View Books  */}
+          <h1 className="title">{this.props.user}'s Books List</h1>
           {/* Toggles Add A book - Renders form by setting addbook state to true */}
-          <button onClick={()=>this.toggleAddBook()}>Add a Book</button>
+          <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddBook()}>Add a Book</button>
+          <hr />
 
 
           {/* View Text Editor - Button Toggle */}
@@ -441,7 +441,7 @@ class Book extends Component {
           {/* View All Chapters Button Toggle  */}
           {/* <button onClick={this.props.toggleChapterView}>View All Chapter</button> */}
             {/* Printing book titles from firebase endpoint */}
-          <ul>
+          <ul className="booksView">
             {this.printBookTitles()}
           </ul>
 
@@ -449,10 +449,10 @@ class Book extends Component {
 
 
           {/* Rendering Resource component */}
-          <Resource />
+          {/* <Resource /> */}
           {/* Rendering chapter component */}
 
-          <a href="http://google.com">Test</a>
+          {/* <a href="http://google.com">Test</a> */}
        </div>
       )
     }
@@ -463,6 +463,11 @@ class Book extends Component {
       return (
         <div>
           <h1>Chapters view</h1>
+          {/* Adding A New Chapter */}
+          <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddChapter()}>Add A Chapter</button>
+          <hr />
+
+
           {/* Printing chapters */}
           {this.printChapters()}
 

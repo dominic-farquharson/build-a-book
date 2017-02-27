@@ -104,27 +104,63 @@ class Chapter extends Component {
         {/* <h3>Title: {this.state.title}</h3> */}
 
         {/* printing chapters */}
-        <div>
-          <p>Title: {chapter.chapterTitle}</p>
-          <p>Image: {chapter.chapterImage}</p>
+        {/* <div> */}
+          {/* <p>Title: {chapter.chapterTitle}</p> */}
+          {/* <p>Image: {chapter.chapterImage}</p> */}
           {/* Edit Chapter button */}
-          <button onClick = {()=> this.toggleChapterEdit()}>Edit chapter</button>
+          {/* <button onClick = {()=> this.toggleChapterEdit()}>Edit chapter</button> */}
 
           {/* Delete Chapter Button - using unique chapter key */}
-          <button onClick = {()=> this.deleteChapter(chapterKey)}>Delete chapter</button>
+          {/* <button onClick = {()=> this.deleteChapter(chapterKey)}>Delete chapter</button> */}
 
 
-        </div>
+        {/* </div> */}
 
         {/* Adding A Chater Button - toggles Add Chapter component*/}
-        <div>
-          <button onClick={this.props.toggleAddChapter}>Add A Chapter</button>
-        </div>
+        {/* <div> */}
+          {/* <button onClick={this.props.toggleAddChapter}>Add A Chapter</button> */}
+        {/* </div> */}
 
         {/* View chapter contents - Renders editor */}
-        <button onClick = {this.props.toggleTextEditor}>View</button>
+        {/* <button onClick = {this.props.toggleTextEditor}>View</button> */}
         {/* Last modified from moment? */}
-        <hr />
+        {/* <hr /> */}
+{/* Card - For Chapters View */}
+<div className="uk-child-width-1-2@m" data-uk-grid>
+    <div className="alignBooks">
+      {/* <div className="uk-card-header">
+         <h3 className="align uk-card-title">{chapter.chapterTitle}</h3>
+     </div> */}
+        <div className="uk-card uk-card-default uk-box-shadow-large">
+            <div className="uk-card-title">{chapter.chapterTitle}</div>
+            <hr />
+            <div className="uk-card-body">
+              Description for {chapter.chapterTitle}
+            </div>
+            {/* <div className="uk-card-media-top"> */}
+                {/* {chapter.image} */}
+                {/* <img src=" http://placehold.it/350x150" alt={chapter.chapterTtile} /> */}
+                {/* <img src="https://images.unsplash.com/photo-1483505806292-09b690b07d50?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" alt="" /> */}
+
+            {/* </div> */}
+            <div className="uk-card-footer">
+              {/* Viewing chapters based on book's key */}
+              {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
+              <button className="uk-button uk-button-default" onClick = {this.props.toggleTextEditor}>View Chapter</button>
+              {/* Runs function to delete a book */}
+              <button className="uk-button uk-button-default" onClick = {()=> this.deleteChapter(chapterKey)}>Delete Chapter</button>
+              {/* Add Edit Button */}
+              <button className="uk-button uk-button-default" onClick = {()=> this.toggleChapterEdit()}>Edit Chapter</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
      </div>
     )
   }
@@ -144,6 +180,7 @@ class Chapter extends Component {
           <input id="chapterImage" name="chapterImage" type="text" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} defaultValue={chapter.chapterImage} required />
         </div>
         {/* Grabbing updated title and image */}
+
         <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterImageInput.value)}>Save</button>
         {/* Toggling Edit state - closing chapter Info editor  */}
         <button onClick = {()=> this.toggleChapterEdit()}>Close</button>

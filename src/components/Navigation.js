@@ -30,7 +30,7 @@ class Navigation extends Component {
     // const nav = this.props;
     return (
       <nav className="navigationMenu">
-        <p className="logo uk-position-bottom">Build A Book</p>
+        <p className="logo uk-position-bottom">&copy; Build A Book</p>
         <ul>
           {/* Toggling Create New Book */}
           {/* <li onClick={()=>this.toggleEdit()}>Create New Book</li> */}
