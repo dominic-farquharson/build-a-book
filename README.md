@@ -52,6 +52,30 @@ Use native numbering
 
 Sample Code: Posting Chapter's data to firebase
 ```javascript
+// Saving Edited Chapter Info
+updateChapterInfo(title, description) {
+  // url for chapter endpoint - based on user's id, the book key, and the chapter's key
+  const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+
+  // Put request to update chapter endpoint with new chapter title and image
+  axios.put(url, {
+    // putting title
+    title:title,
+    // putting description
+    description: description
+  })
+  .then( (response) => {
+    console.log(`updated title`);
+    // Closing Chapter Edit - toggling edit state to false
+    this.toggleChapterEdit();
+  })
+  .catch( (error) => {
+    console.log('error updating title and image')
+    this.toggleChapterEdit();
+  })
+
+}
+
 
 ```
 
