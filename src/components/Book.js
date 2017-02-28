@@ -485,12 +485,15 @@ class Book extends Component {
           <div>
             {/* Passing toggle Editor and Toggle Chapter down as props */}
             <Editor
+              userId={this.props.userId}
+              books = {this.props.book}
               // currentChapter = {this.state.chapterTitle}
               viewEditor={this.props.viewEditor}
               viewChapter = {this.props.viewChapter}
               toggleChapterView = {this.props.toggleChapterView}
               toggleTextEditor = {this.props.toggleTextEditor}
               chapterTitle = {this.state.chapterTitle}
+              bookKey={this.state.title}
              />
           </div>
         )

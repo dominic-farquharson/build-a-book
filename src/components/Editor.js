@@ -6,12 +6,17 @@ import Quill from 'quill';
 // let Quill = require('quill')
 // console.log(quill)
 
-
+// importing axios
+import axios from 'axios';
 
 // creating Editor component
 class Editor extends Component {
   constructor() {
     super();
+
+    this.state = {
+      books: ''
+    }
   }
 
 
@@ -26,10 +31,43 @@ class Editor extends Component {
   });
 
   // setting quill to state - had issues accessing it in render
-  this.setState({quill:quill})
+  this.setState({
+    quill:quill,
+    // books: this.props.book
+  })
   console.log('get length', quill.getLength())
 
 }
+
+// adding edit form content
+addContent(chapterContent, characterCount) {
+  /* Adding a Book. Posting to Firebase */
+    /*
+     will need function to update state of books in app.js after new book added
+     or rerun fetch books request
+     */
+     const uid = this.props.userId;
+     // posting to chapters endpoint
+    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${this.props.bookKey}/chapters/${this.props.chapterTitle}/content/.json`;
+    // posting content and character count
+    axios.post(url, {
+      content: chapterContent,
+      characters: characterCount
+    })
+    .then( (response) => {
+      alert('chapter has been saved')
+      // updating state of books after new book is added
+      // this.props.getBooks();
+      // setting add book form's state to false - rendering all books view
+      // this.toggleAddBook();
+
+    })
+    .catch( (error) => {
+      console.log('error posting new book', error)
+    })
+
+  }
+
 
   render() {
     // setting this.props to book for readability
@@ -49,8 +87,11 @@ class Editor extends Component {
 
         <button className="uk-button-success" onClick={
           ()=> {
+            // grabbing chapter data
             var getText = this.state.quill.getText();
             var length = this.state.quill.getLength();
+            // posting chapter data - text data and character count
+            this.addContent(getText, length);
             console.log('length', length, 'get Text', getText)
             console.log('saving')}
           }>
