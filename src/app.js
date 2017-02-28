@@ -29,13 +29,13 @@ class App extends Component {
     // setting initital states to false
     this.state = {
       // for dev - setting edit state to true
-      viewEditor : true,
-      // viewEditor: false,
+      // viewEditor : true,
+      viewEditor: false,
       viewChapter: false,
       book: {},
 
       // Checking if a user is signed in
-      // userSignIn: false,
+      userSignIn: false,
       // userSignIn: true,
 
       // user's email
@@ -43,15 +43,16 @@ class App extends Component {
       // user Account
       accountView: false,
       //user's unique key from firebase
-    //   uid: '',
+      uid: '',
      //
-    //  displayName: '',
+     displayName: '',
 
 
       // for testing - disabling sign in, spoofing signed in user
-      userSignIn: true,
-      displayName: 'Dominic',
-      uid: process.env.userIdTesting
+      // userSignIn: true,
+      // displayName: 'Dominic',
+      // uid: process.env.userIdTesting
+
 
 
     }
@@ -88,9 +89,14 @@ class App extends Component {
         return;
 
     }
+    // signing out user
     this.setState({
-      userSignIn: true,
-      uid: ''
+      // setting user sign in to false
+      userSignIn: false,
+      // clearing user id
+      uid: '',
+      // emptying book objectt
+      book: {}
 
     })
   }
