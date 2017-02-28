@@ -19,11 +19,13 @@ class Editor extends Component {
   // initializing quill when component mounts
   componentDidMount() {
     // rendering editor
-    var quill = new Quill('#editor', {
+  let quill = new Quill('#editor', {
     // theme - includes toolbar
     theme: 'snow',
     placeholder: 'Enter some text'
   });
+
+  // setting quill to state - had issues accessing it in render
   this.setState({quill:quill})
   console.log('get length', quill.getLength())
 
@@ -33,7 +35,7 @@ class Editor extends Component {
     // setting this.props to book for readability
     const book = this.props;
     // console.log('quill',this.state.quill)
-
+    // console.log('quill',quill)
     return (
       <div id="textEditor">
         {/* Chapter Title - passed down from props */}
@@ -47,8 +49,9 @@ class Editor extends Component {
 
         <button className="uk-button-success" onClick={
           ()=> {
+            var getText = this.state.quill.getText();
             var length = this.state.quill.getLength();
-            console.log('length', length)
+            console.log('length', length, 'get Text', getText)
             console.log('saving')}
           }>
           Save
