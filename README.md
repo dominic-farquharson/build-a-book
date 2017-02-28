@@ -71,6 +71,7 @@ updateChapterInfo(title, description) {
   })
   .catch( (error) => {
     console.log('error updating title and image')
+    // Closing Chapter Edit - toggling edit state to false
     this.toggleChapterEdit();
   })
 
