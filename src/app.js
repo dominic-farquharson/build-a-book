@@ -75,6 +75,20 @@ class App extends Component {
     this.getBooks();
   }
 
+  // log Out Button - temporary, not proper way
+  logOut() {
+    if(this.state.userSign === false) {
+        alert("you aren't signed in");
+        return;
+
+    }
+    this.setState({
+      userSignIn: true,
+      uid: ''
+
+    })
+  }
+
   // create user - firebase
   createUser(email, password, displayName) {
     console.log('new user has been created')
@@ -289,6 +303,7 @@ class App extends Component {
             toggleEdit={()=>{this.toggleTextEditor()}}
             viewEditor={this.state.viewEditor}
             bookView = {()=>{this.toggleBookView()}}
+            logOut = {()=> this.logOut()}
           />
         </header>
         <main>

@@ -44,7 +44,7 @@ class Navigation extends Component {
           {/* User Account Info */}
           <li>Account</li>
           {/* Log Out Button */}
-          <li> Log Out </li>
+          <li onClick={()=>this.props.logOut()}> Log Out </li>
         </ul>
       </nav>
     )

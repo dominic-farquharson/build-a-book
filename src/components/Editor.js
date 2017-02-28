@@ -120,21 +120,21 @@ fetchChapterData() {
 
 }
 
-// printing Chapters after get request
-printChapters() {
-  const chapter = this.state.chapter;
-  if(chapter!== undefined)
-  Object.keys(chapter).map ( (key)=> {
-    this.setState({
-      content:chapter[key]['content'],
-      characterCount: chapter[key]['characters']
-    })
-  })
-  console.log('quill',this.state.quill)
-  this.state.quill.setContents([
-  { insert: this.state.content }
-]);
-}
+// // printing Chapters after get request
+// printChapters() {
+//   const chapter = this.state.chapter;
+//   if(chapter!== undefined)
+//   Object.keys(chapter).map ( (key)=> {
+//     this.setState({
+//       content:chapter[key]['content'],
+//       characterCount: chapter[key]['characters']
+//     })
+//   })
+//   console.log('quill',this.state.quill)
+//   this.state.quill.setContents([
+//   { insert: this.state.content }
+// ]);
+// }
 
   render() {
     // setting this.props to book for readability
@@ -144,7 +144,7 @@ printChapters() {
     return (
       <div id="textEditor">
         {/* Chapter Title - passed down from props */}
-        <h1>Editor <br />{book.chapterTitle}</h1>
+        <h1>Chapter Editor</h1>
         {/* Printing title from props */}
 
         {/* Quill container */}
@@ -152,7 +152,7 @@ printChapters() {
 
         </div>
 
-        <button className="uk-button-success" onClick={
+        <button className="uk-button-primary editorButton" onClick={
           ()=> {
             // grabbing chapter data
             var getText = this.state.quill.getText();
@@ -165,8 +165,10 @@ printChapters() {
           Save
         </button>
 
-        <button className="uk-button-danger"onClick={book.toggleTextEditor}>Close Editor</button>
-        <button onClick={book.toggleChapterView}>View All Chapter</button>
+        {/* <button className="uk-button-danger"onClick={book.toggleTextEditor}>Close Editor</button> */}
+        {/* <button onClick={book.toggleChapterView}>View All Chapter</button> */}
+        <button className="uk-button-danger editorButton"onClick={book.toggleChapterView}>Close Editor</button>
+
         {/* Last modified from moment? */}
      </div>
     )
