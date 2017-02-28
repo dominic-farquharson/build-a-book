@@ -16,7 +16,8 @@ class Editor extends Component {
 
     this.state = {
       books: '',
-      content: 'Start writing some data and press save to continue at a later time.'
+      content: 'Start writing some data and press save to continue at a later time.',
+
     }
   }
 
@@ -29,7 +30,8 @@ class Editor extends Component {
   let quill = new Quill('#editor', {
     // theme - includes toolbar
     theme: 'snow',
-    placeholder: this.state.content
+    placeholder: this.state.content,
+    
   });
 
   // setting quill to state - had issues accessing it in render

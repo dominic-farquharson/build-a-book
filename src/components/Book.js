@@ -413,17 +413,20 @@ class Book extends Component {
       // reners AddBook form when addBook state is true
       if(addBook) {
         return (
-          <form action="#" method="POST">
-            {/* Storing value of Input field */}
-            <input tyep="text" name="bookTitle" ref={ (bookTitle)=>{this.bookTitle = bookTitle}} placeholder="Book Title" required />
+          <div id="addBookForm">
+            <form  className="uk-position-center" action="#" method="POST">
+              <h1>Add A Book</h1>
+              {/* Storing value of Input field */}
+              <input className="uk-input addBookInput" type="text" name="bookTitle" ref={ (bookTitle)=>{this.bookTitle = bookTitle}} placeholder="Book Title" required />
 
-            {/* Grabs value of input field, along with user id to send post request to firebase endpoint */}
-            <input type="button" onClick={ ()=> this.addBook(this.props.userId, this.bookTitle.value) } value="Add Book" />
+              {/* Grabs value of input field, along with user id to send post request to firebase endpoint */}
+              <input className="uk-button-default bookItemButton addBookButton" type="button" onClick={ ()=> this.addBook(this.props.userId, this.bookTitle.value) } value="Add Book" />
 
-            {/* Toggling add Book state - renders all books */}
-            <input type="button" onClick={ ()=> this.toggleAddBook() } value="Cancel" />
+              {/* Toggling add Book state - renders all books */}
+              <input className="uk-button-danger bookItemButton addBookButton" type="button" onClick={ ()=> this.toggleAddBook() } value="Cancel" />
 
-          </form>
+            </form>
+          </div>
         )
       }
       // prints all books when add Book state is false

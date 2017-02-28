@@ -73,11 +73,11 @@ class BookItem extends Component {
             <div className="uk-card-footer">
               {/* Viewing chapters based on book's key */}
               {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
-              <button className="uk-button uk-button-default" onClick={ ()=>{this.props.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
-              {/* Runs function to delete a book */}
-              <button className="uk-button uk-button-default" onClick={()=>this.props.deleteBook(book.key)}>Delete Book</button>
+              <button className="uk-button uk-button-default bookItemButton" onClick={ ()=>{this.props.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
               {/* Add Edit Button */}
-              <button className="uk-button uk-button-default" onClick={()=>this.toggleEditBook(book.key)}>Edit Book</button>
+              <button className="uk-button uk-button-default bookItemButton" onClick={()=>this.toggleEditBook(book.key)}>Edit Book</button>
+              {/* Runs function to delete a book */}
+              <button className="uk-button uk-button-default bookItemButton" onClick={()=>this.props.deleteBook(book.key)}>Delete Book</button>
               {/* <h3 className="align uk-card-title">Footer:{book.title}</h3> */}
 
               {/* Edit Book */}

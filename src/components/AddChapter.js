@@ -42,7 +42,7 @@ class AddChapter extends Component {
 
   render() {
     return (
-      <div>
+      <div id="addChapterDiv">
         {/* <h1>BookKey: {this.props.bookKey}</h1> */}
         {/* Create Chapter Form */}
         <form id="addChapterForm" className="uk-position-center" action="#" method="POST">

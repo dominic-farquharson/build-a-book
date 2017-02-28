@@ -19,6 +19,9 @@ import axios from 'axios';
 // importing firebase
 import * as firebase from "firebase";
 
+// importing account
+import Account from './components/Auth/Account';
+
 // creating app component
 class App extends Component {
   constructor() {
@@ -351,8 +354,36 @@ class App extends Component {
           />
         </header>
         <main>
-      
-      </main>
+          <Account
+            name={this.state.displayName}
+          />
+        </main>
+     </div>
+
+
+        )
+  }
+
+  // This will be statistics page
+  if(this.state.statistics === true) {
+    return(
+      <div>
+        Account View
+        {/* Navigation component - Nav Bar */}
+        <header>
+          <Navigation
+            toggleAccount= {()=> this.toggleAccount()}
+            toggleEdit={()=>{this.toggleTextEditor()}}
+            viewEditor={this.state.viewEditor}
+            bookView = {()=>{this.toggleBookView()}}
+            logOut = {()=> this.logOut()}
+          />
+        </header>
+        <main>
+          <Account
+            name={this.state.displayName}
+          />
+        </main>
      </div>
 
 

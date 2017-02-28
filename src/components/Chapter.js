@@ -150,11 +150,11 @@ class Chapter extends Component {
             <div className="uk-card-footer">
               {/* Viewing chapters based on book's key */}
               {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
-              <button className="uk-button uk-button-default" onClick = {this.props.toggleTextEditor}>View Chapter</button>
+              <button className="uk-button uk-button-default bookItemButton" onClick = {this.props.toggleTextEditor}>View Chapter</button>
               {/* Runs function to delete a book */}
-              <button className="uk-button uk-button-default" onClick = {()=> this.deleteChapter(chapterKey)}>Delete Chapter</button>
+              <button className="uk-button uk-button-default bookItemButton" onClick = {()=> this.deleteChapter(chapterKey)}>Delete Chapter</button>
               {/* Add Edit Button */}
-              <button className="uk-button uk-button-default" onClick = {()=> this.toggleChapterEdit()}>Edit Chapter</button>
+              <button className="uk-button uk-button-default bookItemButton" onClick = {()=> this.toggleChapterEdit()}>Edit Chapter</button>
 
             </div>
 
