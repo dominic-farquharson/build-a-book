@@ -15,7 +15,8 @@ class Editor extends Component {
     super();
 
     this.state = {
-      books: ''
+      books: '',
+      content: 'Start writing some data and press save to continue at a later time.'
     }
   }
 
@@ -23,11 +24,12 @@ class Editor extends Component {
 
   // initializing quill when component mounts
   componentDidMount() {
+
     // rendering editor
   let quill = new Quill('#editor', {
     // theme - includes toolbar
     theme: 'snow',
-    placeholder: 'Enter some text'
+    placeholder: this.state.content
   });
 
   // setting quill to state - had issues accessing it in render
@@ -35,17 +37,26 @@ class Editor extends Component {
     quill:quill,
     // books: this.props.book
   })
+  // fetching Chapter data
+  this.fetchChapterData();
+  // printing chapter data to quill editor
+  // this.printChapters();
+
+  quill.setContents([
+  { insert: this.state.content },
+
+]);
+
+
+
+
   console.log('get length', quill.getLength())
 
 }
 
 // adding edit form content
 addContent(chapterContent, characterCount) {
-  /* Adding a Book. Posting to Firebase */
-    /*
-     will need function to update state of books in app.js after new book added
-     or rerun fetch books request
-     */
+    // user id
      const uid = this.props.userId;
      // posting to chapters endpoint
     const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${this.props.bookKey}/chapters/${this.props.chapterTitle}/content/.json`;
@@ -68,6 +79,62 @@ addContent(chapterContent, characterCount) {
 
   }
 
+// fetching chapter data
+fetchChapterData() {
+  // user id
+   const uid = this.props.userId;
+   // posting to chapters endpoint
+  const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${this.props.bookKey}/chapters/${this.props.chapterTitle}/content/.json`;
+  // posting content and character count
+  axios.get(url)
+  .then( (response) => {
+    this.setState({chapter: response.data})
+    console.log('retreiving chapter data')
+    // this.printChapters();
+    const chapter = this.state.chapter;
+    if(chapter!== undefined)
+    Object.keys(chapter).map ( (key)=> {
+      console.log('1', chapter[key]['content'])
+      if(chapter[key]['content']===undefined) {
+        return;
+      }
+      console.log('setting chapter datat state')
+      this.setState({
+        content:chapter[key]['content'],
+        characterCount: chapter[key]['characters']
+      })
+    })
+    console.log('quill',this.state.quill)
+    this.state.quill.setContents([
+    { insert: this.state.content }
+  ]);
+
+
+
+
+
+  })
+  .catch( (error) => {
+    console.log('error grabbing chapter data', error)
+  })
+
+}
+
+// printing Chapters after get request
+printChapters() {
+  const chapter = this.state.chapter;
+  if(chapter!== undefined)
+  Object.keys(chapter).map ( (key)=> {
+    this.setState({
+      content:chapter[key]['content'],
+      characterCount: chapter[key]['characters']
+    })
+  })
+  console.log('quill',this.state.quill)
+  this.state.quill.setContents([
+  { insert: this.state.content }
+]);
+}
 
   render() {
     // setting this.props to book for readability
