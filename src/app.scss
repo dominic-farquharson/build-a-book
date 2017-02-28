@@ -292,3 +292,26 @@ header {
 .addChapterButton {
   margin:20px 20px;
 }
+
+// editor Component
+#textEditor {
+  // making editor full page
+  position: absolute;
+  width: 100%;
+  height:100%;
+  // width: 100%;
+  // height:100%;
+  h1 {
+    // height:20%;
+    // position:absolute;
+    // top:0;
+  }
+  // Quill container
+  #editor {
+    font-size:2rem;
+    height:70%;
+    // position:absolute;
+    // height:100%;
+    // width: 100%;
+  }
+}

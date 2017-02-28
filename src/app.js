@@ -25,7 +25,9 @@ class App extends Component {
     super();
     // setting initital states to false
     this.state = {
-      viewEditor: false,
+      // for dev - setting edit state to true
+      viewEditor : true,
+      // viewEditor: false,
       viewChapter: false,
       book: {},
 
