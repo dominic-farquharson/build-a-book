@@ -176,21 +176,21 @@ class Chapter extends Component {
         <div>
           {/* Chapter title Input Box filled w/ value of title */}
           <label htmlFor="chapterTitle">Title: </label>
-          <input id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required />
+          <input className="editChapterInput" id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required />
         </div>
         <div>
           {/* Chapter Description input box filled w/ value of Description */}
           <label htmlFor="chapterDescription">Description:</label>
-          <textarea className="editChapterInput" name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} defaultValue={chapter.description} required></textarea>
+          <textarea className="editChapterTextarea" name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} defaultValue={chapter.description} required></textarea>
 
           {/* <input id="chapterDescription" name="chapterDescription" type="text" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} defaultValue={chapter.chapterDescription} required /> */}
 
         </div>
         {/* Grabbing updated title and image */}
 
-        <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterDescriptionInput.value)}>Save</button>
+        <button className="addChapterButton uk-button uk-button-default" onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterDescriptionInput.value)}>Save</button>
         {/* Toggling Edit state - closing chapter Info editor  */}
-        <button onClick = {()=> this.toggleChapterEdit()}>Close</button>
+        <button className="addChapterButton uk-button uk-button-default" onClick = {()=> this.toggleChapterEdit()}>Close</button>
         <hr />
       </div>
     )

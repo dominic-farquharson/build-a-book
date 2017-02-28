@@ -39,7 +39,10 @@ class Book extends Component {
       addBook: false,
       // Renders Add Chapter component when true
       addChapter: false,
-      editBook: false
+      // editBook: false
+
+      // dev
+      editBook: true
     }
   }
 

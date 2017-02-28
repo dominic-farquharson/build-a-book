@@ -273,7 +273,22 @@ header {
 
 // edit chapter styling
 .editChapterInput {
-display:block;
-  margin: 0 auto;
+// display:block;
+  // margin: 0 auto;
+}
+
+
+.editChapterInput, .editChapterTextarea {
   width: 50%;
+  margin: 0 auto;
+  display: block;
+  font-size:2rem;
+}
+
+.editChapterTextarea {
+  height:50%;
+}
+
+.addChapterButton {
+  margin:20px 20px;
 }

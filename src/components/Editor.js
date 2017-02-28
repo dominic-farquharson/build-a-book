@@ -1,6 +1,11 @@
 // importing react and component
 import React, {Component} from 'react';
 
+// importing quill editor
+import quill from 'quill';
+
+console.log(quill);
+
 // creating Editor component
 class Editor extends Component {
   constructor() {
