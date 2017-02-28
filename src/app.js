@@ -37,6 +37,8 @@ class App extends Component {
 
       // user's email
       email:'',
+      // user Account
+      accountView: false,
       //user's unique key from firebase
     //   uid: '',
      //
@@ -77,6 +79,7 @@ class App extends Component {
 
   // log Out Button - temporary, not proper way
   logOut() {
+    console.log('loggin out user')
     if(this.state.userSign === false) {
         alert("you aren't signed in");
         return;
@@ -87,6 +90,20 @@ class App extends Component {
       uid: ''
 
     })
+  }
+
+  // user account
+  toggleAccount() {
+        console.log('editor has been toggled')
+        if(this.state.accountView === false) {
+          // state changed to true
+          this.setState({accountView:true})
+          // this.setState({chapterTitle: chapterTitle})
+          // viewChapter state changed to false
+          // this.setState({viewChapter:false})
+        }
+        else
+          this.setState({accountView:false})
   }
 
   // create user - firebase
@@ -294,12 +311,14 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.userSignIn) {
+    // rendering if account view is not true
+    if(this.state.userSignIn && !this.state.accountView) {
     return (
       <div>
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
+            toggleAccount= {()=> this.toggleAccount()}
             toggleEdit={()=>{this.toggleTextEditor()}}
             viewEditor={this.state.viewEditor}
             bookView = {()=>{this.toggleBookView()}}
@@ -312,9 +331,32 @@ class App extends Component {
           {this.printBooks()}
         </div>
       </main>
-        <a href="http://google.com">Test</a>
+        {/* <a href="http://google.com">Test</a> */}
      </div>
     )
+  }
+  // Account View
+  if(this.state.accountView === true) {
+    return(
+      <div>
+        Account View
+        {/* Navigation component - Nav Bar */}
+        <header>
+          <Navigation
+            toggleAccount= {()=> this.toggleAccount()}
+            toggleEdit={()=>{this.toggleTextEditor()}}
+            viewEditor={this.state.viewEditor}
+            bookView = {()=>{this.toggleBookView()}}
+            logOut = {()=> this.logOut()}
+          />
+        </header>
+        <main>
+      
+      </main>
+     </div>
+
+
+        )
   }
   // rendering sign up page if user not signed in
   else {
