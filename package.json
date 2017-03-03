@@ -7,7 +7,9 @@
     "start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron .",
     "watch": "./node_modules/.bin/webpack-dev-server",
     "electron-rebuild": "./node_modules/.bin/electron-rebuild",
-    "devtools": "react-devtools"
+    "devtools": "react-devtools",
+    "pack": "build --dir",
+    "dist": "build"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
@@ -31,6 +33,7 @@
     "dotenv": "^4.0.0",
     "dotenv-webpack": "^1.4.1",
     "electron": "^1.4.15",
+    "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.37.2",
     "firebaseui": "^1.0.0",
     "fs": "0.0.1-security",
@@ -40,6 +43,9 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.3",
     "uikit": "^3.0.0-beta.12"
+  },
+  "build": {
+    "copyright": "&copy; Dominic Farquharson 2017"
   },
   "author": "Dominic Farquharson",
   "license": "ISC"

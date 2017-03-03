@@ -19,12 +19,23 @@
 <body>
   <!-- Location where React renders -->
   <div id="root"></div>
+  <script>
+    document.addEventListener('keypress', (event)=> {
+      console.log(event.keycode);
+      if(event.keyCode === 13) {
+        alert('enter')
+      }
+    })
+  </script>
 
   <!-- Wepack server on port 8000. Reloads whenever code changes -->
   <script src="http://localhost:8080/webpack-dev-server.js"></script>
 
   <!-- Bundled code (React, styles, etc) -->
   <script src="http://localhost:8080/built/bundle.js"></script>
+  <!-- <script src="./built/bundle.js"></script> -->
+   <!-- <script type="text/javscript">require('./built/bundle.js')</script> -->
+
 
 </body>
 </html>

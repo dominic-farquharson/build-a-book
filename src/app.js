@@ -95,8 +95,14 @@ class App extends Component {
       userSignIn: false,
       // clearing user id
       uid: '',
-      // emptying book objectt
-      book: {}
+      // emptying book object
+      book: {},
+      // setting state to inital values
+      viewEditor: false,
+      viewChapter: false,
+      email:'',
+      accountView: false,
+      displayName: ''
 
     })
   }
@@ -104,15 +110,17 @@ class App extends Component {
   // user account
   toggleAccount() {
         console.log('editor has been toggled')
-        if(this.state.accountView === false) {
+        // if(this.state.accountView === false) {
           // state changed to true
+
+          // changing state to true when account view button is clicked
           this.setState({accountView:true})
           // this.setState({chapterTitle: chapterTitle})
           // viewChapter state changed to false
           // this.setState({viewChapter:false})
-        }
-        else
-          this.setState({accountView:false})
+        // }
+        // else
+          // this.setState({accountView:false})
   }
 
   // create user - firebase
@@ -272,7 +280,9 @@ class App extends Component {
   // Home page - lists all books. Displayed when editor and chapter's state are false
   toggleBookView() {
     console.log('Book view is toggled')
+    // Setting states of Editor, Account and Chapter view to false in order to list all of the books
     this.setState({viewEditor: false})
+    this.setState({accountView:false})
     this.setState({viewChapter:false})
   }
 

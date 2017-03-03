@@ -16,7 +16,7 @@ class SignIn extends Component {
             <h1>Sign in to Build A Book</h1>
             {/* Using refs to grab input values to pass to create user function */}
             <input className="uk-input" name="email" ref={(email) => {this.emailInput=email}} type="text" placeholder="Email" required />
-            <input className="uk-input" name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="Password" required />
+            <input className="uk-input" name="password" ref={(password) => {this.passwordInput=password}} type="password" placeholder="Password" required />
             {/*
               Posting user info to firebase
               Passing password, email to createuser function
