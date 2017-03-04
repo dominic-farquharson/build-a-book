@@ -28,8 +28,7 @@ class App extends Component {
     super();
     // setting initital states to false
     this.state = {
-      // for dev - setting edit state to true
-      // viewEditor : true,
+      // setting view editor to false
       viewEditor: false,
       viewChapter: false,
       book: {},
@@ -47,22 +46,17 @@ class App extends Component {
      //
      displayName: '',
 
-
-      // for testing - disabling sign in, spoofing signed in user
-      // userSignIn: true,
-      // displayName: 'Dominic',
-      // uid: process.env.userIdTesting
-
+     /*
+      for testing - disabling sign in, spoofing signed in user
+      userSignIn: true,
+      displayName: 'Dominic',
+      uid: process.env.userIdTesting
+      for dev - setting edit state to true
+      viewEditor : true,
+      */
 
 
     }
-    // binding methods
-    this.printBooks = this.printBooks.bind(this);
-    this.toggleTextEditor = this.toggleTextEditor.bind(this);
-    this.toggleChapterView = this.toggleChapterView.bind(this);
-    this.getBooks = this.getBooks.bind(this);
-    this.createUser = this.createUser.bind(this);
-
 
   }
   componentDidMount() {
@@ -76,7 +70,6 @@ class App extends Component {
      };
 
     firebase.initializeApp(config);
-
     // getting books from firebase endpoint - if any
     this.getBooks();
   }
@@ -109,18 +102,9 @@ class App extends Component {
 
   // user account
   toggleAccount() {
-        console.log('editor has been toggled')
-        // if(this.state.accountView === false) {
-          // state changed to true
-
-          // changing state to true when account view button is clicked
-          this.setState({accountView:true})
-          // this.setState({chapterTitle: chapterTitle})
-          // viewChapter state changed to false
-          // this.setState({viewChapter:false})
-        // }
-        // else
-          // this.setState({accountView:false})
+    console.log('editor has been toggled')
+    // changing state to true when account view button is clicked
+    this.setState({accountView:true})
   }
 
   // create user - firebase

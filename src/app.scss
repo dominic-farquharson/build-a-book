@@ -16,21 +16,9 @@ body {
   color: red;
   text-align: center;
   form {
-    // position:absolute;
-    // margin-bottom:20px;
-    // right:10%;
-    // bottom:10%;
-    // width:60%;
-    // border:3px black solid;
-    // padding:10px;
-    // margin:0 auto;
 
     input {
-      // margin-bottom:5px;
-      // // border:20px red solid;
-      // font-size: 3rem;
-      // width:100%;
-      // height: 50px;
+
     }
   }
 }
@@ -48,6 +36,14 @@ main {
       font-size:3rem;
       font-weight:bold;
       text-align:center;
+    }
+    // card title
+    .uk-card-title {
+      font-size:3rem;
+    }
+    // body font size
+    .uk-card-body {
+      font-size:2rem;
     }
   li {
     text-align:center;
@@ -78,6 +74,7 @@ header {
         padding: 20px;
         list-style-type: none;
         text-align:center;
+        cursor: pointer;
       }
 
       li:hover {
@@ -97,6 +94,7 @@ header {
 
   // Credit: Unsplash.com
   background:url('https://images.unsplash.com/photo-1483505806292-09b690b07d50?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=');
+  background-size:cover;
   // opacity:.8;
   // title
   h1 {
@@ -117,11 +115,6 @@ header {
 
 
   .uk-position-center {
-    // opacity:1;
-    // .welcomeTitle {
-    //   position:absolute;
-    //   bottom:10%;
-    // }
 
   ul {
     // buttons
@@ -143,9 +136,6 @@ header {
 
 // Add a Chapter Form
 #addChapterForm {
-  // position:absolute;
-  // bottom:30%;
-  // left:10%;
   bottom:10%;
   height:30%;
   text-align: center;
@@ -199,7 +189,7 @@ header {
     @include backgroundFontColor(black, black);
     // background. Credit: Unsplash.com - Aidan Meyer
     background:url('https://images.unsplash.com/photo-1472466287482-c6c7fe50b716?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=');
-
+    background-size: cover;
     form {
       width:100%;
       // sign in button
@@ -241,6 +231,7 @@ header {
   @include backgroundFontColor(black, black);
   // background. Credit: Unsplash.com - Aidan Meyer
   background:url('https://images.unsplash.com/photo-1472466287482-c6c7fe50b716?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=');
+  background-size:cover;
   form {
 
     width:100%;
@@ -357,7 +348,6 @@ header {
 #addBookForm {
   // adding background image
   height:100%;
-  // opacity:.4;
   // Unsplash.com - lacie
   background:url('https://images.unsplash.com/photo-1472068996216-8c972a0af9bd?dpr=1&auto=format&fit=crop&w=1500&h=996&q=80&cs=tinysrgb&crop=');
   background-size:cover;

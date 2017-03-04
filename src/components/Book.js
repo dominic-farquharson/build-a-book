@@ -168,33 +168,6 @@ class Book extends Component {
 }
   }
 
-
-        /*
-         preventing title from being printed mutliple times
-         Only printed when key = 0
-        */
-        // if(i === 0) {
-      //   else {
-      //   return (
-      //     <Chapter
-      //       key = {i}
-      //       title = {this.state.title}
-      //       chapter = {book[key]['title']}
-      //       toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
-      //
-      //     />
-      //   )
-      // }
-
-    //   /*
-    //   - printing chapters without title property
-    //   - passing chapter data, and toggleEditor function down
-    //     as props.
-    //   - toggleEditor will update state to render chapter view
-    //
-    //   */
-
-
   /*
    setting current book title to state
    Will reference this when printing book
@@ -314,53 +287,6 @@ class Book extends Component {
         <div>Welcome</div>
       )
     }
-
-      // return(
-      //   <div>
-      //     <h3>Edit {this.state.title}</h3>
-      //     <div>
-      //       {/* Chapter title Input Box filled w/ value of title */}
-      //       <label htmlFor="chapterTitle">Title: </label>
-      //       {/* <input id="chapterTitle" name="chapterTitle" type="text" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} defaultValue={chapter.chapterTitle} required /> */}
-      //     </div>
-      //     <div>
-      //       {/* Chapter Image input box filled w/ value of title */}
-      //       <label htmlFor="chapterImage">Image:</label>
-      //       {/* <input id="chapterImage" name="chapterImage" type="text" ref={(chapterImage) => {this.chapterImageInput=chapterImage}} defaultValue={chapter.chapterImage} required /> */}
-      //     </div>
-      //     {/* Grabbing updated title and image */}
-      //     {/* <button onClick={ ()=> this.updateChapterInfo(this.chapterTitleInput.value, this.chapterImageInput.value)}>Save</button> */}
-      //     {/* Toggling Edit state - closing chapter Info editor  */}
-      //     <button onClick = {()=> this.editBook(key)}>Close</button>
-      //     <hr />
-      //   </div>
-      // );
-
-  //   else {
-  //
-  //   return(
-  //   Object.keys(books).map( (book, i) => {
-  //     console.log('book item', book)
-  //     return (
-  //       // printing key from object, represents book titlee
-  //       <li key={i}>
-  //         {/* Printing book title */}
-  //         {books[book]['title']}
-  //         <br />
-  //         {/* Viewing chapters based on book's key */}
-  //         {/* <button onClick={()=>{this.printChapters(book); }}>View Chapter</button> */}
-  //         <button onClick={ ()=>{this.setBookTitle(book); this.props.toggleChapterView() } }>View Chapters</button>
-  //         {/* Runs function to delete a book */}
-  //         <button onClick={()=>this.deleteBook(book)}>Delete Book</button>
-  //         {/* Add Edit Button */}
-  //         <button onClick={()=>this.toggleEditBook(book)}>Edit Book</button>
-  //
-  //
-  //       </li>
-  //     )
-  //   })
-  // )
-  // }
 }
 
 
@@ -402,7 +328,6 @@ class Book extends Component {
 
   render() {
     // variable for book title.
-    // const book_title = this.props.book['title'];
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
     let addBook = this.state.addBook;
@@ -439,25 +364,13 @@ class Book extends Component {
           {/* Toggles Add A book - Renders form by setting addbook state to true */}
           <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddBook()}>Add a Book</button>
           <hr />
-
-
-          {/* View Text Editor - Button Toggle */}
-          {/* <button onClick={this.props.toggleTextEditor}>Open Editor</button> */}
-          {/* View All Chapters Button Toggle  */}
-          {/* <button onClick={this.props.toggleChapterView}>View All Chapter</button> */}
-            {/* Printing book titles from firebase endpoint */}
+          {/* Printing book titles from firebase endpoint */}
           <ul className="booksView">
             {this.printBookTitles()}
           </ul>
-
-
-
-
           {/* Rendering Resource component */}
           {/* <Resource /> */}
-          {/* Rendering chapter component */}
 
-          {/* <a href="http://google.com">Test</a> */}
        </div>
       )
     }
@@ -471,14 +384,8 @@ class Book extends Component {
           {/* Adding A New Chapter */}
           <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddChapter()}>Add A Chapter</button>
           <hr />
-
-
           {/* Printing chapters */}
           {this.printChapters()}
-
-          {/* <button onClick={this.props.toggleTextEditor}>Toggle Editor</button>
-          <button onClick={this.props.toggleChapterView}>Toggle Chapter</button> */}
-
         </div>
       )
     }

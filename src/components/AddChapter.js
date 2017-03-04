@@ -26,11 +26,8 @@ class AddChapter extends Component {
     .then( (response) => {
       console.log('New Chapter has been created', response);
       alert('chapter has been added')
-      this.props.toggleAddChapter();
       // updating state of chapters after new chapter is added
-      // this.props.getBooks();
-      // setting add chapter's form's state to false - rendering all chapters view
-      // this.toggleAddBook();
+      this.props.toggleAddChapter();
 
     })
     .catch( (error) => {
@@ -43,7 +40,6 @@ class AddChapter extends Component {
   render() {
     return (
       <div id="addChapterDiv">
-        {/* <h1>BookKey: {this.props.bookKey}</h1> */}
         {/* Create Chapter Form */}
         <form id="addChapterForm" className="uk-position-center" action="#" method="POST">
           {/* Using refs to grab input values to pass to create chapter function */}
@@ -55,7 +51,6 @@ class AddChapter extends Component {
 
           <label htmlFor="chapterDescription">Chapter Description</label>
           {/* Chapter Description */}
-          {/* <input name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} type="text" placeholder="Chapter Description" required /> */}
           <textarea className="addChapterInput" name="chapterDescription" ref={(chapterDescription) => {this.chapterDescriptionInput=chapterDescription}} placeholder="Chapter Description" required></textarea>
 
           {/*
