@@ -11,8 +11,10 @@
 
 
 
-[Wireframe](#)
-[Trello](#)
+#### [Wireframe](#)
+#### [Trello](#)
+#### [Link to Live Site](#)
+#### [Link to Mac Version](#)
 
 # Description:
 
@@ -34,7 +36,7 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
 1. To load React dev tools: open a new tab in your terminal and execute the **npm run devtools** script.
     1. React dev tools were also included as a dependency
 
-Use native numbering
+
 #Technologies Used:
 
 - React.js
@@ -97,6 +99,7 @@ updateChapterInfo(title, description) {
 # Known Issues:
 
 - When creating a chapter inside of a blank book, create chapter must be selected twice before state is properly toggled.
+- Refreshing the page logs out the user.
 
 # Acknowledgements:
 
