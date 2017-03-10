@@ -9,7 +9,8 @@
     "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "devtools": "react-devtools",
     "pack": "build --dir",
-    "dist": "build"
+    "dist": "build",
+    "desktop": "react-scripts start"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
@@ -23,6 +24,7 @@
     "node-libs-browser": "^1.0.0",
     "node-sass": "^4.5.0",
     "react-devtools": "^2.0.12",
+    "react-scripts": "^0.9.5",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
