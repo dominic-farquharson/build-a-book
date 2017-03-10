@@ -13,7 +13,7 @@
 
 #### [Wireframe](#)
 #### [Trello](#)
-#### [Link to Live Site](#)
+#### [Link to Live Site](http://build-a-book.herokuapp.com/)
 #### [Link to Mac Version](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
 
 # Description:
