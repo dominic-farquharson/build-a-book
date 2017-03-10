@@ -109,17 +109,13 @@ class App extends Component {
 
   // create user - firebase
   createUser(email, password, displayName) {
-    console.log('new user has been created')
-    console.log('email type',typeof email)
+
     // console.log(email, password, displayName)
     // creating a new user - firebase
     firebase.auth().createUserWithEmailAndPassword(email, password)
     //promise object - only toggles user sign in on successful account sign up
     .then(
       (response)=>{
-        console.log(response)
-        console.log('success');
-
         // getting user details
         firebase.auth().onAuthStateChanged( (user) => {
 
@@ -155,8 +151,6 @@ class App extends Component {
       // outputting error message using an alert.
       var errorCode = error.code;
       var errorMessage = error.message;
-      // console.log(error, errorCode, errorMessage)
-      console.log('error creatiing user', error)
       // error message
       alert(`${error.message}  \n Error Code: ${error.code}`);
 
@@ -170,7 +164,6 @@ class App extends Component {
 
   // toggle User Sign In - renders book component - null value means account created
   toggleUserSignIn(email='null', password='null') {
-    console.log('from input',email, password )
     /*
     when user creates an account, can't passing in password data results in flashing error.
     When function is passed with no arguments, then user account has been created
@@ -178,9 +171,6 @@ class App extends Component {
     if(email ==='null') {
         // getting user details
         firebase.auth().onAuthStateChanged( (user) => {
-          console.log('user details:', user)
-          console.log(`userId: ${user.uid} email:${user.email}`);
-
           // getting user's unique key and email address
           this.setState({
             uid: user.uid,
@@ -198,14 +188,8 @@ class App extends Component {
     firebase.auth().signInWithEmailAndPassword(email, password)
     // adding promise object to sign user in on sucess
     .then( ()=> {
-        console.log('user was able to log in');
-
-
         // getting user details
         firebase.auth().onAuthStateChanged( (user) => {
-          console.log('user details:', user)
-          console.log(`userId: ${user.uid} email:${user.email}`);
-
           // getting user's unique key and email address
           this.setState({
             uid: user.uid,
@@ -276,10 +260,8 @@ class App extends Component {
 
     // ajax call to get books from firebase endpoint - based on signed in user's uid
     const url = `https://build-a-book.firebaseio.com/users/${this.state.uid}.json`
-    console.log(url)
     axios.get(url)
       .then( (response)=> {
-        console.log('response',response.data);
         // setting response containing books to book state
         this.setState({book:response.data.books})
       })

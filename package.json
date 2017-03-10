@@ -9,8 +9,7 @@
     "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "devtools": "react-devtools",
     "pack": "build --dir",
-    "dist": "build",
-    "desktop": "react-scripts start"
+    "dist": "build"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
