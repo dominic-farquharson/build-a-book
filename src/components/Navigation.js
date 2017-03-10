@@ -1,7 +1,7 @@
 // importing react and component
 import React, {Component} from 'react';
 
-let uikit = require('uikit')
+// let uikit = require('uikit')
 // console.log(uikit)
 
 
