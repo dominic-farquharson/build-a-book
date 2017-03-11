@@ -99,7 +99,9 @@ updateChapterInfo(title, description) {
 # Known Issues:
 
 - When creating a chapter inside of a blank book, create chapter must be selected twice before state is properly toggled.
-- Refreshing the page logs out the user.
+- Refreshing the page logs out the user. - fixed (3/10/17).
+  - The issue stemmed from the user's auth status not being checked when the app component mounted. Added firebase auth state method to check user's sign in status.
+
 
 # Acknowledgements:
 

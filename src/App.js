@@ -72,16 +72,34 @@ class App extends Component {
     firebase.initializeApp(config);
     // getting books from firebase endpoint - if any
     this.getBooks();
+    // checking auth status when user refreshes page - when component mounts
+      firebase.auth().onAuthStateChanged( (user) => {
+        console.log('still signed in',user)
+          // getting user's unique key and email address
+          this.setState({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            userSignIn:true
+          })
+          this.getBooks();
+        });
+
+
+
   }
 
   // log Out Button - temporary, not proper way
   logOut() {
     console.log('loggin out user')
-    if(this.state.userSign === false) {
-        alert("you aren't signed in");
-        return;
+    // if(this.state.userSign === false) {
+    //     alert("you aren't signed in");
+    //     return;
 
-    }
+    // }
+      // signing out user
+     firebase.auth().signOut();
+
     // signing out user
     this.setState({
       // setting user sign in to false
