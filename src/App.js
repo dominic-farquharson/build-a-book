@@ -74,7 +74,18 @@ class App extends Component {
     this.getBooks();
     // checking auth status when user refreshes page - when component mounts
       firebase.auth().onAuthStateChanged( (user) => {
-        console.log('still signed in',user)
+        // console.log('still signed in',user)
+
+        // database reference
+        let database = firebase.database();
+        // Getting user books data
+        let books = database.ref(`/users/${user.uid}`).once('value').then(function(userData){
+          console.log(`user's books`, userData.val().books)
+        })
+        // Books based on userId
+        console.log(`books database for user: ${user.uid}`, books)
+
+
           // getting user's unique key and email address
           this.setState({
             uid: user.uid,

@@ -85,14 +85,14 @@ class Book extends Component {
   printChapters() {
     // user's id
     const uid = this.props.userId;
-    console.log(this.props.books)
+    // console.log(this.props.books)
     // books[book]['title']
 
 
 
     /* Using title from state to render chapters of a specific book */
     let book = this.props.book[this.state.title]['chapters'];
-    console.log('book',book)
+  
 
     /*
     if chapters is undefined - there are no chapters, renders add a chapter
@@ -174,14 +174,14 @@ class Book extends Component {
 
   */
   setBookTitle(title) {
-    console.log('the title is', title)
+    // console.log('the title is', title)
     // setting  book title to state
     this.setState({title: title})
   }
 
   // Deleting a book function
   deleteBook(bookKey) {
-    console.log('deleting book', bookKey)
+    // console.log('deleting book', bookKey)
     // user id
     const uid= this.props.userId;
 
@@ -206,7 +206,7 @@ class Book extends Component {
   }
   // editing a book
   editBook(bookKey, title) {
-    console.log('editing', bookKey, 'title', title)
+    // console.log('editing', bookKey, 'title', title)
     // url for chapter endpoint - based on user's id, the book key, and the chapter's key
     const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${bookKey}.json`;
 
@@ -256,7 +256,7 @@ class Book extends Component {
     if(!this.state.editBook){
       return(
       Object.keys(books).map( (book, i) => {
-        console.log('book item', book)
+        // console.log('book item', book)
         return (
           // printing key from object, represents book titlee
           <li key={i}>
