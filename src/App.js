@@ -72,7 +72,7 @@ class App extends Component {
     firebase.initializeApp(config);
     // checking auth status when user refreshes page - when component mounts
     firebase.auth().onAuthStateChanged( (user) => {
-     
+      if(user) {
       // getting user's unique key and email address
       this.setState({
         uid: user.uid,
@@ -80,11 +80,9 @@ class App extends Component {
         displayName: user.displayName,
         userSignIn:true
       })
-      this.getBooks();
+        this.getBooks();
+      }
     });
-
-
-
   }
 
   // log Out Button - temporary, not proper way
@@ -131,7 +129,7 @@ class App extends Component {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     //promise object - only toggles user sign in on successful account sign up
     .then(
-      (response)=>{
+      ()=>{
         // getting user details
         firebase.auth().onAuthStateChanged( (user) => {
 
@@ -296,7 +294,7 @@ class App extends Component {
         // book object from user's firebase endpoint
         book={this.state.book}
         // Passing getBooks method as prop = to update books after new book is added
-        getBooks = { () => {console.log('trying to get books');this.getBooks()} }
+        getBooks = { () => {this.getBooks()} }
         user = {this.state.displayName}
         // using user Id to pass to firebase endpoint
         userId = {this.state.uid}

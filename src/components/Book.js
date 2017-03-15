@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 
 // importing chapter component
 import Chapter from './Chapter';
+
 // importing resource component
 import Resource from './Resource';
 
@@ -12,8 +13,11 @@ import Editor from './Editor';
 // Adding Chapter
 import AddChapter from './AddChapter';
 
-
+// importing book item
 import BookItem from './BookItem';
+
+// importing Firebase
+import * as firebase from "firebase";
 
 
 
@@ -100,7 +104,6 @@ class Book extends Component {
 
     */
     if(book === undefined  || this.state.addChapter===true) {
-
         return (
           <div>
             <h1>Add A Chapter</h1>
@@ -117,55 +120,37 @@ class Book extends Component {
         )
       }
 
-
       else {
-    return(
-      // grabbing keys from object
-      Object.keys(book).map( (key, i)=> {
-
-        // printing add chapter form - if no chapters present or if user toggles it
-        // if(this.props.book[key]['title']['chapters'] === undefined && i==0) {
-        //   return (
-        //     <div key={i}>
-        //       <AddChapter
-        //         // user's key
-        //         userId = {uid}
-        //         // getting book's unique key to post chapters to it
-        //         bookKey = {key}
-        //        />
-        //     </div>
-        //   )
-        // }
-
-        // rendering Chapter component when chapters object isn't null
-          return (
-            <Chapter
-              userId = {uid}
-              key = {i}
-              // axios call to refresh books after it's updated
-              // getBooks = {()=> this.props.getBoooks()}
-              getBooks = {()=> this.props.getBooks()}
-              // description of chapter - based on key
-              description={book[key]['description']}
-              // printing book's chapters
-              printChapters = {()=>this.printChapters()}
-              // passing chapter's unique key to allow for updating it
-              chapterKey={key}
-              // toggles Add Chapter component
-              toggleAddChapter = {()=> this.toggleAddChapter()}
-              // chapter = {book[key]}
-              chapterTitle = {book[key]['title']}
-              chapterImage = {book[key]['image']}
-              bookKey = {this.state.title}
-              // Sets chapter title and toggles chapter editor
-              toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
-            />
-          )
-
-
-    })
-  )
-}
+        return(
+          // grabbing keys from object
+          Object.keys(book).map( (key, i)=> {
+            // rendering Chapter component when chapters object isn't null
+              return (
+                <Chapter
+                  userId = {uid}
+                  key = {i}
+                  // axios call to refresh books after it's updated
+                  // getBooks = {()=> this.props.getBoooks()}
+                  getBooks = {()=> this.props.getBooks()}
+                  // description of chapter - based on key
+                  description={book[key]['description']}
+                  // printing book's chapters
+                  printChapters = {()=>this.printChapters()}
+                  // passing chapter's unique key to allow for updating it
+                  chapterKey={key}
+                  // toggles Add Chapter component
+                  toggleAddChapter = {()=> this.toggleAddChapter()}
+                  // chapter = {book[key]}
+                  chapterTitle = {book[key]['title']}
+                  chapterImage = {book[key]['image']}
+                  bookKey = {this.state.title}
+                  // Sets chapter title and toggles chapter editor
+                  toggleTextEditor = {()=>{this.setChapterTitle(key); this.props.toggleTextEditor()}}
+                />
+              )
+        })
+      )
+    }
   }
 
   /*
@@ -292,26 +277,32 @@ class Book extends Component {
 
   /* Adding a Book. Posting to Firebase */
   addBook(uid, bookTitle) {
-    /*
-     will need function to update state of books in app.js after new book added
-     or rerun fetch books request
-     */
-    const url = `https://build-a-book.firebaseio.com/users/${uid}/books.json`;
-    axios.post(url, {
-      title:bookTitle
-    })
-    .then( (response) => {
-      console.log('post request succesful', response);
+    // creating variable containing new Book Information - book title, cover and date it was added
+    let newBook = {
+      title: bookTitle,
+      dateAdded: 'Date Added',
+      cover: "coming soon"
+    }
+
+    // getting new book key
+    let newBookKey = firebase.database().ref(`/users/${uid}/books/`).push().key;
+    
+    // book data to be posted, initially an empty object
+    let book = {};
+    // pushing new Book into book object
+    book[`users/${uid}/books/${newBookKey}`] = newBook;
+    // writing new book to endpoint
+    firebase.database().ref().update(book)
+    // adding promise, to update state of boks after new book is added
+    .then( ()=> {
+      console.log('new book successfully added');
       // updating state of books after new book is added
       this.props.getBooks();
       // setting add book form's state to false - rendering all books view
       this.toggleAddBook();
-
     })
-    .catch( (error) => {
-      console.log('error posting new book', error)
-    })
-
+    
+    return;
   }
 
   // Function to toggle Add Book state - renders add book form when true
