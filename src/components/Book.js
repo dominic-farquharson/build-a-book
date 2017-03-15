@@ -18,11 +18,10 @@ import BookItem from './BookItem';
 
 // importing Firebase
 import * as firebase from "firebase";
-
-
-
 // importing axios
 import axios from 'axios';
+
+
 
 // creating Book component
 class Book extends Component {
@@ -166,10 +165,19 @@ class Book extends Component {
 
   // Deleting a book function
   deleteBook(bookKey) {
-    // console.log('deleting book', bookKey)
+    console.log('deleting book', bookKey)
     // user id
     const uid= this.props.userId;
+    if( check() ) {
+      alert('hello')
 
+    
+    }
+
+    else {
+      alert('canceled')
+    }
+/*
     // Book endpoint - based on key of user and key of book
     const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}.json`;
     console.log('will be deleting',url)
@@ -187,7 +195,7 @@ class Book extends Component {
       (error)=> {
         alert('error deleting book')
     })
-
+*/
   }
   // editing a book
   editBook(bookKey, title) {
@@ -322,6 +330,7 @@ class Book extends Component {
     let viewChapter = this.props.viewChapter;
     let viewEditor = this.props.viewEditor;
     let addBook = this.state.addBook;
+
 
 
     // renders books when edit state and view chapter state is false

@@ -9,14 +9,22 @@
   <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+  <!-- jQuery CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!-- UI kit -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/css/uikit.min.css" />
   <!-- Ui kit js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/js/uikit.min.js"></script>
 
-
 </head>
 <body>
+  <!-- Accessing Node API's only available in the renderer process -->
+  <script>
+     function check() {
+       console.log('I was checked')
+       return true;
+     }
+  </script>
   <!-- Location where React renders -->
   <div id="root"></div>
   <!--<script>
@@ -35,6 +43,8 @@
   <script src="http://localhost:8080/built/bundle.js"></script>
   <!-- <script src="./built/bundle.js"></script> -->
    <!-- <script type="text/javscript">require('./built/bundle.js')</script> -->
+
+
 
 
 </body>
