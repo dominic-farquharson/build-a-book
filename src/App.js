@@ -70,31 +70,18 @@ class App extends Component {
      };
 
     firebase.initializeApp(config);
-    // getting books from firebase endpoint - if any
-    this.getBooks();
     // checking auth status when user refreshes page - when component mounts
-      firebase.auth().onAuthStateChanged( (user) => {
-        // console.log('still signed in',user)
-
-        // database reference
-        let database = firebase.database();
-        // Getting user books data
-        let books = database.ref(`/users/${user.uid}`).once('value').then(function(userData){
-          console.log(`user's books`, userData.val().books)
-        })
-        // Books based on userId
-        console.log(`books database for user: ${user.uid}`, books)
-
-
-          // getting user's unique key and email address
-          this.setState({
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            userSignIn:true
-          })
-          this.getBooks();
-        });
+    firebase.auth().onAuthStateChanged( (user) => {
+     
+      // getting user's unique key and email address
+      this.setState({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        userSignIn:true
+      })
+      this.getBooks();
+    });
 
 
 
@@ -285,17 +272,16 @@ class App extends Component {
 
   // function to get books from firebase
   getBooks() {
-    console.log('fetching books');
-
-    // ajax call to get books from firebase endpoint - based on signed in user's uid
-    const url = `https://build-a-book.firebaseio.com/users/${this.state.uid}.json`
-    axios.get(url)
-      .then( (response)=> {
-        // setting response containing books to book state
-        this.setState({book:response.data.books})
-      })
-      .catch( (error) => {
-        console.log('error getting books',error)
+     // database reference
+      let database = firebase.database();
+      // setting variable containing user Id
+      let userId = this.state.uid;
+      // Getting user books data
+      database.ref(`/users/${userId}`).on('value', (userData) => {
+        // setting state containing user's books
+        this.setState({
+          book:userData.val().books
+        })
       })
   }
 
