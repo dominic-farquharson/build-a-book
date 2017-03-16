@@ -161,22 +161,26 @@ class Book extends Component {
     // console.log('the title is', title)
     // setting  book title to state
     this.setState({title: title})
-  }
-
+  } 
+ 
   // Deleting a book function
   deleteBook(bookKey) {
     console.log('deleting book', bookKey)
     // user id
     const uid= this.props.userId;
-    if( check() ) {
-      alert('hello')
+    /*
+     prompt user if they want to delete a book - using Electron's dialog box, accessing it via remote to use it in the renderer process
+     Function returns the index of the button clicked
+    */
+    let userInput = deleteBookPrompt();
 
-    
+    if(val===0) {
+      console.log('user selected yes')
     }
-
     else {
-      alert('canceled')
+      console.log('user selected no')
     }
+    
 /*
     // Book endpoint - based on key of user and key of book
     const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}.json`;

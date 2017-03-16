@@ -20,10 +20,8 @@
 <body>
   <!-- Accessing Node API's only available in the renderer process -->
   <script>
-     function check() {
-       console.log('I was checked')
-       return true;
-     }
+    // importing renderer.js file - to gain access to Node modules in renderer process
+    require('./js/renderer.js')
   </script>
   <!-- Location where React renders -->
   <div id="root"></div>
