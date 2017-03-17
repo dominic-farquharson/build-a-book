@@ -185,24 +185,21 @@ class Book extends Component {
     return;
     
   }
-  // editing a book
+  // editing a book's title
   editBook(bookKey, title) {
-    // console.log('editing', bookKey, 'title', title)
-    // url for chapter endpoint - based on user's id, the book key, and the chapter's key
-    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${bookKey}.json`;
-
-    // Patch request to update book endpoint with new book title and image
-    axios.patch(url, {
-      title:title,
-    })
-    .then( (response) => {
-      alert(`updated title`);
-      this.toggleChapterEdit();
-    })
-    .catch( (error) => {
-      console.log('error updating title and image')
-      this.toggleChapterEdit();
-    })
+    // object containing new title
+    let book = {title}
+    // User Id
+    const uid = this.props.userId;
+    // endpoint of book to be edited
+    let endpoint = `/users/${uid}/books/${bookKey}/`;
+    // Updating book
+    let updatedBook = firebase.database().ref(endpoint).update(book)
+      // promise 
+      .then( ()=> {
+        // notifying user
+        alert('Book has been successfully edited.')
+      })
   }
 
   // toggles state of book edit

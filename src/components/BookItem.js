@@ -79,7 +79,16 @@ class BookItem extends Component {
        </div>
        <button onClick = {()=> this.toggleEditBook()}>Close</button>
        {/* Button to edit book - PUT request - grabbing book key and new book title */}
-       <button onClick = {()=> this.props.editBook(book.bookKey, this.bookTitleInput.value)}>Edit</button>
+       <button onClick = {
+         ()=> 
+          {
+            this.props.editBook(book.bookKey, this.bookTitleInput.value); 
+            // closing edit book
+            this.toggleEditBook();    
+          }
+        }>
+         Edit
+       </button>
 
        <hr />
      </div>
