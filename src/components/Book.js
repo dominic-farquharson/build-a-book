@@ -174,32 +174,16 @@ class Book extends Component {
     */
     let userInput = deleteBookPrompt();
 
-    if(val===0) {
+    // 0 is index of yes button
+    if(userInput===0) {
       console.log('user selected yes')
+      // Deleting book based on Book's key
+      let book = firebase.database().ref(`/users/${uid}/books/${bookKey}`).remove();
+      // notifying user
+      alert('The book has been deleted.')
     }
-    else {
-      console.log('user selected no')
-    }
+    return;
     
-/*
-    // Book endpoint - based on key of user and key of book
-    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}.json`;
-    console.log('will be deleting',url)
-    axios.delete(url)
-    // promise to update state of books after book has been deleted
-    .then(
-      (response)=>{
-        alert('Book has been deleted');
-        // refreshing books object after book has been delted
-        this.props.getBooks();
-        // prining out books based on refreshed book object
-        this.printBookTitles();
-    })
-    .catch(
-      (error)=> {
-        alert('error deleting book')
-    })
-*/
   }
   // editing a book
   editBook(bookKey, title) {
