@@ -8,16 +8,16 @@ console.log('renderer.js is connected');
 // importing dialog using electron remote - allows access in renderer process
 const {dialog} = require('electron').remote;
 
-// function to delete a book, uses electron's message box
-deleteBookPrompt = () => {
+// function to delete a book or chapter, uses electron's message box
+deletePrompt = (title, message, detail) => {
     // Returns index of button clicked
     return(
         dialog.showMessageBox({
             // messag box title
-            title:"Deleting Book",
+            title,
             type: 'warning',
-            message: "Are you sure you want to delete this book?",
-            detail: "Note: The book and all of its chapters will be deleted. This process can NOT be reversed",
+            message,
+            detail,
             // array containing the names of the buttons
             buttons: ['yes', 'cancel'],
             // index of the button initially selected when message box opens. Set to index of the cancel button

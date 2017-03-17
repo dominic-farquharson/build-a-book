@@ -68,30 +68,29 @@ class Chapter extends Component {
   }
 
   // delete chapter
-  deleteChapter(key) {
-     console.log(`deleting chapter of key ${key}`);
-    // Chapter endpoint - based on userid, the book key and the chapter's key
-    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+  deleteChapter(chapterKey) {
+    // user id
+    const uid= this.props.userId;
+    // book Key
+    const bookKey = this.props.bookKey;
+    /*
+     prompt user if they want to delete a chapter - using Electron's dialog box, accessing it via remote to use it in the renderer process
+     Function returns the index of the button clicked
+    */
+    let userInput = deletePrompt(
+      'Delete A Chapter',  
+      'Are you sure you want to delete this chapter?', 
+      'Note: The chapter and all of its contents will be deleted. This process can NOT be reversed'
+    );
 
-    // Put request to update chapter endpoint with new chapter title and image
-    axios.delete(url)
-    .then( (response) => {
-      alert('chapter has been deleted!');
-      // refreshing books object after chapter has been deleted
-      this.props.getBooks();
-      // printing out chapters based on refreshed book object
-      this.props.printChapters();
-    })
-    .catch( (error) => {
-      alert('error deleting title');
-      // refreshing books object after chapter has been deleted
-      this.props.getBooks();
-      // printing out chapters based on refreshed book object
-      this.props.printChapters();
-
-    })
-
-   console.log(`deleting chapter of key ${key}`)
+    // 0 is index of yes button
+    if(userInput===0) {
+      console.log('user selected yes')
+      // Deleting book based on Book's key
+      let chapter = firebase.database().ref(`/users/${uid}/books/${bookKey}/chapters/${chapterKey}`).remove();
+      // notifying user
+      alert('The chapter has been deleted.')
+    }
 }
   render() {
     // console.log('chapter key', this.props.key)

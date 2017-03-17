@@ -172,7 +172,11 @@ class Book extends Component {
      prompt user if they want to delete a book - using Electron's dialog box, accessing it via remote to use it in the renderer process
      Function returns the index of the button clicked
     */
-    let userInput = deleteBookPrompt();
+    let userInput = deletePrompt(
+      'Delete Book',
+       "Are you sure you want to delete this book?", 
+       "Note: The book and all of its chapters will be deleted. This process can NOT be reversed"
+    );
 
     // 0 is index of yes button
     if(userInput===0) {
