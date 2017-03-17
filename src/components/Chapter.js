@@ -4,6 +4,9 @@ import React, {Component} from 'react';
 // importing axios
 import axios from 'axios';
 
+// importing Firebase
+import * as firebase from "firebase";
+
 // creating Chapter component
 class Chapter extends Component {
   constructor(props) {
@@ -39,25 +42,29 @@ class Chapter extends Component {
 
   // Saving Edited Chapter Info
   updateChapterInfo(title, description) {
-    console.log(`title:${title}, image:${description}`)
+    //console.log(`title:${title}, descpription:${description}`)
 
-    // url for chapter endpoint - based on user's id, the book key, and the chapter's key
-    const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+    // Key of book where chapter is located
+    let bookKey = this.props.bookKey; 
+    // key of chapter to be edited
+    let chapterKey = this.props.chapterKey; 
 
-    // Put request to update chapter endpoint with new chapter title and image
-    axios.put(url, {
-      title:title,
-      description: description
-    })
-    .then( (response) => {
-      console.log(`updated title`);
-      this.toggleChapterEdit();
-    })
-    .catch( (error) => {
-      console.log('error updating title and image')
-      this.toggleChapterEdit();
-    })
-    // Closing Chapter Edit - toggling edit state to false
+    // object containing new chapter title and description
+    let chapter = {title, description}
+    // User Id
+    const uid = this.props.userId;
+    // endpoint of book to be edited
+    let endpoint = `/users/${uid}/books/${bookKey}/chapters/${chapterKey}`;
+    // Updating book
+    let updatedChapter = firebase.database().ref(endpoint).update(chapter)
+      // promise 
+      .then( ()=> {
+        // notifying user
+        alert('Chapter has been successfully edited.')
+        // Closing Chapter Edit - toggling edit state to false
+        this.toggleChapterEdit();
+      })
+
   }
 
   // delete chapter

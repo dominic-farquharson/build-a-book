@@ -4,37 +4,43 @@ import React, {Component} from 'react';
 // importing Axios
 import axios from 'axios';
 
+// importing Firebase
+import * as firebase from "firebase";
+
 // creating AddChapter component
 class AddChapter extends Component {
-  constructor(uid) {
-    super(uid);
+  constructor(props) {
+    super(props);
   }
 
   // function to post chapter title and image to firebase
   addChapter(title, description, bookKey) {
-    console.log(`title:${title}, description: ${description}`)
+    //console.log(`title:${title}, description: ${description}`)
     // user's id key
     const uid = this.props.userId;
-    // url of user's chapters endpoint located within the selected book
-    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${bookKey}/chapters.json`;
+    // object containing new Chapter information
+    let newChapter = {
+      title,
+      description
+    }
 
-    // posting ot user's chapter's endpoint
-    axios.post(url, {
-      title:title,
-      description: description
-    })
-    .then( (response) => {
-      console.log('New Chapter has been created', response);
+    // getting new chapter key
+    let newChapterKey = firebase.database().ref(`/users/${uid}/books/${bookKey}/chapters/`).push().key;
+    
+    // chapter data to be posted, initially an empty object
+    let chapter = {};
+    // pushing new Chapter endpoint into chapter object
+    chapter[`users/${uid}/books/${bookKey}/chapters/${newChapterKey}/`] = newChapter;
+    // writing new chapter to chapters endpoint
+    firebase.database().ref().update(chapter)
+    // adding promise, to update state of books after new book is added
+    .then( ()=> {
       alert('chapter has been added')
       // updating state of chapters after new chapter is added
       this.props.toggleAddChapter();
-
     })
-    .catch( (error) => {
-      console.log('error posting new book', error)
-    })
-
-  // will need to fetch chapters within promise
+    
+    return;
   }
 
   render() {
