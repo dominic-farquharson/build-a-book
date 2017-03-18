@@ -13,6 +13,18 @@ class AddChapter extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    /*
+     Add Chapter renders when book is undefined or add Chapter state is toggled. When book is undefined addChapter state is still false. 
+     This would cause add chapter to reopen when the cancel button was clicked.
+   */ 
+    if(this.props.books ===undefined) {
+      // changing add chapter's state is true when user has no chapters
+      this.props.toggleAddChapter();
+    }
+  }
+
+
   // function to post chapter title and image to firebase
   addChapter(title, description, bookKey) {
     //console.log(`title:${title}, description: ${description}`)

@@ -91,7 +91,8 @@ class Chapter extends Component {
       // notifying user
       alert('The chapter has been deleted.')
     }
-}
+  }
+  
   render() {
     // console.log('chapter key', this.props.key)
 

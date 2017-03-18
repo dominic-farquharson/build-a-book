@@ -47,10 +47,6 @@ class Book extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.props.getBooks();
-  }
-
   // prints out resources depending on num available in database
   printResources() {
 
@@ -58,14 +54,10 @@ class Book extends Component {
 
   // toggles Add Chapter component
   toggleAddChapter() {
-    console.log('toggling add Chapter')
-
-
     // sets state of addChapter to false if true
     if(this.state.addChapter) {
       this.setState({addChapter: false});
-      // axios call to update books after posting
-      // console.log('get books',this.props)
+      //  updating books after posting
       this.props.getBooks();
       // rendering Add Chapter Component
       this.printChapters();
@@ -79,7 +71,6 @@ class Book extends Component {
 
   // sets chapter title to be sent down to editor as prop
   setChapterTitle(title) {
-    console.log('setting chapter title')
     // setting state
     this.setState({chapterTitle: title})
   }
@@ -88,21 +79,19 @@ class Book extends Component {
   printChapters() {
     // user's id
     const uid = this.props.userId;
-    // console.log(this.props.books)
-    // books[book]['title']
-
-
-
+   
     /* Using title from state to render chapters of a specific book */
     let book = this.props.book[this.state.title]['chapters'];
   
-
     /*
     if chapters is undefined - there are no chapters, renders add a chapter
     Also rendered if user toggles state of addChapter and sets it to true
 
     */
+
     if(book === undefined  || this.state.addChapter===true) {
+      // making sure that addChapter is true when book is undefined
+     
         return (
           <div>
             <h1>Add A Chapter</h1>
@@ -114,6 +103,8 @@ class Book extends Component {
                toggleAddChapter = {()=> this.toggleAddChapter()}
                // getting book's unique key to post chapters to it
                bookKey = {this.state.title}
+               // passing down book - to determine if it is undefined
+               book= {book}
               />
           </div>
         )
@@ -386,6 +377,7 @@ class Book extends Component {
             <Editor
               userId={this.props.userId}
               books = {this.props.book}
+              getBooks = {this.props.getBooks}
               // currentChapter = {this.state.chapterTitle}
               viewEditor={this.props.viewEditor}
               viewChapter = {this.props.viewChapter}

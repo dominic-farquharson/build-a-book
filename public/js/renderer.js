@@ -26,5 +26,4 @@ deletePrompt = (title, message, detail) => {
             cancelId:1
         })
     )    
-   
 }

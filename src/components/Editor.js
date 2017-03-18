@@ -9,6 +9,9 @@ import Quill from 'quill';
 // importing axios
 import axios from 'axios';
 
+// importing Firebase
+import * as firebase from "firebase";
+
 // creating Editor component
 class Editor extends Component {
   constructor() {
@@ -19,119 +22,103 @@ class Editor extends Component {
       content: 'Start writing some data and press save to continue at a later time.',
 
     }
+
   }
 
-
-
-  // initializing quill when component mounts
+  // initializing quill
   componentDidMount() {
-
-    // rendering editor
-    let quill = new Quill('#editor', {
-      // theme - includes toolbar
-      theme: 'snow',
-      placeholder: this.state.content,
-
-  });
-
-  // setting quill to state - had issues accessing it in render
-  this.setState({
-    quill:quill,
-    // books: this.props.book
-  })
-  // fetching Chapter data
-  this.fetchChapterData();
-  // printing chapter data to quill editor
-  quill.setContents([
-  { insert: this.state.content },
-
-]);
-
-  console.log('get length', quill.getLength())
-
-}
-
-// adding edit form content
-addContent(chapterContent, characterCount) {
-    // user id
-     const uid = this.props.userId;
-     // posting to chapters endpoint
-    const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${this.props.bookKey}/chapters/${this.props.chapterTitle}/content/.json`;
-    // posting content and character count
-    axios.post(url, {
-      content: chapterContent,
-      characters: characterCount
-    })
-    .then( (response) => {
-      alert('chapter has been saved')
-      // updating state of books after new book is added
-      // this.props.getBooks();
-      // setting add book form's state to false - rendering all books view
-      // this.toggleAddBook();
-
-    })
-    .catch( (error) => {
-      console.log('error posting new book', error)
-    })
-
+    // setting quill object to variable 
+    let quill = this.initializeQuill();
+    // settting quill to state for access in render
+    this.setState({quill})
+    // passing quill object as argument - fetching latest chapter edit
+    this.fetchChapterData(quill);   
   }
 
-// fetching chapter data
-fetchChapterData() {
-  // user id
-   const uid = this.props.userId;
-   // posting to chapters endpoint
-  const url = `https://build-a-book.firebaseio.com/users/${uid}/books/${this.props.bookKey}/chapters/${this.props.chapterTitle}/content/.json`;
-  // posting content and character count
-  axios.get(url)
-  .then( (response) => {
-    this.setState({chapter: response.data})
-    console.log('retreiving chapter data')
-    // this.printChapters();
-    const chapter = this.state.chapter;
-    if(chapter!== undefined)
-    Object.keys(chapter).map ( (key)=> {
-      console.log('1', chapter[key]['content'])
-      if(chapter[key]['content']===undefined) {
+  initializeQuill() {
+    console.log(document.getElementById('editor'), 'initializing')
+      let quill = new Quill('#editor', { theme: 'snow',placeholder: `Type something!`})
+      return quill;
+  }
+
+  // fetching Chapter Data -passing in quill editor as argument
+  fetchChapterData(editor) {
+      // book object
+      const book = this.props.books;
+      // key of book that chapter is in
+      const bookKey = this.props.bookKey;
+      // Key of chapter being edited
+      const chapterKey = this.props.chapterTitle;
+      // Object containing history of all of the user's edits
+      let contentObject = book[bookKey]['chapters'][chapterKey]['content'];
+      // Ending Function when user has no chapter data
+      if(contentObject === undefined) {
         return;
       }
-      console.log('setting chapter datat state')
-      this.setState({
-        content:chapter[key]['content'],
-        characterCount: chapter[key]['characters']
-      })
-    })
-    this.state.quill.setContents([
-    { insert: this.state.content }
-  ]);
+      // retrieving chapter content - inserting it into quill
+      else {
+      // Turning into array of keys
+      let contentKeys = Object.keys(contentObject);
+      // getting index of latest edit
+      let length =  contentKeys.length - 1
+      // Getting latest edit
+      let latestEditKey = contentKeys[length];
+      // Setting variable containing latest edit - object containing content/ character count - pulling out just the content for now
+      let latestEdit = contentObject[latestEditKey]['content']
+      // setting editor contents w/ latest edit
+      editor.setContents([{insert: latestEdit}])
+      }
+  }
 
+  addContent(chapterContent, characterCount) {
+  // // // adding edit form content
 
-
-
-
-  })
-  .catch( (error) => {
-    console.log('error grabbing chapter data', error)
-  })
-
-}
+      // user's id key
+      const uid = this.props.userId;
+      // object containing new Chapter information
+      let chapterData = {
+        content: chapterContent,
+        characters: characterCount
+      }
+      // Key of chapter being edited
+      let chapterKey = this.props.chapterTitle;
+      // key of book containing chapter
+      let bookKey = this.props.bookKey;
+      // getting new editor key - to allow for histories of edits
+      let newEditorKey = firebase.database().ref(`/users/${uid}/books/${bookKey}/chapters/${chapterKey}/content/`).push().key;    
+      // chapter data to be posted, initially an empty object
+      let chapter = {};
+      // pushing new Chapter endpoint into chapter object
+      chapter[`users/${uid}/books/${bookKey}/chapters/${chapterKey}/content/${newEditorKey}`] = chapterData;
+      // writing new chapter to chapters endpoint
+      firebase.database().ref().update(chapter)
+      // adding promise, notifying user on completion of update
+      .then( ()=> {
+        alert('chapter has been Saved')    
+      })    
+      return;
+  }
 
   render() {
-    // setting this.props to book for readability
-    const book = this.props;
-    // console.log('quill',this.state.quill)
-    // console.log('quill',quill)
+       // book object
+      const book = this.props.books;
+      // key of book that chapter is in
+      const bookKey = this.props.bookKey;
+      // Key of chapter being edited
+      const chapterKey = this.props.chapterTitle;
+      // Title of chapter
+      let title = book[bookKey]['chapters'][chapterKey]['title'];
+    
     return (
       <div id="textEditor">
-        {/* Chapter Title - passed down from props */}
-        <h1>Chapter Editor</h1>
-        {/* Printing title from props */}
+   
+        {/* Chapter Title */}
+        <h1>{title}</h1>
+      
 
         {/* Quill container */}
-        <div id="editor">
-
-        </div>
-
+        <div id="editor"> </div>
+  
         <button className="uk-button-primary editorButton" onClick={
           ()=> {
             // grabbing chapter data
@@ -145,9 +132,7 @@ fetchChapterData() {
           Save
         </button>
 
-        {/* <button className="uk-button-danger"onClick={book.toggleTextEditor}>Close Editor</button> */}
-        {/* <button onClick={book.toggleChapterView}>View All Chapter</button> */}
-        <button className="uk-button-danger editorButton" onClick={book.toggleChapterView}>Close Editor</button>
+        <button className="uk-button-danger editorButton" onClick={this.props.toggleChapterView}>Close Editor</button>
 
         {/* Last modified from moment? */}
      </div>
