@@ -13,8 +13,8 @@
 
 #### [Wireframe](#)
 #### [Trello](#)
-#### [Link to Live Site](http://build-a-book.herokuapp.com/)
-#### [Link to Mac Version](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
+#### [Link to Live Site - outdated](http://build-a-book.herokuapp.com/)
+#### [Link to Mac Version - outdated](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
 
 # Description:
 
@@ -54,32 +54,29 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
 
 Sample Code: Posting Chapter's data to firebase
 ```javascript
-// Saving Edited Chapter Info
-updateChapterInfo(title, description) {
-  // url for chapter endpoint - based on user's id, the book key, and the chapter's key
-  const url = `https://build-a-book.firebaseio.com/users/${this.props.userId}/books/${this.props.bookKey}/chapters/${this.props.chapterKey}.json`;
+  // Saving Edited Chapter Info
+  updateChapterInfo(title, description) {
+    // Key of book where chapter is located
+    let bookKey = this.props.bookKey; 
+    // key of chapter to be edited
+    let chapterKey = this.props.chapterKey; 
 
-  // Put request to update chapter endpoint with new chapter title and image
-  axios.put(url, {
-    // putting title
-    title:title,
-    // putting description
-    description: description
-  })
-  .then( (response) => {
-    console.log(`updated title`);
-    // Closing Chapter Edit - toggling edit state to false
-    this.toggleChapterEdit();
-  })
-  .catch( (error) => {
-    console.log('error updating title and image')
-    // Closing Chapter Edit - toggling edit state to false
-    this.toggleChapterEdit();
-  })
-
-}
-
-
+    // object containing new chapter title and description
+    let chapter = {title, description}
+    // User Id
+    const uid = this.props.userId;
+    // endpoint of book to be edited
+    let endpoint = `/users/${uid}/books/${bookKey}/chapters/${chapterKey}`;
+    // Updating book
+    let updatedChapter = firebase.database().ref(endpoint).update(chapter)
+      // promise 
+      .then( ()=> {
+        // notifying user
+        alert('Chapter has been successfully edited.')
+        // Closing Chapter Edit - toggling edit state to false
+        this.toggleChapterEdit();
+      })
+  }
 ```
 
 # Future Improvements:
@@ -95,13 +92,20 @@ updateChapterInfo(title, description) {
 - Setting up Firebase Auth.
 - Setting up JSON structure
     - I initially had a sample  user JSON file that I was using to test static data. I had to refactor it to make the data easier to navigate.
+- Trying to access Node api's outside of Electron's main process.
 
 # Known Issues:
 
-- When creating a chapter inside of a blank book, create chapter must be selected twice before state is properly toggled.
+- When creating a chapter inside of a blank book, create chapter must be selected twice before state is properly toggled. -fixed(3/18)
+  - When retrieving the user's list of chapters, I set a condition for users who had no chapters to be immediately sent to the Add Chapter component, which only   rendered when its state was set to true. But when the Add Chapter form is rendered in this manner(when a user first creates a book and has no chapters), its   state is never set to true and pressing close would toggle the state to now be true which caused it to open again.  This was fixed by passing the book's       data down as a prop and if it was undefined the state would be set to true. 
+
 - Refreshing the page logs out the user. - fixed (3/10/17).
   - The issue stemmed from the user's auth status not being checked when the app component mounted. Added firebase auth state method to check user's sign in status.
+- Formatting (Bold text, bullet points, etc) from the Quill.js editor is not saved with the user's chapter data.
 
+# About Current Version
+
+The Endpoint is now protected and I am no longer using Axios to GET/POST data. If you attempt to post content using the deployed versions the access will be denied. The current version is now using the Firebase API to GET/POST data.. I will soon update the deployed links with the newest version.
 
 # Acknowledgements:
 
