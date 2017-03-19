@@ -19,8 +19,13 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  // Creates browser window.
-  mainWindow = new BrowserWindow({width: 1000, height: 600})
+  // Creates browser window. - preventing window from being resized past certain amount until it's responsive
+  mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    minWidth:1000,
+    minHeight: 600
+  })
 
   // setting directory of index file
   mainWindow.loadURL(url.format({
