@@ -18,7 +18,7 @@ class AddChapter extends Component {
      Add Chapter renders when book is undefined or add Chapter state is toggled. When book is undefined addChapter state is still false. 
      This would cause add chapter to reopen when the cancel button was clicked.
    */ 
-    if(this.props.books ===undefined) {
+    if(this.props.books ===undefined && !this.props.addChapter) {
       // changing add chapter's state is true when user has no chapters
       this.props.toggleAddChapter();
     }
@@ -60,9 +60,8 @@ class AddChapter extends Component {
       <div id="addChapterDiv">
         {/* Create Chapter Form */}
         <form id="addChapterForm" className="uk-position-center" action="#" method="POST">
+          <h1>Add A Chapter</h1>        
           {/* Using refs to grab input values to pass to create chapter function */}
-
-
           <label htmlFor="chapterTitle">Chapter Title</label>
           {/* Chapter Title */}
           <input className="addChapterInput uk-input" id="chapterTitle" name="chapterTitle" ref={(chapterTitleInput) => {this.chapterTitleInput=chapterTitleInput}} type="text" placeholder="Chapter Title" required />

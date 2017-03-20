@@ -54,6 +54,7 @@ class Book extends Component {
 
   // toggles Add Chapter component
   toggleAddChapter() {
+    console.log('toggling add chapter')
     // sets state of addChapter to false if true
     if(this.state.addChapter) {
       this.setState({addChapter: false});
@@ -94,7 +95,6 @@ class Book extends Component {
      
         return (
           <div>
-            <h1>Add A Chapter</h1>
             {/* Rendering Add Chapter component */}
             <AddChapter
                // user's key
@@ -105,6 +105,8 @@ class Book extends Component {
                bookKey = {this.state.title}
                // passing down book - to determine if it is undefined
                book= {book}
+               // state of add chapter 
+               addChapter = {this.state.addChapter}
               />
           </div>
         )
