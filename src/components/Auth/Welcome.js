@@ -20,7 +20,7 @@ class Welcome extends Component {
       welcome: true
     }
 
-    // binding functions - but unecessary since using fat arrow
+    // binding functions
     this.toggleSignIn = this.toggleSignIn.bind(this);
     this.toggleSignUp = this.toggleSignUp.bind(this);
 
@@ -103,7 +103,7 @@ class Welcome extends Component {
       <div>
         <SignUp
           // passing create user function as prop for use in Sign Up component
-          createUser = {(email, password, displayName)=>this.props.createUser(email, password, displayName)}
+          createUser = {(email, password, displayName, picture)=>this.props.createUser(email, password, displayName, picture)}
           // createUser = {(email, password)=>this.props.createUser(email, password)}
 
          />

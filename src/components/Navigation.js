@@ -9,7 +9,7 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
 
-    // binding functions, even though fat arrow being used
+    // binding functions 
     this.toggleView = this.toggleEdit.bind(this)
 
   }

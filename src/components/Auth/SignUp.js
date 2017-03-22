@@ -22,7 +22,8 @@ class SignUp extends Component {
             {/* Fil upload input */}
             <div className="profilePic">
               <span>Add a Profile Picture</span>
-              <input type="file" name="profilePicture" ref={ (picture)=> this.picture = picture } />
+              {/* Creating reference to picture file path */}
+              <input type="file" name="profilePicture" ref={ (picture)=> {this.pictureInput = picture} } />
             </div>
             {/*
               Posting user info to firebase
@@ -33,7 +34,8 @@ class SignUp extends Component {
               type="button" 
               value="Create Account" 
               onClick={()=>{
-                this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value, this.picture); 
+                {/* Passing references to create user function */}
+                this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value, this.pictureInput); 
                 }} 
             />
             {/* Close Button */}
