@@ -70,6 +70,11 @@ class App extends Component {
      };
 
     firebase.initializeApp(config);
+    
+    // reference to storage
+    const storage = firebase.storage();
+
+   
     // checking auth status when user refreshes page - when component mounts
     firebase.auth().onAuthStateChanged( (user) => {
       if(user) {
@@ -122,54 +127,60 @@ class App extends Component {
   }
 
   // create user - firebase
-  createUser(email, password, displayName) {
+  createUser(email, password, displayName, picture) {
+    console.log('create user', picture)
+    // reference to root of storage
+    const storage = firebase.storage().ref();
+
+    // storage reference
+    const storageRef = storage.ref();
 
     // console.log(email, password, displayName)
     // creating a new user - firebase
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    //promise object - only toggles user sign in on successful account sign up
-    .then(
-      ()=>{
-        // getting user details
-        firebase.auth().onAuthStateChanged( (user) => {
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    // //promise object - only toggles user sign in on successful account sign up
+    // .then(
+    //   ()=>{
+    //     // getting user details
+    //     firebase.auth().onAuthStateChanged( (user) => {
 
-          // invoking firebase current user
-          var user = firebase.auth().currentUser;
+    //       // invoking firebase current user
+    //       var user = firebase.auth().currentUser;
 
-          // adding name to user object
-          user.updateProfile({
-            displayName: displayName,
-            photoURL: "http://placehold.it/350x150"
-          }).then( () => {
-            // Update successful.
-            // getting user's unique key and email address
-            this.setState({
-              uid: user.uid,
-              email: user.email,
-              displayName: displayName,
-            })
-            // toggling sign in state
-            this.toggleUserSignIn();
+    //       // adding name to user object
+    //       user.updateProfile({
+    //         displayName: displayName,
+    //         photoURL: "http://placehold.it/350x150"
+    //       }).then( () => {
+    //         // Update successful.
+    //         // getting user's unique key and email address
+    //         this.setState({
+    //           uid: user.uid,
+    //           email: user.email,
+    //           displayName: displayName,
+    //         })
+    //         // toggling sign in state
+    //         this.toggleUserSignIn();
 
-          }, function(error) {
-            // An error happened.
-            console.log('error updating profile',error)
-          });
+    //       }, function(error) {
+    //         // An error happened.
+    //         console.log('error updating profile',error)
+    //       });
 
-        });
+    //     });
 
 
-      }
-    )
-    .catch(function(error) {
-      // outputting error message using an alert.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // error message
-      alert(`${error.message}  \n Error Code: ${error.code}`);
+    //   }
+    // )
+    // .catch(function(error) {
+    //   // outputting error message using an alert.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   // error message
+    //   alert(`${error.message}  \n Error Code: ${error.code}`);
 
-      // ...
-    });
+    //   // ...
+    // });
 
 
 
@@ -390,7 +401,7 @@ class App extends Component {
       <div>
         {/* App Landing Page - when no user is signed in */}
         <Welcome
-          createUser = {(email, password, displayName) => this.createUser(email, password, displayName)}
+          createUser = {(email, password, displayName, picture) => this.createUser(email, password, displayName, picture)}
           userSignedIn = { ()=> this.toggleUserSignIn()}
           // passing function to authenticate user down as prop
           toggleUserSignIn = { (email, password)=> {this.toggleUserSignIn(email, password)}}

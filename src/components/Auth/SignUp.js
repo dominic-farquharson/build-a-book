@@ -19,11 +19,23 @@ class SignUp extends Component {
             <input className="uk-input" name="nameInput" ref={(displayNameInput) => {this.displayNameInput=displayNameInput}} type="text" placeholder="Username" required />
             <input className="uk-input" name="email" ref={(email) => {this.emailInput=email}} type="text" placeholder="Email" required />
             <input className="uk-input" name="password" ref={(password) => {this.passwordInput=password}} type="text" placeholder="Password" required />
+            {/* Fil upload input */}
+            <div className="profilePic">
+              <span>Add a Profile Picture</span>
+              <input type="file" name="profilePicture" ref={ (picture)=> this.picture = picture } />
+            </div>
             {/*
               Posting user info to firebase
               Passing password, email to createuser function
             */}
-            <input className="createAccountButton uk-button uk-button-default" type="button" value="Create Account" onClick={()=>{this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value); }} />
+            <input 
+              className="createAccountButton uk-button uk-button-default" 
+              type="button" 
+              value="Create Account" 
+              onClick={()=>{
+                this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value, this.picture); 
+                }} 
+            />
             {/* Close Button */}
 
           </div>
