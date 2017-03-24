@@ -16,10 +16,38 @@ class Account extends Component {
 
   // Making React control state of form
   handleSubmit(event) {
-    console.log('submitted changes')
+    console.log('submitted changes', event)
     event.preventDefault();
-    console.log(this.pictureInput)
-    // this.props.updatePicture(this.pictureInput)
+
+    // from input fields
+    const name = this.nameInput.value;
+    const picture = this.pictureInput.files[0];
+    
+    // User doesn't upload a new picture, but changes name
+    if(picture===undefined) {
+        console.log('name has been changed');
+        this.props.updateName(name);
+        this.toggleAccountEdit()  
+      return;
+    }
+    // User uploads a new picture and changes name
+    else {
+      // user only changed picture
+      if(name === this.props.name) {
+        this.props.updatePicture(this.pictureInput);
+        this.toggleAccountEdit()  
+        return;
+      }
+      // user changed picture and name
+      console.log('picture and name has been changed');
+      // // updating picture and profile name
+      this.props.updatePicture(this.pictureInput);
+      this.props.updateName(name);
+      // closing editor    
+      this.toggleAccountEdit()  
+      return;
+    }
+    
   }
 
   handleChange(event) {
@@ -58,21 +86,25 @@ class Account extends Component {
   // rendering edit fields 
   else {
     return(
-      <div className="account">
-          <h1>Edit Account</h1>
-          <img src={user.profilePic} />
+       <div className="account">                 
           {/* Change Profile Picture */}
-          <form onSubmit= {this.handleSubmit} >
-          <section className="profilePic">
-                <span>Change Profile Picture</span>
-                <br />
-                {/* Creating reference to picture file path */}
-                <input type="file" name="profilePicture" ref={ (picture)=> {this.pictureInput = picture} }  onChange={this.handleChange} />
-          </section>
-          <input type="submit" value="Edit" />
-          <input type="button" value="Cancel" onClick={()=>this.toggleAccountEdit()} />
+         <form onSubmit= {this.handleSubmit} >
+           <section>
+              <h1>Edit Account</h1>
+              <label>Name:<input type="text" defaultValue={user.name} name="name" ref={ (name)=> {this.nameInput = name} } required /></label>
+              <br />
+              <img src={user.profilePic} />
+            </section>             
+            <section className="profilePic">
+                  <span>Change Profile Picture</span>
+                  <br />
+                  {/* Creating reference to picture file path */}
+                  <input type="file" name="profilePicture" ref={ (picture)=> {this.pictureInput = picture} }  onChange={this.handleChange} />
+            </section>
+            <input type="submit" value="Edit" />
+            <input type="button" value="Cancel" onClick={()=>this.toggleAccountEdit()} />
           
-          </form>
+        </form>
         </div>
     )
   }

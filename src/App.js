@@ -236,6 +236,25 @@ class App extends Component {
 
   }
 
+  updateName(name) {
+          // invoking firebase current user
+          var user = firebase.auth().currentUser;
+
+          // adding name to user object
+          user.updateProfile({
+            displayName: name
+          }).then( () => {
+            // Update successful.
+            // setting state to new user name
+            this.setState({
+              displayName: name
+            })
+          }, function(error) {
+            // An error happened.
+            console.log('error updating profile',error)
+          });
+  }
+
   // toggle User Sign In - renders book component - null value means account created
   toggleUserSignIn(email='null', password='null') {
     /*
@@ -417,6 +436,7 @@ class App extends Component {
             // update picture 
             updatePicture = { (picture)=>this.updatePicture(picture) }
             profilePic = {this.state.profilePic}
+            updateName = {(name)=>this.updateName(name)}
           />
         </main>
      </div>
