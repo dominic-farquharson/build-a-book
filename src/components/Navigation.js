@@ -42,7 +42,10 @@ class Navigation extends Component {
           <li>Statistics</li>
 
           {/* User Account Info */}
-          <li onClick={()=> this.props.toggleAccount()}>Account</li>
+          <li onClick={()=> this.props.toggleAccount()}>
+            <img src={this.props.profilePic} style={{width:"50px", height:"50px", marginRight:"10px", borderRadius:"100%"}} />
+            Account
+          </li>
           {/* Log Out Button */}
           <li onClick={()=>this.props.logOut()}> Log Out </li>
         </ul>

@@ -80,6 +80,7 @@ class App extends Component {
     // checking auth status when user refreshes page - when component mounts
     firebase.auth().onAuthStateChanged( (user) => {
       if(user) {
+        console.log(user)
         // // reference to profile Picture
         // let picture = storageRef.child(`/images/${this.state.displayName}/picture/fig6bigforblog.png`);
         // console.log('picture url', picture.getDownloadURL())
@@ -90,7 +91,7 @@ class App extends Component {
         email: user.email,
         displayName: user.displayName,
         userSignIn:true,
-        // profilePic: picture
+        profilePic: user.photoURL
       })
         this.getBooks();
       }
@@ -362,13 +363,14 @@ class App extends Component {
         viewChapter = {this.state.viewChapter}
         toggleChapterView = {() => this.toggleChapterView()}
         toggleTextEditor = { ()=> this.toggleTextEditor() }
+        profilePic={this.state.profilePic}
       />
     )
 
   }
 
   render() {
-    // rendering if account view is not true
+    // rendering if account view is not true - renderding books
     if(this.state.userSignIn && !this.state.accountView) {
     return (
       <div>
@@ -380,6 +382,7 @@ class App extends Component {
             viewEditor={this.state.viewEditor}
             bookView = {()=>{this.toggleBookView()}}
             logOut = {()=> this.logOut()}
+            profilePic={this.state.profilePic}
           />
         </header>
         <main>
@@ -405,6 +408,7 @@ class App extends Component {
             viewEditor={this.state.viewEditor}
             bookView = {()=>{this.toggleBookView()}}
             logOut = {()=> this.logOut()}
+            profilePic={this.state.profilePic}
           />
         </header>
         <main>
@@ -434,6 +438,7 @@ class App extends Component {
             viewEditor={this.state.viewEditor}
             bookView = {()=>{this.toggleBookView()}}
             logOut = {()=> this.logOut()}
+            profilePic={this.state.profilePic}
           />
         </header>
         <main>

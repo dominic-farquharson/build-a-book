@@ -336,10 +336,12 @@ class Book extends Component {
       // Viewing all books
       return (
         <div>
-          {/* Title For View Books  */}
-          <h1 className="title">{this.props.user}'s Books List</h1>
-          {/* Toggles Add A book - Renders form by setting addbook state to true */}
-          <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddBook()}>Add a Book</button>
+          <section className="booksHeading">
+            {/* Title For View Books  */}
+            <h1 className="title">{this.props.user}'s Books List</h1>
+            {/* Toggles Add A book - Renders form by setting addbook state to true */}
+            <button className="uk-button uk-button-primary" onClick={()=>this.toggleAddBook()}>Add a Book</button>
+          </section>  
           <hr />
           {/* Printing book titles from firebase endpoint */}
           <ul className="booksView">
@@ -382,6 +384,7 @@ class Book extends Component {
               toggleTextEditor = {this.props.toggleTextEditor}
               chapterTitle = {this.state.chapterTitle}
               bookKey={this.state.title}
+              profilePic={this.props.profilePic}
              />
           </div>
         )
