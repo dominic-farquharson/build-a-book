@@ -6,7 +6,6 @@
   "scripts": {
     "start": "./node_modules/.bin/electron .",
     "watch": "./node_modules/.bin/webpack-dev-server",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild",
     "devtools": "react-devtools",
     "pack": "build --dir",
     "dist": "build"

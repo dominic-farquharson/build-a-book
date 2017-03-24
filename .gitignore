@@ -11,3 +11,5 @@ build-a-book-linux-ia32/
 build-a-book-win32-x64/
 # Debug 
 npm-debug.log
+# Distribution folder
+dist/

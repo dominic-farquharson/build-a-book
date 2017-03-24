@@ -1,9 +1,6 @@
 // importing react and component
 import React, {Component} from 'react';
 
-// importing Axios
-import axios from 'axios';
-
 // importing Firebase
 import * as firebase from "firebase";
 

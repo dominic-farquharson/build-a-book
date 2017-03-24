@@ -3,11 +3,6 @@ import React, {Component} from 'react';
 
 // importing quill editor
 import Quill from 'quill';
-// let Quill = require('quill')
-// console.log(quill)
-
-// importing axios
-import axios from 'axios';
 
 // importing Firebase
 import * as firebase from "firebase";

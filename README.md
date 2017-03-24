@@ -13,8 +13,10 @@
 
 #### [Wireframe](#)
 #### [Trello](#)
-#### [Link to Live Site - outdated](http://build-a-book.herokuapp.com/)
-#### [Link to Mac Version - outdated](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
+# Desktop Builds - Outdated (Version 1.0)
+ - [Windows](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
+ - [Mac](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
+ - [Linux](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
 
 # Description:
 

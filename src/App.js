@@ -13,9 +13,6 @@ import Welcome from './components/Auth/Welcome';
 // importing react and component
 import React, {Component} from 'react';
 
-//importing axios
-import axios from 'axios';
-
 // importing firebase
 import * as firebase from "firebase";
 

@@ -18,10 +18,6 @@ import BookItem from './BookItem';
 
 // importing Firebase
 import * as firebase from "firebase";
-// importing axios
-import axios from 'axios';
-
-
 
 // creating Book component
 class Book extends Component {
@@ -121,8 +117,7 @@ class Book extends Component {
                 <Chapter
                   userId = {uid}
                   key = {i}
-                  // axios call to refresh books after it's updated
-                  // getBooks = {()=> this.props.getBoooks()}
+                  // ajax call to refresh books after it's updated
                   getBooks = {()=> this.props.getBooks()}
                   // description of chapter - based on key
                   description={book[key]['description']}
@@ -205,7 +200,7 @@ class Book extends Component {
     // sets state of addChapter to false if true
     if(this.state.editBook) {
       this.setState({editBook: false});
-      // axios call to update books after posting
+      // ajax call to update books after posting
       this.props.getBooks();
       // rendering Add Chapter Component
       this.printBookTitles();
