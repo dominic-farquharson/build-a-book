@@ -61,13 +61,12 @@ class Editor extends Component {
       // Setting variable containing latest edit - object containing content/ character count - pulling out just the content for now
       let latestEdit = contentObject[latestEditKey]['content']
       // setting editor contents w/ latest edit
-      editor.setContents([{insert: latestEdit}])
+      editor.setContents(latestEdit)
       }
   }
 
   addContent(chapterContent, characterCount) {
-  // // // adding edit form content
-
+  // adding edit form content
       // user's id key
       const uid = this.props.userId;
       // object containing new Chapter information
@@ -116,13 +115,13 @@ class Editor extends Component {
   
         <button className="uk-button-primary editorButton" onClick={
           ()=> {
-            // grabbing chapter data
-            var getText = this.state.quill.getText();
+            // character count
             var length = this.state.quill.getLength();
+            // getting text + formatting
+            let contents = this.state.quill.getContents();
             // posting chapter data - text data and character count
-            this.addContent(getText, length);
-            console.log('length', length, 'get Text', getText)
-            console.log('saving')}
+            this.addContent(contents, length);
+           }
           }>
           Save
         </button>
