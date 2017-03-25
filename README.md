@@ -13,10 +13,10 @@
 
 #### [Wireframe](#)
 #### [Trello](#)
-# Desktop Builds - Outdated (Version 1.0)
- - [Windows](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
- - [Mac](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
- - [Linux](https://drive.google.com/open?id=0B_fEKxl-bFyNQXhqR0FqYUMtTDA)
+# Desktop Builds - Current (Version 2.0.1)
+ - [Windows v2.01](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
+ - [Mac v1.0](#)
+ - [Linux v1.0](#)
 
 # Description:
 
