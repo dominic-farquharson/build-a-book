@@ -24,7 +24,8 @@ function createWindow () {
     width: 1000,
     height: 600,
     minWidth:1000,
-    minHeight: 600
+    minHeight: 600,
+    icon: 'build/icon.ico'
   })
 
   // setting directory of index file
@@ -35,7 +36,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // closing window
   mainWindow.on('closed', function () {

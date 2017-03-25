@@ -13,3 +13,5 @@ build-a-book-win32-x64/
 npm-debug.log
 # Distribution folder
 dist/
+# Icons
+build/

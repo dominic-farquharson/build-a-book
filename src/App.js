@@ -136,8 +136,9 @@ class App extends Component {
 
   // create user - firebase
   createUser(email, password, displayName, picture) {
+
     // console.log('create user', picture.files[0])
-    // // reference to root of storage
+    // // // reference to root of storage
     // const storageRef = firebase.storage().ref();
     // // profile pic reference
     // const profilePic = storageRef.child(`/images/${displayName}/picture`)
@@ -146,7 +147,7 @@ class App extends Component {
     //     console.log('success?', data)
     //   })
 
-    // storage reference
+    // // storage reference
     // const storageRef = storage.ref();
 
     // console.log(email, password, displayName)
@@ -160,12 +161,12 @@ class App extends Component {
 
           // invoking firebase current user
           var user = firebase.auth().currentUser;
-
+      
           // adding name to user object
           user.updateProfile({
-            displayName: displayName,
-            photoURL: "http://placehold.it/350x150"
+            displayName: displayName
           }).then( () => {
+            console.log('I have updated')
             // Update successful.
             // getting user's unique key and email address
             this.setState({
@@ -173,6 +174,8 @@ class App extends Component {
               email: user.email,
               displayName: displayName,
             })
+            // inserting picture
+             this.updatePicture(picture);
             // toggling sign in state
             this.toggleUserSignIn();
 
