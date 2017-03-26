@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "199491b34708b9474a46"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d651475b954be93dbd8b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -20622,7 +20622,7 @@
 	      var _this3 = this;
 
 	      // console.log('create user', picture.files[0])
-	      // // reference to root of storage
+	      // // // reference to root of storage
 	      // const storageRef = firebase.storage().ref();
 	      // // profile pic reference
 	      // const profilePic = storageRef.child(`/images/${displayName}/picture`)
@@ -20631,7 +20631,7 @@
 	      //     console.log('success?', data)
 	      //   })
 
-	      // storage reference
+	      // // storage reference
 	      // const storageRef = storage.ref();
 
 	      // console.log(email, password, displayName)
@@ -20647,9 +20647,9 @@
 
 	          // adding name to user object
 	          user.updateProfile({
-	            displayName: displayName,
-	            photoURL: "http://placehold.it/350x150"
+	            displayName: displayName
 	          }).then(function () {
+	            console.log('I have updated');
 	            // Update successful.
 	            // getting user's unique key and email address
 	            _this3.setState({
@@ -20657,6 +20657,8 @@
 	              email: user.email,
 	              displayName: displayName
 	            });
+	            // inserting picture
+	            _this3.updatePicture(picture);
 	            // toggling sign in state
 	            _this3.toggleUserSignIn();
 	          }, function (error) {

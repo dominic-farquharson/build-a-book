@@ -29,6 +29,7 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
 # Installation Instructions:
 
 1. Clone or download repo.
+    1. Or if you'd like to just test it out. Click on the relevant build above to download the compiled version.
 1. All of the needed dependencies are included within the package.json.
 1. Run npm install in root of project folder.
     1. Make sure the latest version of Node is installed.
@@ -43,7 +44,7 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
 
 - React.js
 - Electron
-- Electron-React boilerplate --link
+- Electron-React boilerplate 
 - Webpack
 - ES6 Classes
 - UI Kit
@@ -103,7 +104,8 @@ Sample Code: Posting Chapter's data to firebase
 
 - Refreshing the page logs out the user. - fixed (3/10/17).
   - The issue stemmed from the user's auth status not being checked when the app component mounted. Added firebase auth state method to check user's sign in status.
-- Formatting (Bold text, bullet points, etc) from the Quill.js editor is not saved with the user's chapter data.
+- Formatting (Bold text, bullet points, etc) from the Quill.js editor is not saved with the user's chapter data. - fixed (3/25/17)
+  - I was originally using Quill's getText method to save the editor contents and post it to firebase. This saves the text with no formatting. I am now using Quill's getContent method which saves text and formatting.
 
 # About Current Version
 
