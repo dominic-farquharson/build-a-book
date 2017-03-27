@@ -15,7 +15,7 @@
 #### [Trello](#)
 # Desktop Builds - Current (Version 2.0.1)
  - [Windows v2.01](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
- - [Mac v1.0](#)
+ - [Mac v2.0.1](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
  - [Linux v1.0](#)
 
 # Description:
