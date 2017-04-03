@@ -27,27 +27,26 @@ class Navigation extends Component {
   }
 
   render() {
-    // const nav = this.props;
+    const nav = this.props;
     return (
       <nav className="navigationMenu">
         <p className="logo uk-position-bottom">&copy; Build A Book</p>
         <ul>
-          {/* Toggling Create New Book */}
-          {/* <li onClick={()=>this.toggleEdit()}>Create New Book</li> */}
-
+  
           {/* Toggling View All Books page */}
-          <li onClick={()=>{this.props.bookView()}}>Books</li>
+          <li onClick={()=>{nav.bookView()}}>Books</li>
 
           {/* Showing Book Statistics using D3??? */}
-          <li>Statistics</li>
+          <li onClick={()=>{nav.statisticsView()} }>Statistics</li>
 
           {/* User Account Info */}
-          <li onClick={()=> this.props.toggleAccount()}>
-            <img src={this.props.profilePic} style={{width:"50px", height:"50px", marginRight:"10px", borderRadius:"100%"}} />
+          <li onClick={()=> nav.toggleAccount()}>
+            <img src={nav.profilePic} style={{width:"50px", height:"50px", marginRight:"10px", borderRadius:"100%"}} />
             Account
           </li>
+
           {/* Log Out Button */}
-          <li onClick={()=>this.props.logOut()}> Log Out </li>
+          <li onClick={()=>nav.logOut()}> Log Out </li>
         </ul>
       </nav>
     )

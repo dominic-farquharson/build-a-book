@@ -19,6 +19,9 @@ import * as firebase from "firebase";
 // importing account
 import Account from './components/Auth/Account';
 
+// importing Statistics
+import Statistics from './components/Statistics';
+
 // creating app component
 class App extends Component {
   constructor() {
@@ -43,7 +46,9 @@ class App extends Component {
      //
      displayName: '',
      // Default Profile Picture
-     profilePic: 'http://placehold.it/250x250'
+     profilePic: 'http://placehold.it/250x250',
+     // Statistics 
+     statistics: false
 
      /*
       for testing - disabling sign in, spoofing signed in user
@@ -131,7 +136,10 @@ class App extends Component {
   toggleAccount() {
     console.log('editor has been toggled')
     // changing state to true when account view button is clicked
-    this.setState({accountView:true})
+    this.setState({
+      accountView:true,
+      statistics: false
+    })
   }
 
   // create user - firebase
@@ -348,6 +356,25 @@ class App extends Component {
     this.setState({viewEditor: false})
     this.setState({accountView:false})
     this.setState({viewChapter:false})
+    this.setState({statistics:false})
+    
+  }
+
+  // statistics view
+  toggleStatisticsView() {
+    console.log('statistcs')
+    const statistics = this.state.statistics;
+    // hide statistics
+    if(statistics) {
+      this.setState({statistics: false})
+    }
+    // show Statistics
+    else {
+      this.setState({
+        statistics: true,
+        accountView: false
+      })      
+    }
   }
 
   // function to get books from firebase
@@ -393,12 +420,13 @@ class App extends Component {
 
   render() {
     // rendering if account view is not true - renderding books
-    if(this.state.userSignIn && !this.state.accountView) {
+    if(this.state.userSignIn && !this.state.accountView & !this.state.statistics) {
     return (
       <div>
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
+            statisticsView={ ()=>this.toggleStatisticsView()}
             toggleAccount= {()=> this.toggleAccount()}
             toggleEdit={()=>{this.toggleTextEditor()}}
             viewEditor={this.state.viewEditor}
@@ -425,6 +453,7 @@ class App extends Component {
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
+            statisticsView={ ()=>this.toggleStatisticsView()}          
             toggleAccount= {()=> this.toggleAccount()}
             toggleEdit={()=>{this.toggleTextEditor()}}
             viewEditor={this.state.viewEditor}
@@ -456,6 +485,7 @@ class App extends Component {
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
+            statisticsView={ ()=>this.toggleStatisticsView()}          
             toggleAccount= {()=> this.toggleAccount()}
             toggleEdit={()=>{this.toggleTextEditor()}}
             viewEditor={this.state.viewEditor}
@@ -465,11 +495,7 @@ class App extends Component {
           />
         </header>
         <main>
-          <Account
-            name={this.state.displayName}
-            // update picture
-            updatePicture = { (picture)=>this.updatePicture(picture) }
-          />
+          <Statistics />
         </main>
      </div>
 
