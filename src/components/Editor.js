@@ -31,8 +31,21 @@ class Editor extends Component {
   }
 
   initializeQuill() {
+
+
     console.log(document.getElementById('editor'), 'initializing')
-      let quill = new Quill('#editor', { theme: 'snow',placeholder: `Type something!`})
+      let quill = new Quill('#editor', 
+        { 
+          modules:{ 
+            // Allowing for user to redo and undo
+            history: {
+            delay: 2000,
+            maxStack: 500,
+            userOnly: true
+            }},
+            theme: 'snow',
+            placeholder: `Type something!`
+         });
       return quill;
   }
 
@@ -125,7 +138,9 @@ class Editor extends Component {
           }>
           Save
         </button>
-
+        <button onClick={()=>this.state.quill.history.undo()}>Undo</button>
+        <button onClick={()=>this.state.quill.history.redo()}>Redo</button>
+        
         <button className="uk-button-danger editorButton" onClick={this.props.toggleChapterView}>Close Editor</button>
 
         {/* Last modified from moment? */}
