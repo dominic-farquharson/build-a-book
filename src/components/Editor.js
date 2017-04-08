@@ -31,20 +31,34 @@ class Editor extends Component {
   }
 
   initializeQuill() {
+    // creating toolbar options 
+    const toolbarOptions = [
+      [{ 'font': [] }], // font family    
+      [{ size: [ 'small', false, 'large', 'huge' ]}], // heading size - controlled w/ quill css      
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],  // list level 
+      [{ 'color': [] }, { 'background': [] }], 
+      [{ 'align': [] }],
+      ['clean'] 
+    ];
 
 
-    console.log(document.getElementById('editor'), 'initializing')
+    // console.log(document.getElementById('editor'), 'initializing')
       let quill = new Quill('#editor', 
         { 
           modules:{ 
+            // adding to tool bar
+            toolbar: toolbarOptions,
             // Allowing for user to redo and undo
             history: {
             delay: 2000,
             maxStack: 500,
-            userOnly: true
+            userOnly: true,
             }},
             theme: 'snow',
-            placeholder: `Type something!`
+            placeholder: `Type something!`,
+          
          });
       return quill;
   }

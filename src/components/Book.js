@@ -229,7 +229,7 @@ class Book extends Component {
         // console.log('book item', book)
         return (
           // printing key from object, represents book titlee
-          <li key={i}>
+          <li className="bookItem" key={i}>
             <BookItem
               key={book}
               // unique key for each book

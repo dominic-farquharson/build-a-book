@@ -1,6 +1,6 @@
 {
   "name": "build-a-book",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Build A Book App. Built with Electron and React.js",
   "main": "main.js",
   "scripts": {
