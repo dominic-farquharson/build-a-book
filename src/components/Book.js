@@ -261,31 +261,40 @@ class Book extends Component {
 
 
   /* Adding a Book. Posting to Firebase */
-  addBook(uid, bookTitle) {
-    // creating variable containing new Book Information - book title, cover and date it was added
+  addBook(uid, bookTitle, bookCover) {
+    // Preventing null value for form data
+    if(!bookTitle) {
+      return alert('Please enter a book title');
+    }
+
+    if(!bookCover) {
+      bookCover = 'http://placehold.it/300x300';
+    }
+
+    // creating variable containing new Book Information - book title, cover and date it was added    
     let newBook = {
       title: bookTitle,
       dateAdded: 'Date Added',
-      cover: "coming soon"
+      cover: bookCover
     }
-
-    // getting new book key
-    let newBookKey = firebase.database().ref(`/users/${uid}/books/`).push().key;
+    console.log('book blob', newBook)
+    // // getting new book key
+    // let newBookKey = firebase.database().ref(`/users/${uid}/books/`).push().key;
     
-    // book data to be posted, initially an empty object
-    let book = {};
-    // pushing new Book into book object
-    book[`users/${uid}/books/${newBookKey}`] = newBook;
-    // writing new book to endpoint
-    firebase.database().ref().update(book)
-    // adding promise, to update state of boks after new book is added
-    .then( ()=> {
-      console.log('new book successfully added');
-      // updating state of books after new book is added
-      this.props.getBooks();
-      // setting add book form's state to false - rendering all books view
-      this.toggleAddBook();
-    })
+    // // book data to be posted, initially an empty object
+    // let book = {};
+    // // pushing new Book into book object
+    // book[`users/${uid}/books/${newBookKey}`] = newBook;
+    // // writing new book to endpoint
+    // firebase.database().ref().update(book)
+    // // adding promise, to update state of boks after new book is added
+    // .then( ()=> {
+    //   console.log('new book successfully added');
+    //   // updating state of books after new book is added
+    //   this.props.getBooks();
+    //   // setting add book form's state to false - rendering all books view
+    //   this.toggleAddBook();
+    // })
     
     return;
   }
@@ -319,10 +328,25 @@ class Book extends Component {
             <form  className="uk-position-center" action="#" method="POST">
               <h1>Add A Book</h1>
               {/* Storing value of Input field */}
-              <input className="uk-input addBookInput" type="text" name="bookTitle" ref={ (bookTitle)=>{this.bookTitle = bookTitle}} placeholder="Book Title" required />
+              <input 
+                className="uk-input addBookInput" 
+                type="text" 
+                name="bookTitle" 
+                ref={ (bookTitle)=>{this.bookTitle = bookTitle}} 
+                placeholder="Book Title" required 
+              />
+              {/* Book cover */}
+              <input 
+                className="uk-input addBookInput"
+                name="bookCover"
+                type="text" 
+                placeholder="Book cover url"
+                ref={ (bookCover) => {this.bookCover = bookCover}}
+                required 
+              />
 
               {/* Grabs value of input field, along with user id to send post request to firebase endpoint */}
-              <input className="uk-button-default bookItemButton addBookButton" type="button" onClick={ ()=> this.addBook(this.props.userId, this.bookTitle.value) } value="Add Book" />
+              <input className="uk-button-default bookItemButton addBookButton" type="button" onClick={ ()=> this.addBook(this.props.userId, this.bookTitle.value, this.bookCover.value) } value="Add Book" />
 
               {/* Toggling add Book state - renders all books */}
               <input className="uk-button-danger bookItemButton addBookButton" type="button" onClick={ ()=> this.toggleAddBook() } value="Cancel" />
