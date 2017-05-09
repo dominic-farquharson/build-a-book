@@ -46,7 +46,7 @@ class BookItem extends Component {
 
                     <div className="uk-card-media-top">
                         {/* Adding default image if none was entered */}
-                        <img src={book.bookCover || `http://placehold.it/250x250`} alt="book cover" title="book cover" />
+                        <img style={{height: '400px'}} src={book.bookCover || `http://placehold.it/250x250`} alt="book cover" title="book cover" />
                     </div>
 
                     <div className="uk-card-footer">
@@ -71,17 +71,17 @@ class BookItem extends Component {
        <h3>Edit {this.props.title}</h3>
        <div>
          {/* Chapter title Input Box filled w/ value of title */}
-         <label htmlFor="bookTitle">Title: </label>
-         <input id="bookTitle" name="bookTitle" type="text" ref={(bookTitleInput) => {this.bookTitleInput=bookTitleInput}} defaultValue={book.title} required />
+         <label htmlFor="bookTitle">Book Title</label>
+         <input id="bookTitle" className="uk-input" name="bookTitle" type="text" ref={(bookTitleInput) => {this.bookTitleInput=bookTitleInput}} defaultValue={book.title} required />
        </div>
        <div>
          {/* Chapter Image input box filled w/ book cover url */}
-         <label htmlFor="bookCover">Image:</label>
-         <input id="bookCover" name="bookCover" type="text" ref={(bookCoverInput) => {this.bookCoverInput=bookCoverInput}} defaultValue={book.bookCover} required />
+         <label htmlFor="bookCover">Book Cover</label>
+         <input id="bookCover" className="uk-input" name="bookCover" type="text" ref={(bookCoverInput) => {this.bookCoverInput=bookCoverInput}} defaultValue={book.bookCover} required />
        </div>
-       <button onClick = {()=> this.toggleEditBook()}>Close</button>
+       <button className="uk-button uk-button-danger" style={{margin: '5px'}} onClick = {()=> this.toggleEditBook()}>Close</button>
        {/* Button to edit book - PUT request - grabbing book key and new book title */}
-       <button onClick = {
+       <button className="uk-button uk-button-primary" onClick = {
          ()=> 
           {
             this.props.editBook(book.bookKey, this.bookTitleInput.value, this.bookCoverInput.value); 
