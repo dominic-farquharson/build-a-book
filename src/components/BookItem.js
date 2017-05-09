@@ -45,7 +45,8 @@ class BookItem extends Component {
                   <div className="align uk-card-title">{book.title}</div>
 
                     <div className="uk-card-media-top">
-                        <img src="https://images.unsplash.com/photo-1483505806292-09b690b07d50?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=" alt="" />
+                        {/* Adding default image if none was entered */}
+                        <img src={book.bookCover || `http://placehold.it/250x250`} alt="book cover" title="book cover" />
                     </div>
 
                     <div className="uk-card-footer">
@@ -74,15 +75,16 @@ class BookItem extends Component {
          <input id="bookTitle" name="bookTitle" type="text" ref={(bookTitleInput) => {this.bookTitleInput=bookTitleInput}} defaultValue={book.title} required />
        </div>
        <div>
-         {/* Chapter Image input box filled w/ value of title */}
-         <label htmlFor="chapterImage">Image:</label>
+         {/* Chapter Image input box filled w/ book cover url */}
+         <label htmlFor="bookCover">Image:</label>
+         <input id="bookCover" name="bookCover" type="text" ref={(bookCoverInput) => {this.bookCoverInput=bookCoverInput}} defaultValue={book.bookCover} required />
        </div>
        <button onClick = {()=> this.toggleEditBook()}>Close</button>
        {/* Button to edit book - PUT request - grabbing book key and new book title */}
        <button onClick = {
          ()=> 
           {
-            this.props.editBook(book.bookKey, this.bookTitleInput.value); 
+            this.props.editBook(book.bookKey, this.bookTitleInput.value, this.bookCoverInput.value); 
             // closing edit book
             this.toggleEditBook();    
           }

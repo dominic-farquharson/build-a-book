@@ -76,7 +76,8 @@ class Account extends Component {
       return (
         <div className="account">
           <h1>Hello {user.name}</h1>
-          <img src={user.profilePic} /> 
+          {/* Default image if user didn't enter one */}
+          <img src={user.profilePic || `http://placehold.it/100x100`} /> 
           <br />
           <input type="button" value="Edit" onClick={()=> this.toggleAccountEdit()} />       
         </div>

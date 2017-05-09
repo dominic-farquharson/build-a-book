@@ -178,9 +178,9 @@ class Book extends Component {
     
   }
   // editing a book's title
-  editBook(bookKey, title) {
+  editBook(bookKey, title, cover) {
     // object containing new title
-    let book = {title}
+    let book = {title, cover}
     // User Id
     const uid = this.props.userId;
     // endpoint of book to be edited
@@ -236,6 +236,8 @@ class Book extends Component {
               bookKey={book}
               // book title
               title={books[book]['title']}
+              // book url
+              bookCover={books[book]['cover']}
               // function to update objects
               getBooks = {()=> this.props.getBooks()}
               // setting title of book to state
@@ -243,7 +245,8 @@ class Book extends Component {
               // printing all bookd
               printBookTitles = {()=> this.printBookTitles()}
               deleteBook = {()=>this.deleteBook(book)}
-              editBook = {(bookKey, title)=>this.editBook(bookKey, title)}
+              // editing book
+              editBook = {(bookKey, title, cover)=>this.editBook(bookKey, title, cover)}
               toggleChapterView = { ()=> this.props.toggleChapterView()}
             />
 
@@ -279,22 +282,22 @@ class Book extends Component {
     }
     console.log('book blob', newBook)
     // // getting new book key
-    // let newBookKey = firebase.database().ref(`/users/${uid}/books/`).push().key;
+    let newBookKey = firebase.database().ref(`/users/${uid}/books/`).push().key;
     
-    // // book data to be posted, initially an empty object
-    // let book = {};
-    // // pushing new Book into book object
-    // book[`users/${uid}/books/${newBookKey}`] = newBook;
-    // // writing new book to endpoint
-    // firebase.database().ref().update(book)
-    // // adding promise, to update state of boks after new book is added
-    // .then( ()=> {
-    //   console.log('new book successfully added');
-    //   // updating state of books after new book is added
-    //   this.props.getBooks();
-    //   // setting add book form's state to false - rendering all books view
-    //   this.toggleAddBook();
-    // })
+    // book data to be posted, initially an empty object
+    let book = {};
+    // pushing new Book into book object
+    book[`users/${uid}/books/${newBookKey}`] = newBook;
+    // writing new book to endpoint
+    firebase.database().ref().update(book)
+    // adding promise, to update state of boks after new book is added
+    .then( ()=> {
+      console.log('new book successfully added');
+      // updating state of books after new book is added
+      this.props.getBooks();
+      // setting add book form's state to false - rendering all books view
+      this.toggleAddBook();
+    })
     
     return;
   }

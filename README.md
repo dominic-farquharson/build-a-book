@@ -85,7 +85,12 @@ Sample Code: Posting Chapter's data to firebase
 # Future Improvements:
 
 - Statistics section- showing word count of chapters and books using D3.
+ - Or file version/edit history.
 - Resources section. Lists image or video related to chapter.
+- Ability to change password.
+- Custom book cover.
+- Facebook oauth
+- Styling.
 
 # Project Issues:
 
