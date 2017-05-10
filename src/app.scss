@@ -53,6 +53,7 @@ main {
     }
     }
 }
+
 // navigation bar
 
 header {
@@ -247,6 +248,7 @@ header {
 
   }
 
+
   input {
     display:block;
     width:50%;
@@ -384,4 +386,16 @@ header {
 .ql-align-justify {
   margin-bottom:0px;
   text-align:left;
+}
+
+// back button 
+.backButton {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+.backButton:hover {
+  cursor: pointer;
+  opacity: .8;
 }

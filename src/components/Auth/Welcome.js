@@ -29,7 +29,8 @@ class Welcome extends Component {
   // toggles sign in state - renders sign in component
   toggleSignIn() {
     if(this.state.signIn)
-      this.setState({signIn: false})
+      // back button - rendering welcome component    
+      this.setState({signIn: false, welcome: true})
     else {
       // setting state of sign in to true - renders sign in component
       this.setState({signIn : true})
@@ -41,7 +42,9 @@ class Welcome extends Component {
   // toggles sign up state - renders sign up component
   toggleSignUp() {
     if(this.state.signUp)
-      this.setState({signUp: false})
+      // back button - rendering welcome component
+      this.setState({signUp: false, welcome: true})
+      
     else {
       // setting state of welcome to false
       this.setState({welcome: false})
@@ -104,6 +107,8 @@ class Welcome extends Component {
         <SignUp
           // passing create user function as prop for use in Sign Up component
           createUser = {(email, password, displayName, picture)=>this.props.createUser(email, password, displayName, picture)}
+          // Back button
+          backButton={this.toggleSignUp}
           // createUser = {(email, password)=>this.props.createUser(email, password)}
 
          />
@@ -117,6 +122,7 @@ class Welcome extends Component {
       <div>
         <SignIn
           toggleUserSignIn = { (email, password)=>this.props.toggleUserSignIn(email, password)}
+          backButton={this.toggleSignIn}
         />
 
       </div>

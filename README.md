@@ -88,7 +88,7 @@ Sample Code: Posting Chapter's data to firebase
  - Or file version/edit history.
 - Resources section. Lists image or video related to chapter.
 - Ability to change password.
-- Custom book cover.
+- Custom book cover. - added in v2.1.2
 - Facebook oauth
 - Styling.
 

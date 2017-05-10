@@ -25,6 +25,8 @@ class SignIn extends Component {
           </div>
 
         </form>
+        {/* Close/Back Button */}
+        <i className=" backButton fa fa-chevron-circle-left fa-2x" aria-hidden="true" onClick={this.props.backButton}></i>
       </div>
     )
   }

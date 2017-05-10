@@ -38,10 +38,11 @@ class SignUp extends Component {
                 this.props.createUser(this.emailInput.value, this.passwordInput.value, this.displayNameInput.value, this.pictureInput); 
                 }} 
             />
-            {/* Close Button */}
-
           </div>
         </form>
+        {/* Close/Back Button */}
+        <i className=" backButton fa fa-chevron-circle-left fa-2x" aria-hidden="true" onClick={this.props.backButton}></i>
+        
       </div>
     )
   }

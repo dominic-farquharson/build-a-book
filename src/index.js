@@ -3,7 +3,7 @@ Electron entry file
 */
 
 // importing react dev tools for debugging
-// import 'react-devtools';
+import 'react-devtools';
 
 // importing react
 import React from 'react';
