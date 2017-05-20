@@ -48,8 +48,8 @@ class App extends Component {
      // Default Profile Picture
      profilePic: 'http://placehold.it/250x250',
      // Statistics 
-     statistics: false
-    // statistics: true,
+    //  statistics: false
+    statistics: true,
     // checking if user has any books
 
      /*
