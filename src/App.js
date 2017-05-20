@@ -48,8 +48,9 @@ class App extends Component {
      // Default Profile Picture
      profilePic: 'http://placehold.it/250x250',
      // Statistics 
-    //  statistics: false
-    statistics: true
+     statistics: false
+    // statistics: true,
+    // checking if user has any books
 
      /*
       for testing - disabling sign in, spoofing signed in user
@@ -386,6 +387,15 @@ class App extends Component {
       let userId = this.state.uid;
       // Getting user books data
       database.ref(`/users/${userId}`).on('value', (userData) => {
+        // console.log('uyser data', userData.val())
+        
+        // checking if user has any books
+        if(userData.val() === null) {
+          // emptying books object (if user deletes all books)
+          return this.setState({ book: {} });
+        }
+
+
         // setting state containing user's books
         this.setState({
           book:userData.val().books
@@ -399,6 +409,7 @@ class App extends Component {
       printing book component, sending book data as props
     */
 
+    console.log('I\'m printing books')
     return(
       <Book
         // book object from user's firebase endpoint
@@ -482,7 +493,7 @@ class App extends Component {
   if(this.state.statistics === true) {
     return(
       <div>
-        Account View
+        Statistics View
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
@@ -496,7 +507,8 @@ class App extends Component {
           />
         </header>
         <main>
-          <Statistics />
+          {/* Passing books down as prop */}
+          <Statistics book={this.state.book} />
         </main>
      </div>
 

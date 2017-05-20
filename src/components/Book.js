@@ -216,10 +216,22 @@ class Book extends Component {
   printBookTitles() {
     // setting books object to a variable
     const books = this.props.book;
-    console.log('books',this.props);
-    if(books === undefined) {
+     
+    // checking if there are any books 
+    const length = Object.keys(books).length;
+
+    const welcome = (
+      <section>
+        <h2>Welcome to Build A Book!</h2>
+        {/* Image credit: Giphy.com - Supernatural Gif */}
+        <img src="../public/assets/giphy.gif" alt="Castiel waving" title="Castiel waving" />
+        <p>Click Add A book to get Started</p>
+      </section>
+    )
+
+    if(books === undefined || length === 0) {
       return (
-        <div>Welcome</div>
+        <div>{welcome}</div>
       )
     }
     // renders when edit book is true

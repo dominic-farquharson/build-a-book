@@ -1,23 +1,27 @@
 import React, {Component} from 'react';
 
 
-class Statistics extends Component {
-    constructor() {
-        super();
-        // initial state
-        this.state = {
-            statistics: {},
-            content: false
-        }
-    }
+// class Statistics extends Component {
+//     constructor() {
+//         super();
+//         // initial state
+//         this.state = {
+//             statistics: {},
+//             content: false
+//         }
+//     }
 
-    render() {
-        const content = this.state.content;
-        return (
-            <div> {(content)? data : message}</div>
-        )
-    }
-}
+//     componentWillMount() {
+
+//     }
+
+//     render() {
+//         const content = this.state.content;
+//         return (
+//             <div> {(content)? data : message}</div>
+//         )
+//     }
+// }
 
 
 /* Message when there are no statistics */
@@ -35,15 +39,16 @@ const data = (
 )
 
 
-/*const Statistics = (props) => {
-    let msg = true;
-    
+const Statistics = (props) => {
+    // checking if object is empty
+    const length = Object.keys(props.book).length;
+    console.log('length', length)
     return (
         <div>
-            {(msg)?message:<div>None</div>}            
+            { (length > 0) ? message:<div>None</div> }            
         </div>
     )
-};*/
+}
 
 
 
