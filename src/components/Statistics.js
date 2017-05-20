@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import BookStat from './statistics/BookStat.jsx';
 
 
 // class Statistics extends Component {
@@ -38,6 +39,14 @@ const noData = (
     </section>
 );
 
+// Printing Statistics
+const printStatistics = (books) => {
+    const titles = Object.keys(books).map( (bookKey, i) => <BookStat key={i} title={books[bookKey].title} />);
+
+    // let okay =Object.keys(data)[0]
+    return <ul>{titles}</ul>
+};
+
 
 
 
@@ -47,18 +56,18 @@ const Statistics = (props) => {
     console.log(`book data: ${props.book}`);
 
     /* Simulating content */
-    const data = (
+    /*const data = (
         <section>
             I am data
         </section>
-    );
+    );*/
 
 
 
     return (
         <div>
             {/* Returning data if content */}
-            { (length > 0) ? data : noData }            
+            { (length > 0) ? printStatistics(props.book) : noData }            
         </div>
     )
 }
