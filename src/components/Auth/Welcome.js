@@ -12,7 +12,7 @@ import SignUp from './SignUp';
 class Welcome extends Component {
   constructor(props) {
     super(props);
-    // setting signin and singUp inital state to fasle
+    // setting signin and singUp inital state to false
     this.state = {
       signIn : false,
       // signIn:true,

@@ -48,7 +48,8 @@ class App extends Component {
      // Default Profile Picture
      profilePic: 'http://placehold.it/250x250',
      // Statistics 
-     statistics: false
+    //  statistics: false
+    statistics: true
 
      /*
       for testing - disabling sign in, spoofing signed in user
