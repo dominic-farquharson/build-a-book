@@ -493,7 +493,6 @@ class App extends Component {
   if(this.state.statistics === true) {
     return(
       <div>
-        Statistics View
         {/* Navigation component - Nav Bar */}
         <header>
           <Navigation
