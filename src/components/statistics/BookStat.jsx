@@ -21,7 +21,8 @@ class BookStat extends Component {
                 <img 
                     style={ {width: '33vw', height: '33vh'} } 
                     src={book.cover || defaultImage } 
-                    onClick={()=>console.log('book key', book.bookKey)}
+                     // toggling state 
+                    onClick={()=> book.viewStats(book.bookKey)}
                 />
             </li>
         )

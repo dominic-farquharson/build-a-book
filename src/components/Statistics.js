@@ -10,7 +10,8 @@ class Statistics extends Component {
             statistics: {},
             // content: false,
             length: 0,
-            viewStats: false
+            viewStats: false,
+            bookKey: ''
         }
     }
 
@@ -20,22 +21,45 @@ class Statistics extends Component {
         this.setState({length})  
     }
 
-    // Toggling State - viewing statistics for a book
-    viewStatistics() {
+/*
+Change name to toggle stat
 
+************/
+
+    // Toggling State - viewing statistics for a book
+    viewStatistics(bookKey) {
+        if(this.state.viewStats) {
+            return this.setState({viewStats: false, bookKey: ''})
+        }
+        // setting state of book Key
+        this.setState({bookKey, viewStats: true});
+        
+        console.log('book is', this.props.book[bookKey]);
+        // this.renderStat(bookKey);
     }
+
 
 
     // Printing Statistics
     printStatistics(books) {
         const titles = Object.keys(books).map( 
-            (bookKey, i) => <BookStat key={i} title={books[bookKey].title} cover={books[bookKey]['cover']} bookKey={bookKey} />
+            (bookKey, i) => <BookStat key={i} title={books[bookKey].title} cover={books[bookKey]['cover']} bookKey={bookKey} viewStats={(key)=> this.viewStatistics(key)} />
         );
 
         // State of inidividual stat - initially false
         const viewStats = this.state.viewStats;
 
-        const indStat = (<h1>I am a single stat</h1>);
+        const indStat = (
+            <section>
+                <p>View for bookKey: {this.state.bookKey}</p>
+                {/* Printing Title */}
+                <h1>{(this.state.bookKey!== '')? books[this.state.bookKey]['title']: null}</h1>
+                {/* Printing Book Info */}
+                <div> { ( this.state.bookKey !== '')? <div>There are chapters =</div> : <div>NO chapters</div>}</div>
+                <button onClick={()=> this.viewStatistics()}>Cancel</button>
+            </section>
+        );
+
         if(viewStats) {
             return indStat;
         }
