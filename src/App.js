@@ -367,16 +367,16 @@ class App extends Component {
     console.log('statistcs')
     const statistics = this.state.statistics;
     // hide statistics
-    if(statistics) {
-      this.setState({statistics: false})
-    }
+    // if(statistics) {
+    //   this.setState({statistics: false})
+    // }
     // show Statistics
-    else {
+    // else {
       this.setState({
         statistics: true,
         accountView: false
       })      
-    }
+    // }
   }
 
   // function to get books from firebase
