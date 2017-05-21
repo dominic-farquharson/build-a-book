@@ -129,7 +129,8 @@ class App extends Component {
       viewChapter: false,
       email:'',
       accountView: false,
-      displayName: ''
+      displayName: '',
+      statistics: false
 
     })
   }
@@ -291,6 +292,10 @@ class App extends Component {
 
 
     }
+    // writing email to local storage - allow for quick sign in 
+    localStorage.setItem('build-A-Book-Email', email);
+
+
     firebase.auth().signInWithEmailAndPassword(email, password)
     // adding promise object to sign user in on sucess
     .then( ()=> {
