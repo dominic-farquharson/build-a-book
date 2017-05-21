@@ -42,40 +42,73 @@ Change name to toggle stat
 
     // Printing Statistics
     printStatistics(books) {
+        // console.log('checking book', books)
+
+        // mapping over books
         const titles = Object.keys(books).map( 
-            (bookKey, i) => <BookStat key={i} title={books[bookKey].title} cover={books[bookKey]['cover']} bookKey={bookKey} viewStats={(key)=> this.viewStatistics(key)} />
+            (bookKey, i) => (
+                <BookStat 
+                    key={i} 
+                    // Passing chapters down as prop. First checking if chapters is defined - if undefined chapter count is 0
+                    chapterCount={  (books[bookKey].hasOwnProperty('chapters') )?   Object.keys(books[bookKey]['chapters']).length : 0}
+                    title={books[bookKey].title} 
+                    cover={books[bookKey]['cover']} 
+                    bookKey={bookKey} 
+                    viewStats={(key)=> this.viewStatistics(key)} />
+            )
         );
 
         // State of inidividual stat - initially false
         const viewStats = this.state.viewStats;
 
-        const indStat = (
+
+        // Printing Individual Book Stats     
+        let indStat = (
             <section>
-                <p>View for bookKey: {this.state.bookKey}</p>
                 {/* Printing Title */}
                 <h1>{(this.state.bookKey!== '')? books[this.state.bookKey]['title']: null}</h1>
                 {/* Printing Book Info */}
-                <div> { ( this.state.bookKey !== '')? <div>There are chapters =</div> : <div>NO chapters</div>}</div>
-                <button onClick={()=> this.viewStatistics()}>Cancel</button>
+                <div> 
+                    {/* Mapping over chapters */}
+                    {   // Checking if book has chapters
+                        ( this.state.bookKey !== '' && books[this.state.bookKey].hasOwnProperty('chapters') )? 
+                            <ul>
+                                {Object.keys(books[this.state.bookKey]['chapters']).map(
+                                    (key, i)=> <li key={i}>{books[this.state.bookKey]['chapters'][key].title}</li>
+                                )} 
+                                <button className={(this.state.bookKey=='')? 'noBooks' : 'booksPresent'} onClick={()=> this.viewStatistics()}>Cancel</button>                 
+                            </ul> 
+                            : (
+                                <section>
+                                    <p>You don't have any chapters yet! Check back here when you add some!</p>
+                                    <button onClick={()=> this.viewStatistics()}>Cancel</button>                 
+                                </section>
+                              )
+                    }
+                </div>
             </section>
         );
 
-        if(viewStats) {
-            return indStat;
+        // Checking if state has updated
+        if( this.state.bookKey !== '' ) {
+            return indStat;      
+
+        } else {
+            // printing all the books
+            return (
+                <section 
+                    style={ 
+                        {overflow: 'scroll', height: '100vh', margin: '0 auto', position: 'absolute', top: '0', left: '20%', width: '80vw'} 
+                    } 
+                >
+                    <h1 className="title">Statistics View</h1>                    
+                    <ul>
+                        {/* Printing books - Book Stats component */}
+                        {titles}
+                    </ul>
+                </section>
+            )
         }
-        // let okay =Object.keys(data)[0]
-        return (
-            <section 
-                style={ 
-                    {overflow: 'scroll', height: '100vh', margin: '0 auto', position: 'absolute', top: '0', left: '20%', width: '80vw'} 
-                } 
-            >
-                <h1 className="title">Statistics View</h1>                    
-                <ul>
-                {titles}
-                </ul>
-            </section>
-        )
     }
 
 
@@ -109,34 +142,6 @@ const noData = (
         <h2>Get to writing!</h2>  
     </section>
 );
-
-
-
-
-
-// const Statistics = (props) => {
-//     // checking if object is empty
-//     const length = Object.keys(props.book).length;
-//     console.log(`book data: ${props.book}`);
-
-    /* Simulating content */
-    /*const data = (
-        <section>
-            I am data
-        </section>
-    );*/
-
-
-// /*
-//     return (
-//         <div>
-//             {/* Returning data if content */}
-//             { (length > 0) ? printStatistics(props.book) : noData }            
-//         </div>
-//     )
-// }*/
-
-
 
 
 export default Statistics;

@@ -24,6 +24,8 @@ class BookStat extends Component {
                      // toggling state 
                     onClick={()=> book.viewStats(book.bookKey)}
                 />
+                
+                <p>Chapters: { book.chapterCount }</p>
             </li>
         )
     }
