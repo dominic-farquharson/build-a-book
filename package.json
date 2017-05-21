@@ -1,6 +1,6 @@
 {
   "name": "build-a-book",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Build A Book App. Built with Electron and React.js",
   "main": "main.js",
   "scripts": {
@@ -44,7 +44,7 @@
   },
   "build": {
     "copyright": "&copy; Dominic Farquharson 2017",
-    "icon":"./dist/icon.icns"
+    "icon": "./dist/icon.icns"
   },
   "author": "Dominic Farquharson",
   "license": "ISC"
