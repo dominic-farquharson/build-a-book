@@ -13,9 +13,9 @@
 
 #### [Wireframe](#)
 #### [User Stories (Trello)](https://trello.com/b/VvIPePGl/build-a-book)
-# Desktop Builds - Current (Version 2.1.2)
+# Desktop Builds - Current (Version 2.2.0)
  - [Windows v2.01](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
- - [Mac v2.1.2](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
+ - [Mac v2.2.0](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
  - [Linux v1.0](#)
 
 # Description:
@@ -40,7 +40,7 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
     1. React dev tools were also included as a dependency
 
 
-#Technologies Used:
+# Technologies Used:
 
 - React.js
 - Electron
@@ -84,7 +84,7 @@ Sample Code: Posting Chapter's data to firebase
 
 # Future Improvements:
 
-- Statistics section- showing word count of chapters and books using D3.
+- Statistics section- showing word count of chapters and books using D3. - in progress
  - Or file version/edit history.
 - Resources section. Lists image or video related to chapter.
 - Ability to change password.
