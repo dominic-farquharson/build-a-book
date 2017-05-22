@@ -49,6 +49,9 @@ Change name to toggle stat
             (bookKey, i) => (
                 <BookStat 
                     key={i} 
+                    // character count -first checking if it has chapters
+                    chapterKeys={(books[bookKey].hasOwnProperty('chapters') ) ? Object.keys(books[bookKey]['chapters']) : 0 }
+                    chapters={(books[bookKey].hasOwnProperty('chapters') )? books[bookKey]['chapters']: false}
                     // Passing chapters down as prop. First checking if chapters is defined - if undefined chapter count is 0
                     chapterCount={  (books[bookKey].hasOwnProperty('chapters') )?   Object.keys(books[bookKey]['chapters']).length : 0}
                     title={books[bookKey].title} 
@@ -82,7 +85,13 @@ Change name to toggle stat
                     } 
                 >
                     <h1 className="title">Statistics View</h1>                    
-                    <ul>
+                    <ul className="statContainer">
+                        {/* Heading for Stat Rows */}
+                        <li>
+                            <span>Cover</span>
+                            <span>Title</span>
+                            <span>Stats</span>
+                        </li>
                         {/* Printing books - Book Stats component */}
                         {titles}
                     </ul>

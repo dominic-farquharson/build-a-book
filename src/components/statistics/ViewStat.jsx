@@ -16,8 +16,8 @@ const ViewStat = (props) => {
     if( hasChapters && bookKey !== '') {
         console.log('i have chapters')
         // Printing chapter data
-       chapters = (
-            <ul className="statContainer">
+        chapters = (
+            <ul>
                 {/* Book cover */}
                 <img src={books[bookKey]['cover'] || defaultImage } />
                 {/* Mapping over chapters */}

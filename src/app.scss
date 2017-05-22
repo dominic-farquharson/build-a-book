@@ -13,7 +13,7 @@
 // testing SASS file
 body {
   font-size: 1.5rem;
-  color: red;
+  // color: red;
   text-align: center;
   form {
 
@@ -402,7 +402,39 @@ header {
 
 // Statistics Styling
 .statContainer {
+  padding: 10px;
+  // flex container
   li {
+    padding: 10px;
+    // creating flex container
     display: flex;
+    // default direction on main axis
+    flex-direction: row;
+    // aligning items on main axis
+    justify-content: space-around;
+    // aligning items on cross axis
+    align-items: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    border: 1px black solid;
+    
   }
+
+  // flex items
+  li > * {
+    flex: 1 1 25vw;
+    // flex-basis: 33vh;
+  }
+
+
+  li > button {
+    // take 25% of available space
+    margin: 15px;
+    flex: .20 .20 20vw;
+    // width: 200px;
+  }
+}
+
+* {
+  box-sizing: border-box
 }
