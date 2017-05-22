@@ -54,6 +54,7 @@ Build-A-Book, inspired, by Scriviner, a writing tool, allows writers to stay in 
 - Firebase API
 - Axios
 - Quill.js
+- Moment.js
 
 Sample Code: Posting Chapter's data to firebase
 ```javascript

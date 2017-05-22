@@ -7,6 +7,9 @@ import Quill from 'quill';
 // importing Firebase
 import * as firebase from "firebase";
 
+// importing moment
+import moment from 'moment';
+
 // creating Editor component
 class Editor extends Component {
   constructor() {
@@ -96,10 +99,14 @@ class Editor extends Component {
   // adding edit form content
       // user's id key
       const uid = this.props.userId;
+      // time
+      let time =  moment().format('MMMM Do YYYY, h:mm:ss a');
+
       // object containing new Chapter information
       let chapterData = {
         content: chapterContent,
-        characters: characterCount
+        characters: characterCount,
+        time
       }
       // Key of chapter being edited
       let chapterKey = this.props.chapterTitle;
@@ -111,10 +118,28 @@ class Editor extends Component {
       let chapter = {};
       // pushing new Chapter endpoint into chapter object
       chapter[`users/${uid}/books/${bookKey}/chapters/${chapterKey}/content/${newEditorKey}`] = chapterData;
+
+
+      // statistics 
+      let stats= {};
+      // adding time + chapter stats to latest edit endpoint - quick book info
+      stats[`users/${uid}/books/${bookKey}/chapters/${chapterKey}/latestEdit`] = {characters: characterCount, time};
+      
+      // snapShot of edits for Statistics component
+      let snapShot = {};
+      snapShot[`users/${uid}/books/${bookKey}/latestEdit`] = {time};
+
+
+
       // writing new chapter to chapters endpoint
       firebase.database().ref().update(chapter)
       // adding promise, notifying user on completion of update
       .then( ()=> {
+        // Quick snapshot of last chapter edit - writing to root of chapters - quick info of latest edit
+        firebase.database().ref().update(stats); 
+        // quick snapshot of last book edit - writing to root of book - quick info on the latest edit
+        firebase.database().ref().update(snapShot);        
+               
         alert('chapter has been Saved')    
       })    
       return;

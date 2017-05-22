@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+// importing firebase
+import * as firebase from "firebase";
 
 // individual books on Statistics page
 class BookStat extends Component {
@@ -16,24 +18,14 @@ class BookStat extends Component {
         // default image
         const defaultImage = 'http://placehold.it/250x250';
 
-        // const char = this.props.characterCount;
 
-        // let chapters = Object.keys(char);
-
-        // length of character count object
-        // console.log(x)
-
-        // checking if there are chapters
-        if(this.props.chapters) {
-            let content = this.props.chapterKeys.map( key => this.props.chapters[key]['content']);
-            let length = content.length;
-            console.log('chapters', content, length)
-        }
-        // console.log('chapters', this.props.chapters, 'chapterKeys', this.props.chapterKeys)
-
-        // const chapters = Object.keys(this.props.characterCount);
-        // const latestEdit = this.props.characterCount[chapters.length];
-        // console.log(`latest edit: ${latestEdit}`)
+        const chapters = this.props.chapters;
+        const chapterKeys = this.props.chapterKeys;
+        // if(chapters) {
+        // let data = chapterKeys.map( (key) => chapters[key]['latestEdit']);
+        // console.log('data', data)
+        
+        // }
 
         
         return (
@@ -45,7 +37,7 @@ class BookStat extends Component {
                     onClick={()=> book.viewStats(book.bookKey)}
                 />
                 <h2>{book.title}</h2>
-                <p>Chapters: { book.chapterCount } <br /> Last Edited: today <br /> Character Count: </p>
+                <p>Chapters: { book.chapterCount } <br /> Last Edited: <br /> {book.latestEdit['time'] || '---' }<br /> Character Count: </p>
                 {/* View Stats Button */}
                 <button 
                     onClick={()=> book.viewStats(book.bookKey)}
