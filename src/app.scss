@@ -399,3 +399,10 @@ header {
   cursor: pointer;
   opacity: .8;
 }
+
+// Statistics Styling
+.statContainer {
+  li {
+    display: flex;
+  }
+}

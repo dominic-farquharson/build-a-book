@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import BookStat from './statistics/BookStat.jsx';
-
+import ViewStat from './statistics/ViewStat.jsx';
 
 class Statistics extends Component {
     constructor() {
@@ -61,37 +61,17 @@ Change name to toggle stat
         // State of inidividual stat - initially false
         const viewStats = this.state.viewStats;
 
-
-        // Printing Individual Book Stats     
-        let indStat = (
-            <section>
-                {/* Printing Title */}
-                <h1>{(this.state.bookKey!== '')? books[this.state.bookKey]['title']: null}</h1>
-                {/* Printing Book Info */}
-                <div> 
-                    {/* Mapping over chapters */}
-                    {   // Checking if book has chapters
-                        ( this.state.bookKey !== '' && books[this.state.bookKey].hasOwnProperty('chapters') )? 
-                            <ul>
-                                {Object.keys(books[this.state.bookKey]['chapters']).map(
-                                    (key, i)=> <li key={i}>{books[this.state.bookKey]['chapters'][key].title}</li>
-                                )} 
-                                <button className={(this.state.bookKey=='')? 'noBooks' : 'booksPresent'} onClick={()=> this.viewStatistics()}>Cancel</button>                 
-                            </ul> 
-                            : (
-                                <section>
-                                    <p>You don't have any chapters yet! Check back here when you add some!</p>
-                                    <button onClick={()=> this.viewStatistics()}>Cancel</button>                 
-                                </section>
-                              )
-                    }
-                </div>
-            </section>
-        );
-
+       
         // Checking if state has updated
         if( this.state.bookKey !== '' ) {
-            return indStat;      
+            // Viewing a book's Statistics
+            return (
+                    <ViewStat 
+                        bookKey={this.state.bookKey} 
+                        books={books} 
+                        viewStatistics={()=>this.viewStatistics()} 
+                    />
+            );  
 
         } else {
             // printing all the books
