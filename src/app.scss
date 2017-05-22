@@ -435,6 +435,29 @@ header {
   }
 }
 
+// view individual book stats styling
+.viewStat {
+  img {
+    width: 50vw;
+    height: 50vh;
+  }
+}
+
+// Back Button for stats
+.statsBack {
+  position: fixed;
+  left: 25%;
+  top: 10%;
+  z-index: 999;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  from{color: black}
+  to{color: red}
+  
+}
+
 * {
   box-sizing: border-box
 }

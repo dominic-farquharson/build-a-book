@@ -42,7 +42,7 @@ class BookStat extends Component {
                 <button 
                     onClick={()=> book.viewStats(book.bookKey)}
                 >
-                    View More Statistics
+                    View Chapter Statistics
                 </button>
             </li>
         )
