@@ -105,6 +105,15 @@ class App extends Component {
     });
   }
 
+  // email to reset password
+  passwordResetEmail(email) {
+    console.log('email', email)
+    // firebase.auth().sendPasswordResetEmail(email)
+    //   .then( () => alert(`Password reset has been sent to this email address: ${email}`),
+    //   // error
+    //    () => alert('The email you entered was either invalid or does not exist!'))
+  }
+
   // log Out Button - temporary, not proper way
   logOut() {
     console.log('loggin out user')
@@ -527,6 +536,7 @@ class App extends Component {
         <Welcome
           createUser = {(email, password, displayName, picture) => this.createUser(email, password, displayName, picture)}
           userSignedIn = { ()=> this.toggleUserSignIn()}
+          passwordReset={ (email)=> this.passwordResetEmail(email)}
           // passing function to authenticate user down as prop
           toggleUserSignIn = { (email, password)=> {this.toggleUserSignIn(email, password)}}
         

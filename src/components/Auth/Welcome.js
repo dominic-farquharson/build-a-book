@@ -123,6 +123,7 @@ class Welcome extends Component {
         <SignIn
           toggleUserSignIn = { (email, password)=>this.props.toggleUserSignIn(email, password)}
           backButton={this.toggleSignIn}
+          passwordResetEmail={(email)=> this.props.passwordReset(email)}
         />
 
       </div>
