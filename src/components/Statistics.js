@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import BookStat from './statistics/BookStat.jsx';
-import ViewStat from './statistics/ViewStat.jsx';
+import ChapterStat from './statistics/ChapterStat.jsx';
+import ViewHistory from './statistics/ViewHistory.jsx';
 
 class Statistics extends Component {
     constructor() {
@@ -11,7 +12,9 @@ class Statistics extends Component {
             // content: false,
             length: 0,
             viewStats: false,
-            bookKey: ''
+            bookKey: '',
+            viewEditHistory: false,
+            chapterKey: ''
         }
     }
 
@@ -38,6 +41,15 @@ Change name to toggle stat
         // this.renderStat(bookKey);
     }
 
+    viewEditHistory(chapterKey='') {
+        if(this.state.viewEditHistory) {
+           this.setState({viewEditHistory: false})
+           return;
+        } else { // setting chapter key
+           this.setState({viewEditHistory: true, chapterKey})
+           return; 
+        }
+    }
 
 
     // Printing Statistics
@@ -63,20 +75,37 @@ Change name to toggle stat
             )
         );
 
-        // State of inidividual stat - initially false
-        const viewStats = this.state.viewStats;
+        // // State of inidividual stat - initially false
+        // const viewStats = this.state.viewStats;
 
        
         // Checking if state has updated
         if( this.state.bookKey !== '' ) {
             // Viewing a book's Statistics
-            return (
-                    <ViewStat 
+            const viewEditHistory = this.state.viewEditHistory;
+
+            // rendering chapter stats
+            if(!viewEditHistory) {
+                return (
+                    <ChapterStat 
                         bookKey={this.state.bookKey} 
                         books={books} 
                         viewStatistics={()=>this.viewStatistics()} 
+                        // Setting state to the chapter key when button is clicked 
+                        viewEditHistory={(key)=>this.viewEditHistory(key)}
                     />
-            );  
+                );  
+            } else { // showing edit history
+                return (
+                    <ViewHistory 
+                        bookKey={this.state.bookKey}
+                        books={books} 
+                        viewEditHistory={()=>this.viewEditHistory()}   
+                        // Chapter Key passed as prop
+                        chapterKey={this.state.chapterKey}                     
+                    />
+                )
+            }
 
         } else {
             // printing all the books
@@ -100,6 +129,9 @@ Change name to toggle stat
                 </section>
             )
         }
+
+
+
     }
 
 

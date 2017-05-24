@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Component to View an individual book's statistics
-const ViewStat = (props) => {
+const ChapterStat = (props) => {
     // setting variables
     const books = props.books;
     const bookKey=props.bookKey;
@@ -39,7 +39,16 @@ const ViewStat = (props) => {
                             {/* Time of last edit */}
                             <span>{(books[bookKey]['chapters'][key].hasOwnProperty('latestEdit'))?books[bookKey]['chapters'][key]['latestEdit']['time'] : '---'}</span>
                             {/* Latest Character count */}
-                            <span>{(books[bookKey]['chapters'][key].hasOwnProperty('latestEdit'))?books[bookKey]['chapters'][key]['latestEdit']['characters'] : '---'}</span>                            <span>{  }</span>
+                            <span>{(books[bookKey]['chapters'][key].hasOwnProperty('latestEdit'))?books[bookKey]['chapters'][key]['latestEdit']['characters'] : '---'}</span> 
+                             {/* View Edit History Button - toggles state in statistics component */}
+                            { (books[bookKey]['chapters'][key].hasOwnProperty('content'))? (
+                          
+                                ( typeof books[bookKey]['chapters'][key]['content'] === 'object' && Object.keys(books[bookKey]['chapters'][key]['content']).length > 1)? (
+                            <button 
+                                onClick={()=> {props.viewEditHistory(key)}}
+                            >
+                                View Edit History 
+                            </button> ) :null ) : null}
                         </li>
                 )} 
                 {/*<button className={(bookKey=='')? 'noBooks' : 'booksPresent'} onClick={()=> props.viewStatistics()}>Cancel</button>                 */}
@@ -76,4 +85,4 @@ const ViewStat = (props) => {
 
 
 
-export default ViewStat;
+export default ChapterStat;

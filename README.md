@@ -93,6 +93,26 @@ Sample Code: Posting Chapter's data to firebase
 - Facebook oauth
 - Styling.
 
+# Version History - will be updated(incomplete)
+
+Version 1.0.0
+- Axios used to retrieve from Firebase. Open endpoint.
+
+Version 2.0.0
+
+- Endpoint is now protected. Firebase API used for all requests.
+
+Version 3.0.0
+
+- Statistics component has now been added. 
+    - Contains a list of all of the books.
+    - Last edit, and character count of books can be viewed.
+    - Can View an Individual book's statistics
+        - Character count, last edit date for each chapter.
+- Can view edit history of a chapter ----in progress
+- Added Moment.js to track time chapter has been added/updated
+
+
 # Project Issues:
 
 - Should've fully planned out components hierarchy before starting. Constantly had to refactor code when I realized I needed something  passed down as a prop to be accessible in another component.

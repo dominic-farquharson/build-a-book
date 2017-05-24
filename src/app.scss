@@ -496,6 +496,39 @@ header {
 
 }
 
+// View History - page with file edits
+.viewHistory {
+    position: absolute;
+    left: 20%;
+    height: 100vh;
+    width: 80vw;
+    overflow: scroll;
+    padding: 10px;
+
+  ul {
+    padding: 0;
+    // flex container 
+    li {
+      display: flex;
+      // main axis
+      flex-direction: row;
+      // alignment - main axis
+      justify-content: space-around;
+      // alignment - cross axis
+      align-items: center;
+      flex-wrap: wrap;
+
+      border: 1px solid indigo;
+
+
+      * {
+        flex: 1 1 50%;      
+      }
+    }
+  }
+}
+
+
 * {
   box-sizing: border-box
 }

@@ -12,6 +12,9 @@ class SignIn extends Component {
     this.state = {
       resetPassword: false
     }
+
+    // binding
+    this.handlePress = this.handlePress.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +34,14 @@ class SignIn extends Component {
     
   }
 
+  handlePress(e) {
+    // enter button
+    if(e.key == 'Enter') {
+      // submitting password
+      this.props.toggleUserSignIn(this.emailInput.value, this.passwordInput.value);
+    }
+  }
+
   render() {
     const resetPassword = this.state.resetPassword;
 
@@ -42,13 +53,36 @@ class SignIn extends Component {
             <div> {/*className="uk-position-center" */}
               <h1>Sign in to Build A Book</h1>
               {/* Using refs to grab input values to pass to create user function - checking local storage for email - filling input  */} 
-              <input className="uk-input" name="email" ref={(email) => {this.emailInput=email}} type="text" placeholder="Email" defaultValue={localStorage.getItem('build-A-Book-Email') || ''  }   required />
-              <input className="uk-input" name="password" ref={(password) => {this.passwordInput=password}} type="password" placeholder="Password" required />
+              <input 
+                className="uk-input" 
+                name="email" 
+                ref={(email) => {this.emailInput=email}} 
+                type="text" 
+                placeholder="Email" 
+                // getting from local storage
+                defaultValue={localStorage.getItem('build-A-Book-Email') || ''  }   
+                required 
+              />
+              <input 
+                className="uk-input" 
+                name="password" 
+                ref={(password) => {this.passwordInput=password}} 
+                type="password" 
+                placeholder="Password" 
+                // Allowing Enter Key to submit form
+                onKeyPress={this.handlePress}
+                required 
+              />
               {/*
                 Posting user info to firebase
                 Passing password, email to createuser function
               */}
-              <input className="signInButton uk-button uk-button-default " type="button" value="Sign In" onClick={()=>{this.props.toggleUserSignIn(this.emailInput.value, this.passwordInput.value); }} />
+              <input 
+                className="signInButton uk-button uk-button-default " 
+                type="button" 
+                value="Sign In" 
+                onClick={()=>{this.props.toggleUserSignIn(this.emailInput.value, this.passwordInput.value); }} 
+              />
                 {/* Password Reset toggle */}
               <input className="signInButton uk-button uk-button-default " type="button" value="Reset Password" onClick={()=>{this.togglePasswordReset(); }} />              
             </div>
