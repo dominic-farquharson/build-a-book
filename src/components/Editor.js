@@ -43,6 +43,7 @@ class Editor extends Component {
       [{ 'indent': '-1'}, { 'indent': '+1' }],  // list level 
       [{ 'color': [] }, { 'background': [] }], 
       [{ 'align': [] }],
+      ['image'],
       ['clean'] 
     ];
 

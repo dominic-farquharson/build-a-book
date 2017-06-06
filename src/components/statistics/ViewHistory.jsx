@@ -1,4 +1,19 @@
 import React from 'react';
+// import Quill from 'quill';
+import ReactQuill, {Quill} from 'react-quill';
+
+// initialize Quill
+// creating toolbar options 
+const toolbarOptions = [
+    [{ 'font': [] }], // font family    
+    [{ size: [ 'small', false, 'large', 'huge' ]}], // heading size - controlled w/ quill css      
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'indent': '-1'}, { 'indent': '+1' }],  // list level 
+    [{ 'color': [] }, { 'background': [] }], 
+    [{ 'align': [] }],
+    ['clean'] 
+];
 
 // view edit history
 const ViewHistory = (props) => (
@@ -27,6 +42,7 @@ const printChapterHistory = (chapter)=> {
 
     // printing chapter history - input w/ chapter titles
     const chapterHistory = chapterHistoryKeys.map((key, i)=> {
+
         console.log('chapter data',chapter['content'][key]);     
 
         /* Hack to make sure chapters print. - have to do this to allow for backwards compatibility with old users of the app - JSON structure was changed  */
@@ -38,7 +54,9 @@ const printChapterHistory = (chapter)=> {
                 <li key={i}>
                     {console.log('chapter', chapter[key])}
                     <p style={ {marginTop: '20px'} }> <span>Characters: {chapter['content'][key]['characters']}  </span></p>
-                    <p>Time: {chapter['content'][key]['time'] || '---' }</p>           
+                    <p>Time: {chapter['content'][key]['time'] || '---' }</p>        
+                    
+                    {/*<ReactQuill value={chapter['content'][key]['content']} readOnly={true} />   */}
                     {/*<p><span>Date:</span> {chapter['content'[key]['characters']]} </p>*/}
                     {/* Printing Chapter Data - Checking if there is chapter data */}
                     <p>{
@@ -53,6 +71,9 @@ const printChapterHistory = (chapter)=> {
 
     return chapterHistory;
 }
+
+// Quill
+
 
 
 export default ViewHistory;
