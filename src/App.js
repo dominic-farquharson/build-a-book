@@ -495,6 +495,7 @@ class App extends Component {
             updatePicture = { (picture)=>this.updatePicture(picture) }
             profilePic = {this.state.profilePic}
             updateName = {(name)=>this.updateName(name)}
+            email={this.state.email}
           />
         </main>
      </div>

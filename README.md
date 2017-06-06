@@ -13,9 +13,9 @@
 
 #### [Wireframe](#)
 #### [User Stories (Trello)](https://trello.com/b/VvIPePGl/build-a-book)
-# Desktop Builds - Current (Version 2.2.0)
- - [Windows v2.2.0](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
- - [Mac v2.2.0](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
+# Desktop Builds - Current (Version 3.0.0)
+ - [Windows v3.0.0](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
+ - [Mac v3.0.0](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
  - [Linux v1.0](#)
 
 # Description:
