@@ -13,9 +13,9 @@
 
 #### [Wireframe](#)
 #### [User Stories (Trello)](https://trello.com/b/VvIPePGl/build-a-book)
-# Desktop Builds - Current (Version 3.0.1)
+# Desktop Builds - Current (Version 3.0.2)
  - [Windows v3.0.0](https://drive.google.com/open?id=0B_fEKxl-bFyNa0JJUUZ3VHhtNjg)
- - [Mac v3.0.0](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
+ - [Mac v3.0.2](https://drive.google.com/open?id=0B_fEKxl-bFyNTHBwdVpJQkhCS00)
  - [Linux v1.0](#)
 
 # Description:
@@ -111,6 +111,8 @@ Version 3.0.0
         - Character count, last edit date for each chapter.
 - Can view edit history of a chapter ----in progress
 - Added Moment.js to track time chapter has been added/updated
+- Keyboard shortcut (ctrl + s to save)
+- UI improvements
 
 
 # Project Issues:

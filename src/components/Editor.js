@@ -183,7 +183,7 @@ class Editor extends Component {
 
           {/* Close/Back Button */}
           <i 
-              className="statsBack fa fa-chevron-circle-left fa-2x" aria-hidden="true" 
+              className="statsBack fa fa-chevron-circle-left fa-2x editorBack" aria-hidden="true" 
               // close button
               onClick={this.props.toggleChapterView}
           ></i>
