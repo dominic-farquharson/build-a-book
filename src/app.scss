@@ -449,13 +449,17 @@ header {
   left: 25%;
   top: 10%;
   z-index: 999;
-  animation: blink 4s infinite;
+  // animation: blink 10s infinite;
 }
 
 @keyframes blink {
   from{color: black}
   to{color: red}
   
+}
+
+.editorBack {
+  top: 2%;
 }
 
 

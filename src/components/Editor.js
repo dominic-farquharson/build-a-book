@@ -180,8 +180,31 @@ class Editor extends Component {
         <div id="editor"> </div>
         {/* Make this neater */}
         <p>Press control s to quickly save</p>
-  
-        <button className="uk-button-primary editorButton" onClick={
+
+          {/* Close/Back Button */}
+          <i 
+              className="statsBack fa fa-chevron-circle-left fa-2x" aria-hidden="true" 
+              // close button
+              onClick={this.props.toggleChapterView}
+          ></i>
+
+        {/* SAve Button */}
+        <i 
+          className=" blue fa fa-floppy-o fa-2x" 
+          aria-hidden="true"
+          onClick={
+            ()=> {
+              // character count
+              var length = this.state.quill.getLength();
+              // getting text + formatting
+              let contents = this.state.quill.getContents();
+              // posting chapter data - text data and character count
+              this.addContent(contents, length);
+            }
+          }
+        ></i> 
+
+        {/*<button className="uk-button-primary editorButton" onClick={
           ()=> {
             // character count
             var length = this.state.quill.getLength();
@@ -192,11 +215,11 @@ class Editor extends Component {
            }
           }>
           Save
-        </button>
-        <button onClick={()=>this.state.quill.history.undo()}>Undo</button>
-        <button onClick={()=>this.state.quill.history.redo()}>Redo</button>
+        </button>*/}
+        {/*<button onClick={()=>this.state.quill.history.undo()}>Undo</button>
+        <button onClick={()=>this.state.quill.history.redo()}>Redo</button>*/}
         
-        <button className="uk-button-danger editorButton" onClick={this.props.toggleChapterView}>Close Editor</button>
+        {/*<button className="uk-button-danger editorButton" onClick={this.props.toggleChapterView}>Close Editor</button>*/}
 
         {/* Last modified from moment? */}
      </div>
