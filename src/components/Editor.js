@@ -52,6 +52,8 @@ class Editor extends Component {
       let quill = new Quill('#editor', 
         { 
           modules:{ 
+            // clipboard
+            clipboard: {},
             // adding to tool bar
             toolbar: toolbarOptions,
             // Allowing for user to redo and undo
@@ -64,6 +66,17 @@ class Editor extends Component {
             placeholder: `Type something!`,
           
          });
+
+         // save shortcut
+         quill.keyboard.addBinding({ key: 's', ctrlKey: true }, () => {
+            // character count
+            var length = this.state.quill.getLength();
+            // getting text + formatting
+            let contents = this.state.quill.getContents();
+            // posting chapter data - text data and character count
+            this.addContent(contents, length); 
+         });
+
       return quill;
   }
 
@@ -165,6 +178,8 @@ class Editor extends Component {
 
         {/* Quill container */}
         <div id="editor"> </div>
+        {/* Make this neater */}
+        <p>Press control s to quickly save</p>
   
         <button className="uk-button-primary editorButton" onClick={
           ()=> {
