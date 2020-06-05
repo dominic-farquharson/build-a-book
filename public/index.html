@@ -1,49 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Build A Book</title>
-  <!-- Quill stylesheet -->
-  <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
-  <!-- jQuery CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <!-- UI kit -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/css/uikit.min.css" />
-  <!-- Ui kit js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/js/uikit.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Build A Book</title>
+    <!-- Quill stylesheet -->
+    <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- UI kit -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/css/uikit.min.css"
+    />
+    <!-- Ui kit js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.12/js/uikit.min.js"></script>
+  </head>
+  <body>
+    <!-- Accessing Node API's only available in the renderer process -->
+    <script src="js/renderer.js"></script>
+    <div id="root"></div>
 
-</head>
-<body>
-  <!-- Accessing Node API's only available in the renderer process -->
-  <script>
-    // importing renderer.js file - to gain access to Node modules in renderer process
-    require('./js/renderer.js')
-  </script>
-  <!-- Location where React renders -->
-  <div id="root"></div>
-  <!--<script>
-    document.addEventListener('keypress', (event)=> {
-      console.log(event.keycode);
-      if(event.keyCode === 13) {
-        alert('enter')
-      }
-    })
-  </script>-->
+    <!--Wepack server on port 8000. Reloads whenever code changes -->
+    <!--<script src="http://localhost:8080/webpack-dev-server.js"></script>-->
+    <!-- Bundled code (React, styles, etc) -->
+    <!--<script src="http://localhost:8080/built/bundle.js"></script>-->
 
-   <!--Wepack server on port 8000. Reloads whenever code changes -->
-  <!--<script src="http://localhost:8080/webpack-dev-server.js"></script>-->
-  <!-- Bundled code (React, styles, etc) -->
-  <!--<script src="http://localhost:8080/built/bundle.js"></script>-->
-
-  <!-- Latest Bundled code - For deployment -->
-  <script>require('./built/bundle.js')</script> 
-
-
-
-
-</body>
+    <!-- Latest Bundled code - For deployment -->
+    <script src="built/bundle.js"></script>
+  </body>
 </html>

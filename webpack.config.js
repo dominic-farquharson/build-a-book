@@ -6,6 +6,7 @@ Watches for changes within webpack-dev-server.
 
 // importing webpack
 const webpack = require('webpack');
+const path = require('path')
 
 // Enables .env file to be referenced in app.js
 const Dotenv = require('dotenv-webpack');
@@ -18,25 +19,27 @@ module.exports = {
   },
   // bundled files
   output: {
-    path: './public/built',
+    path: path.resolve(__dirname, './public/built'),
     filename: 'bundle.js',
     publicPath: 'public/built/'
   },
 
   devServer: {
     contentBase: './public',
-    publicPath: 'http://localhost:8080/built/'
+    // publicPath: 'http://localhost:8080/built/'
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['react', 'es2015']
-        }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+          },
+        },
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       // Including Sass loader to run SCSS
@@ -46,6 +49,7 @@ module.exports = {
   },
 
   plugins: [
+    new HtmlWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$")),
     // dot env file for reference in app.js
