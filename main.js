@@ -3,37 +3,32 @@
 // */
 
 // importing electron, setting it to a variable
-const electron = require('electron')
-// creating app variable
-const app = electron.app
-// importin BrowserWindow module from Electron
-const BrowserWindow = electron.BrowserWindow
-
-// importing path + url
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
-
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
+function createWindow() {
   // Creates browser window. - preventing window from being resized past certain amount until it's responsive
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
-    minWidth:1000,
+    minWidth: 1000,
     minHeight: 600,
-    icon: 'build/icon.ico'
+    // icon: 'build/icon.ico'
   })
 
   // setting directory of index file
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'public/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  mainWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, 'public/index.html'),
+      protocol: 'file:',
+      slashes: true,
+    })
+  )
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -42,7 +37,6 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null
   })
-  
 }
 
 // initializing app
@@ -50,7 +44,7 @@ app.on('ready', createWindow)
 
 // closing app
 app.on('window-all-closed', function () {
-   // window stays active on mac, closes on other platforms
+  // window stays active on mac, closes on other platforms
   if (process.platform !== 'darwin') {
     app.quit()
   }

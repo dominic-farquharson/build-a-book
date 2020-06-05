@@ -3,13 +3,14 @@ node_modules/
 # env file
 .env
 # OSX build
+build-a-book-darwin-x64
 release-builds/
 # Linux build
 build-a-book-linux-x64/
 # Windows build
 build-a-book-linux-ia32/
 build-a-book-win32-x64/
-# Debug 
+# Debug
 npm-debug.log
 # Distribution folder
 dist/
