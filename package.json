@@ -39,7 +39,7 @@
     "firebaseui": "^1.0.0",
     "fs": "0.0.1-security",
     "less": "^2.7.2",
-    "less-loader": "^2.2.3",
+    "less-loader": "^11.1.0",
     "moment": "^2.18.1",
     "quill": "^1.2.2",
     "react": "^0.14.7",
